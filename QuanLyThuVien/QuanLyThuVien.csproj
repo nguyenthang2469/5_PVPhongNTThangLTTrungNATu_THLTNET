@@ -46,14 +46,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="CSDL\Account.cs" />
+    <Compile Include="CSDL\DB.cs" />
+    <Compile Include="CSDL\Nhanvien.cs" />
+    <Compile Include="CSDL\Docgia.cs" />
+    <Compile Include="Taikhoan\fDangnhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Taikhoan\fDangnhap.Designer.cs">
+      <DependentUpon>fDangnhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fQuanly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fQuanly.Designer.cs">
+      <DependentUpon>fQuanly.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Taikhoan\fDoimatkhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Taikhoan\fDoimatkhau.Designer.cs">
+      <DependentUpon>fDoimatkhau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Taikhoan\fThongtindocgia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Taikhoan\fThongtindocgia.Designer.cs">
+      <DependentUpon>fThongtindocgia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Taikhoan\fThongtinnhanvien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Taikhoan\fThongtinnhanvien.Designer.cs">
+      <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Taikhoan\fDangnhap.resx">
+      <DependentUpon>fDangnhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fQuanly.resx">
+      <DependentUpon>fQuanly.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +97,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Taikhoan\fDoimatkhau.resx">
+      <DependentUpon>fDoimatkhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Taikhoan\fThongtindocgia.resx">
+      <DependentUpon>fThongtindocgia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Taikhoan\fThongtinnhanvien.resx">
+      <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
