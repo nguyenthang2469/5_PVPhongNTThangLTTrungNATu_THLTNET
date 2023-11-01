@@ -64,6 +64,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Taikhoan\fDanhsachtaikhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Taikhoan\fDanhsachtaikhoan.Designer.cs">
+      <DependentUpon>fDanhsachtaikhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Taikhoan\fDoimatkhau.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Taikhoan\fDanhsachtaikhoan.resx">
+      <DependentUpon>fDanhsachtaikhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Taikhoan\fDoimatkhau.resx">
       <DependentUpon>fDoimatkhau.cs</DependentUpon>
     </EmbeddedResource>

@@ -72,5 +72,18 @@ namespace QuanLyThuVien
             fDoimatkhau f = new fDoimatkhau();
             f.ShowDialog();
         }
+
+        private void fQuanly_Load(object sender, EventArgs e)
+        {
+            if(!user["loainguoidung"].ToString().Equals("quanly")) {
+                quảnLýTàiKhoảnToolStripMenuItem.Visible = false;
+            }
+        }
+
+        private void quảnLýTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fDanhsachtaikhoan f = new fDanhsachtaikhoan();
+            f.ShowDialog();
+        }
     }
 }
