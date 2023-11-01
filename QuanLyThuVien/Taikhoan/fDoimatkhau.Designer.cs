@@ -30,6 +30,7 @@ namespace QuanLyThuVien.Taikhoan
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fDoimatkhau));
             this.label1 = new System.Windows.Forms.Label();
             this.tbTendangnhap = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,7 +53,7 @@ namespace QuanLyThuVien.Taikhoan
             this.label1.Location = new System.Drawing.Point(32, 32);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 29);
+            this.label1.Size = new System.Drawing.Size(141, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tên đăng nhập";
             // 
@@ -63,22 +64,22 @@ namespace QuanLyThuVien.Taikhoan
             this.tbTendangnhap.Location = new System.Drawing.Point(258, 29);
             this.tbTendangnhap.Margin = new System.Windows.Forms.Padding(5);
             this.tbTendangnhap.Name = "tbTendangnhap";
-            this.tbTendangnhap.Size = new System.Drawing.Size(301, 34);
+            this.tbTendangnhap.Size = new System.Drawing.Size(301, 28);
             this.tbTendangnhap.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 89);
+            this.label2.Location = new System.Drawing.Point(32, 74);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 29);
+            this.label2.Size = new System.Drawing.Size(112, 24);
             this.label2.TabIndex = 2;
             this.label2.Text = "Mật khẩu cũ";
             // 
             // btnXacnhan
             // 
-            this.btnXacnhan.Location = new System.Drawing.Point(258, 253);
+            this.btnXacnhan.Location = new System.Drawing.Point(258, 200);
             this.btnXacnhan.Name = "btnXacnhan";
             this.btnXacnhan.Size = new System.Drawing.Size(140, 35);
             this.btnXacnhan.TabIndex = 11;
@@ -88,7 +89,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // btnTrolai
             // 
-            this.btnTrolai.Location = new System.Drawing.Point(419, 253);
+            this.btnTrolai.Location = new System.Drawing.Point(419, 200);
             this.btnTrolai.Name = "btnTrolai";
             this.btnTrolai.Size = new System.Drawing.Size(140, 35);
             this.btnTrolai.TabIndex = 12;
@@ -98,19 +99,19 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // tbMatkhaucu
             // 
-            this.tbMatkhaucu.Location = new System.Drawing.Point(258, 86);
+            this.tbMatkhaucu.Location = new System.Drawing.Point(258, 71);
             this.tbMatkhaucu.Margin = new System.Windows.Forms.Padding(5);
             this.tbMatkhaucu.Name = "tbMatkhaucu";
-            this.tbMatkhaucu.Size = new System.Drawing.Size(301, 34);
+            this.tbMatkhaucu.Size = new System.Drawing.Size(301, 28);
             this.tbMatkhaucu.TabIndex = 3;
             this.tbMatkhaucu.UseSystemPasswordChar = true;
             // 
             // ckbShowhideoldpassword
             // 
             this.ckbShowhideoldpassword.AutoSize = true;
-            this.ckbShowhideoldpassword.Location = new System.Drawing.Point(569, 95);
+            this.ckbShowhideoldpassword.Location = new System.Drawing.Point(569, 80);
             this.ckbShowhideoldpassword.Name = "ckbShowhideoldpassword";
-            this.ckbShowhideoldpassword.Size = new System.Drawing.Size(18, 17);
+            this.ckbShowhideoldpassword.Size = new System.Drawing.Size(15, 14);
             this.ckbShowhideoldpassword.TabIndex = 4;
             this.toolTip1.SetToolTip(this.ckbShowhideoldpassword, "Hiển thị mật khẩu");
             this.ckbShowhideoldpassword.UseVisualStyleBackColor = true;
@@ -119,9 +120,9 @@ namespace QuanLyThuVien.Taikhoan
             // ckbShowhidenewpassword
             // 
             this.ckbShowhidenewpassword.AutoSize = true;
-            this.ckbShowhidenewpassword.Location = new System.Drawing.Point(569, 152);
+            this.ckbShowhidenewpassword.Location = new System.Drawing.Point(569, 123);
             this.ckbShowhidenewpassword.Name = "ckbShowhidenewpassword";
-            this.ckbShowhidenewpassword.Size = new System.Drawing.Size(18, 17);
+            this.ckbShowhidenewpassword.Size = new System.Drawing.Size(15, 14);
             this.ckbShowhidenewpassword.TabIndex = 7;
             this.toolTip1.SetToolTip(this.ckbShowhidenewpassword, "Hiển thị mật khẩu");
             this.ckbShowhidenewpassword.UseVisualStyleBackColor = true;
@@ -130,9 +131,9 @@ namespace QuanLyThuVien.Taikhoan
             // ckbShowhideconfirmpassword
             // 
             this.ckbShowhideconfirmpassword.AutoSize = true;
-            this.ckbShowhideconfirmpassword.Location = new System.Drawing.Point(569, 209);
+            this.ckbShowhideconfirmpassword.Location = new System.Drawing.Point(569, 168);
             this.ckbShowhideconfirmpassword.Name = "ckbShowhideconfirmpassword";
-            this.ckbShowhideconfirmpassword.Size = new System.Drawing.Size(18, 17);
+            this.ckbShowhideconfirmpassword.Size = new System.Drawing.Size(15, 14);
             this.ckbShowhideconfirmpassword.TabIndex = 10;
             this.toolTip1.SetToolTip(this.ckbShowhideconfirmpassword, "Hiển thị mật khẩu");
             this.ckbShowhideconfirmpassword.UseVisualStyleBackColor = true;
@@ -140,48 +141,48 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // tbMatkhaumoi
             // 
-            this.tbMatkhaumoi.Location = new System.Drawing.Point(258, 143);
+            this.tbMatkhaumoi.Location = new System.Drawing.Point(258, 114);
             this.tbMatkhaumoi.Margin = new System.Windows.Forms.Padding(5);
             this.tbMatkhaumoi.Name = "tbMatkhaumoi";
-            this.tbMatkhaumoi.Size = new System.Drawing.Size(301, 34);
+            this.tbMatkhaumoi.Size = new System.Drawing.Size(301, 28);
             this.tbMatkhaumoi.TabIndex = 6;
             this.tbMatkhaumoi.UseSystemPasswordChar = true;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 146);
+            this.label3.Location = new System.Drawing.Point(32, 117);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 29);
+            this.label3.Size = new System.Drawing.Size(122, 24);
             this.label3.TabIndex = 7;
             this.label3.Text = "Mật khẩu mới";
             // 
             // tbXacnhanmatkhau
             // 
-            this.tbXacnhanmatkhau.Location = new System.Drawing.Point(258, 200);
+            this.tbXacnhanmatkhau.Location = new System.Drawing.Point(258, 159);
             this.tbXacnhanmatkhau.Margin = new System.Windows.Forms.Padding(5);
             this.tbXacnhanmatkhau.Name = "tbXacnhanmatkhau";
-            this.tbXacnhanmatkhau.Size = new System.Drawing.Size(301, 34);
+            this.tbXacnhanmatkhau.Size = new System.Drawing.Size(301, 28);
             this.tbXacnhanmatkhau.TabIndex = 9;
             this.tbXacnhanmatkhau.UseSystemPasswordChar = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 203);
+            this.label4.Location = new System.Drawing.Point(32, 162);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(215, 29);
+            this.label4.Size = new System.Drawing.Size(173, 24);
             this.label4.TabIndex = 8;
             this.label4.Text = "Xác nhận mật khẩu";
             // 
             // fDoimatkhau
             // 
             this.AcceptButton = this.btnXacnhan;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 308);
+            this.ClientSize = new System.Drawing.Size(628, 245);
             this.Controls.Add(this.ckbShowhideconfirmpassword);
             this.Controls.Add(this.tbXacnhanmatkhau);
             this.Controls.Add(this.label4);
@@ -196,7 +197,10 @@ namespace QuanLyThuVien.Taikhoan
             this.Controls.Add(this.tbTendangnhap);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
+            this.MaximizeBox = false;
             this.Name = "fDoimatkhau";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đổi mật khẩu";

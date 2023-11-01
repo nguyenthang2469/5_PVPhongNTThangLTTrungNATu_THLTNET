@@ -106,7 +106,7 @@ namespace QuanLyThuVien
                 MessageBox.Show("Bạn chưa nhập tên đăng nhập", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             } else
             {
-                if(MessageBox.Show("Bạn muốn quên mật khẩu?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if(MessageBox.Show("Bạn muốn quên mật khẩu?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string tendangnhap = tbTendangnhap.Text.Trim();
                     DataRow dr = Account.getAccount(tendangnhap);

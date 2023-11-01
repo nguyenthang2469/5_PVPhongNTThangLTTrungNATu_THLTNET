@@ -29,6 +29,7 @@ namespace QuanLyThuVien.Taikhoan
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fThongtindocgia));
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbGioitinh = new System.Windows.Forms.ComboBox();
             this.tbTendangnhap = new System.Windows.Forms.TextBox();
@@ -80,7 +81,7 @@ namespace QuanLyThuVien.Taikhoan
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(634, 500);
+            this.panel1.Size = new System.Drawing.Size(634, 441);
             this.panel1.TabIndex = 0;
             // 
             // cbGioitinh
@@ -91,7 +92,7 @@ namespace QuanLyThuVien.Taikhoan
             this.cbGioitinh.Items.AddRange(new object[] {
             "Nam",
             "Nữ"});
-            this.cbGioitinh.Location = new System.Drawing.Point(230, 162);
+            this.cbGioitinh.Location = new System.Drawing.Point(230, 144);
             this.cbGioitinh.Name = "cbGioitinh";
             this.cbGioitinh.Size = new System.Drawing.Size(357, 30);
             this.cbGioitinh.TabIndex = 7;
@@ -100,7 +101,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             this.tbTendangnhap.BackColor = System.Drawing.Color.White;
             this.tbTendangnhap.Enabled = false;
-            this.tbTendangnhap.Location = new System.Drawing.Point(230, 398);
+            this.tbTendangnhap.Location = new System.Drawing.Point(230, 350);
             this.tbTendangnhap.Name = "tbTendangnhap";
             this.tbTendangnhap.Size = new System.Drawing.Size(357, 28);
             this.tbTendangnhap.TabIndex = 17;
@@ -108,7 +109,7 @@ namespace QuanLyThuVien.Taikhoan
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(33, 400);
+            this.label9.Location = new System.Drawing.Point(33, 352);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(141, 24);
             this.label9.TabIndex = 16;
@@ -118,7 +119,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             this.tbManhanvientaothe.BackColor = System.Drawing.Color.White;
             this.tbManhanvientaothe.Enabled = false;
-            this.tbManhanvientaothe.Location = new System.Drawing.Point(230, 351);
+            this.tbManhanvientaothe.Location = new System.Drawing.Point(230, 309);
             this.tbManhanvientaothe.Name = "tbManhanvientaothe";
             this.tbManhanvientaothe.Size = new System.Drawing.Size(357, 28);
             this.tbManhanvientaothe.TabIndex = 15;
@@ -126,7 +127,7 @@ namespace QuanLyThuVien.Taikhoan
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(33, 353);
+            this.label8.Location = new System.Drawing.Point(33, 311);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(185, 24);
             this.label8.TabIndex = 14;
@@ -134,7 +135,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new System.Drawing.Point(230, 445);
+            this.btnLuu.Location = new System.Drawing.Point(230, 393);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(140, 35);
             this.btnLuu.TabIndex = 19;
@@ -145,7 +146,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(387, 444);
+            this.btnThoat.Location = new System.Drawing.Point(387, 392);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(140, 35);
             this.btnThoat.TabIndex = 20;
@@ -155,7 +156,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // btnCapnhat
             // 
-            this.btnCapnhat.Location = new System.Drawing.Point(230, 445);
+            this.btnCapnhat.Location = new System.Drawing.Point(230, 393);
             this.btnCapnhat.Name = "btnCapnhat";
             this.btnCapnhat.Size = new System.Drawing.Size(140, 35);
             this.btnCapnhat.TabIndex = 18;
@@ -167,7 +168,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             this.dtpNgaytaothe.Enabled = false;
             this.dtpNgaytaothe.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgaytaothe.Location = new System.Drawing.Point(230, 304);
+            this.dtpNgaytaothe.Location = new System.Drawing.Point(230, 268);
             this.dtpNgaytaothe.Name = "dtpNgaytaothe";
             this.dtpNgaytaothe.Size = new System.Drawing.Size(357, 28);
             this.dtpNgaytaothe.TabIndex = 13;
@@ -176,7 +177,7 @@ namespace QuanLyThuVien.Taikhoan
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(33, 306);
+            this.label7.Location = new System.Drawing.Point(33, 270);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(115, 24);
             this.label7.TabIndex = 12;
@@ -186,7 +187,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             this.tbLophoc.BackColor = System.Drawing.Color.White;
             this.tbLophoc.Enabled = false;
-            this.tbLophoc.Location = new System.Drawing.Point(230, 257);
+            this.tbLophoc.Location = new System.Drawing.Point(230, 227);
             this.tbLophoc.Name = "tbLophoc";
             this.tbLophoc.Size = new System.Drawing.Size(357, 28);
             this.tbLophoc.TabIndex = 11;
@@ -194,7 +195,7 @@ namespace QuanLyThuVien.Taikhoan
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(33, 259);
+            this.label6.Location = new System.Drawing.Point(33, 229);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 24);
             this.label6.TabIndex = 10;
@@ -204,7 +205,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             this.tbDiachi.BackColor = System.Drawing.Color.White;
             this.tbDiachi.Enabled = false;
-            this.tbDiachi.Location = new System.Drawing.Point(230, 210);
+            this.tbDiachi.Location = new System.Drawing.Point(230, 186);
             this.tbDiachi.Name = "tbDiachi";
             this.tbDiachi.Size = new System.Drawing.Size(357, 28);
             this.tbDiachi.TabIndex = 9;
@@ -212,7 +213,7 @@ namespace QuanLyThuVien.Taikhoan
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 212);
+            this.label5.Location = new System.Drawing.Point(33, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 24);
             this.label5.TabIndex = 8;
@@ -222,7 +223,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             this.dtpNgaysinh.Enabled = false;
             this.dtpNgaysinh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgaysinh.Location = new System.Drawing.Point(230, 116);
+            this.dtpNgaysinh.Location = new System.Drawing.Point(230, 104);
             this.dtpNgaysinh.Name = "dtpNgaysinh";
             this.dtpNgaysinh.Size = new System.Drawing.Size(357, 28);
             this.dtpNgaysinh.TabIndex = 5;
@@ -230,7 +231,7 @@ namespace QuanLyThuVien.Taikhoan
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 165);
+            this.label4.Location = new System.Drawing.Point(33, 147);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 24);
             this.label4.TabIndex = 6;
@@ -239,7 +240,7 @@ namespace QuanLyThuVien.Taikhoan
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 118);
+            this.label3.Location = new System.Drawing.Point(33, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 24);
             this.label3.TabIndex = 4;
@@ -249,7 +250,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             this.tbTendocgia.BackColor = System.Drawing.Color.White;
             this.tbTendocgia.Enabled = false;
-            this.tbTendocgia.Location = new System.Drawing.Point(230, 69);
+            this.tbTendocgia.Location = new System.Drawing.Point(230, 63);
             this.tbTendocgia.Name = "tbTendocgia";
             this.tbTendocgia.Size = new System.Drawing.Size(357, 28);
             this.tbTendocgia.TabIndex = 3;
@@ -257,7 +258,7 @@ namespace QuanLyThuVien.Taikhoan
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 71);
+            this.label2.Location = new System.Drawing.Point(33, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 24);
             this.label2.TabIndex = 2;
@@ -286,13 +287,16 @@ namespace QuanLyThuVien.Taikhoan
             this.AcceptButton = this.btnLuu;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 500);
+            this.ClientSize = new System.Drawing.Size(634, 441);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
+            this.MaximizeBox = false;
             this.Name = "fThongtindocgia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Thông tin cá nhân";
+            this.Text = "Thông tin độc giả";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
