@@ -11,13 +11,23 @@ namespace QuanLyThuVien.CSDL
 {
     public class Account : DB
     {
-        public static int getTotalElements()
+        public static int count(string loainguoidung = "")
         {
             int count = 0;
             using (SqlConnection conn = connect())
             {
                 conn.Open();
-                string sql = "SELECT COUNT(*) FROM NguoiDung";
+                string sql = "";
+                if(loainguoidung.Equals(""))
+                {
+                    sql = "SELECT COUNT(*) FROM NguoiDung";
+                } else if(loainguoidung.Equals("quanly"))
+                {
+                    sql = "SELECT COUNT(*) FROM NguoiDung WHERE loainguoidung <> 'quanly'";
+                } else
+                {
+                    sql = "SELECT COUNT(*) FROM NguoiDung WHERE loainguoidung = 'docgia'";
+                }
                 SqlCommand cm = new SqlCommand(sql, conn);
                 count = (int)cm.ExecuteScalar();
                 cm.Dispose();
@@ -40,14 +50,23 @@ namespace QuanLyThuVien.CSDL
             return dt;
         }
 
-        public static DataTable searchAccount(int pageSize, int pageIndex, string keyword = "")
+        public static DataTable searchAccount(string loainguoidung, int pageSize, int pageIndex, string keyword = "")
         {
             DataTable dt = new DataTable();
             using (SqlConnection conn = connect())
             {
                 int offset = (pageIndex - 1) * pageSize;
-
-                string sql = $"SELECT * FROM NguoiDung WHERE tendangnhap like '{keyword}%' and loainguoidung <> 'quanly' ORDER BY tendangnhap OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
+                string sql = "";
+                if(loainguoidung.Equals("quanly"))
+                {
+                    sql = $"SELECT * FROM NguoiDung WHERE tendangnhap like '{keyword}%' and loainguoidung <> 'quanly' ORDER BY tendangnhap OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
+                } else if(loainguoidung.Equals("thuthu"))
+                {
+                    sql = $"SELECT * FROM NguoiDung WHERE tendangnhap like '{keyword}%' and loainguoidung = 'docgia' ORDER BY tendangnhap OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
+                } else
+                {
+                    return null;
+                }
                 SqlDataAdapter ad = new SqlDataAdapter(sql, conn);
                 ad.Fill(dt);
                 ad.Dispose();

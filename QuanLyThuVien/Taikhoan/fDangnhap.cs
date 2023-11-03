@@ -41,6 +41,17 @@ namespace QuanLyThuVien
                 {
                     if (dr["matkhau"].ToString() == matkhau)
                     {
+                        if(dr["loainguoidung"].ToString().Equals("docgia") && Docgia.getDocgia(dr["tendangnhap"].ToString()) == null)
+                        {
+                            MessageBox.Show("Tài khoản của bạn chưa thể sử dụng do chưa lập thẻ độc giả, vui lòng liên hệ với thủ thư để cấp thẻ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                        if (dr["loainguoidung"].ToString().Equals("thuthu") && Nhanvien.getNhanvien(dr["tendangnhap"].ToString()) == null)
+                        {
+                            MessageBox.Show("Tài khoản của bạn chưa được kích hoạt, vui lòng liên hệ quản lý để đăng ký thông tin nhân viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                        MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         user = dr;
                         fQuanly f = new fQuanly();
                         this.Hide();
@@ -131,6 +142,15 @@ namespace QuanLyThuVien
                         }
                     }
                 }
+            }
+        }
+
+        private void tbTendangnhap_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            {
+                // Nếu không phải số hoặc chữ cái, thì không cho phép nhập.
+                e.Handled = true;
             }
         }
     }

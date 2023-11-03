@@ -16,6 +16,8 @@ namespace QuanLyThuVien.Taikhoan
         private int pageIndex = 1;
         private int pageSize = 10; // Số lượng mục trên mỗi trang
         private int totalPages = 0;
+        private DataRow user = null;
+        private string keySearch = "";
 
         Dictionary<string, string> roles = new Dictionary<string, string>
         {
@@ -29,6 +31,13 @@ namespace QuanLyThuVien.Taikhoan
             cbSohang.SelectedIndex = 2;
         }
 
+        public fDanhsachtaikhoan(DataRow user)
+        {
+            InitializeComponent();
+            this.user = user;
+            cbSohang.SelectedIndex = 2;
+        }
+
         private void fDanhsachtaikhoan_Load(object sender, EventArgs e)
         {
             cbLoainguoidung.DataSource = new BindingSource(roles, null);
@@ -39,8 +48,9 @@ namespace QuanLyThuVien.Taikhoan
         private void loadData()
         {
             dgvTaikhoan.DataSource = null;
-            int totalAccounts = Account.getTotalElements();
-            DataTable accounts = Account.searchAccount(pageSize, pageIndex);
+            int totalAccounts = Account.count(user["loainguoidung"].ToString());
+            //MessageBox.Show(totalAccounts.ToString());
+            DataTable accounts = Account.searchAccount(user["loainguoidung"].ToString(), pageSize, pageIndex, keySearch);
             totalPages = (int)Math.Ceiling((double)totalAccounts / pageSize);
 
             dgvTaikhoan.DataSource = accounts;
@@ -149,6 +159,13 @@ namespace QuanLyThuVien.Taikhoan
             handleTextbox(true); // Cho phép sửa textbox
             switchMode(false); // Chuyển chế độ Lưu hoặc hủy
             dgvTaikhoan.ClearSelection();
+            if(user["loainguoidung"].ToString().Equals("quanly"))
+            {
+                cbLoainguoidung.SelectedIndex = 0;
+            } else
+            {
+                cbLoainguoidung.SelectedIndex = 1;
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -269,7 +286,10 @@ namespace QuanLyThuVien.Taikhoan
         {
             tbTendangnhap.Enabled = enabled;
             tbMatkhau.Enabled = enabled;
-            cbLoainguoidung.Enabled = enabled;
+            if(user["loainguoidung"].ToString().Equals("quanly"))
+            {
+                cbLoainguoidung.Enabled = enabled;
+            }
         }
 
         private void switchMode(bool visible)
@@ -282,6 +302,66 @@ namespace QuanLyThuVien.Taikhoan
             dgvTaikhoan.Enabled = visible;
             if (visible) btnThem.Focus();
             else btnLuu.Focus();
+        }
+
+        private void btnTimkiem_Click(object sender, EventArgs e)
+        {
+            keySearch = tbTimkiem.Text.Trim();
+            loadData();
+        }
+
+        private void tbTimkiem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                //btnTimkiem.PerformClick();
+            }
+            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            //{
+            //    // Nếu không phải số hoặc chữ cái, thì không cho phép nhập.
+            //    e.Handled = true;
+            //}
+        }
+
+        private void tbTendangnhap_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            {
+                // Nếu không phải số hoặc chữ cái, thì không cho phép nhập.
+                e.Handled = true;
+            }
+        }
+
+        private void tbTimkiem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnTimkiem.PerformClick();
+            }
+        }
+
+        private void tbTendangnhap_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLuu.PerformClick();
+            }
+        }
+
+        private void tbMatkhau_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLuu.PerformClick();
+            }
+        }
+
+        private void cbLoainguoidung_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLuu.PerformClick();
+            }
         }
     }
 }

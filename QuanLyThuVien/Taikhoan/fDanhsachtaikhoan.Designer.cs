@@ -37,6 +37,8 @@ namespace QuanLyThuVien.Taikhoan
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fDanhsachtaikhoan));
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnTimkiem = new System.Windows.Forms.Button();
+            this.tbTimkiem = new System.Windows.Forms.TextBox();
             this.dgvTaikhoan = new System.Windows.Forms.DataGridView();
             this.tendangnhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.matkhau = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,11 +83,13 @@ namespace QuanLyThuVien.Taikhoan
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(564, 556);
+            this.panel1.Size = new System.Drawing.Size(564, 597);
             this.panel1.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnTimkiem);
+            this.groupBox1.Controls.Add(this.tbTimkiem);
             this.groupBox1.Controls.Add(this.dgvTaikhoan);
             this.groupBox1.Controls.Add(this.cbSohang);
             this.groupBox1.Controls.Add(this.label4);
@@ -96,10 +100,31 @@ namespace QuanLyThuVien.Taikhoan
             this.groupBox1.Controls.Add(this.lbCurrentpage);
             this.groupBox1.Location = new System.Drawing.Point(12, 178);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(535, 366);
+            this.groupBox1.Size = new System.Drawing.Size(535, 407);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách tài khoản";
+            // 
+            // btnTimkiem
+            // 
+            this.btnTimkiem.Location = new System.Drawing.Point(429, 35);
+            this.btnTimkiem.Name = "btnTimkiem";
+            this.btnTimkiem.Size = new System.Drawing.Size(100, 30);
+            this.btnTimkiem.TabIndex = 12;
+            this.btnTimkiem.Text = "Tìm kiếm";
+            this.btnTimkiem.UseVisualStyleBackColor = true;
+            this.btnTimkiem.Click += new System.EventHandler(this.btnTimkiem_Click);
+            // 
+            // tbTimkiem
+            // 
+            this.tbTimkiem.BackColor = System.Drawing.Color.White;
+            this.tbTimkiem.Location = new System.Drawing.Point(155, 35);
+            this.tbTimkiem.Margin = new System.Windows.Forms.Padding(4);
+            this.tbTimkiem.Name = "tbTimkiem";
+            this.tbTimkiem.Size = new System.Drawing.Size(268, 28);
+            this.tbTimkiem.TabIndex = 11;
+            this.tbTimkiem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTimkiem_KeyDown);
+            this.tbTimkiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTimkiem_KeyPress);
             // 
             // dgvTaikhoan
             // 
@@ -121,7 +146,7 @@ namespace QuanLyThuVien.Taikhoan
             this.tendangnhap,
             this.matkhau,
             this.loainguoidung});
-            this.dgvTaikhoan.Location = new System.Drawing.Point(6, 33);
+            this.dgvTaikhoan.Location = new System.Drawing.Point(6, 85);
             this.dgvTaikhoan.MultiSelect = false;
             this.dgvTaikhoan.Name = "dgvTaikhoan";
             this.dgvTaikhoan.ReadOnly = true;
@@ -133,12 +158,13 @@ namespace QuanLyThuVien.Taikhoan
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvTaikhoan.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvTaikhoan.RowHeadersWidth = 51;
             this.dgvTaikhoan.RowTemplate.DividerHeight = 1;
             this.dgvTaikhoan.RowTemplate.Height = 32;
             this.dgvTaikhoan.RowTemplate.ReadOnly = true;
             this.dgvTaikhoan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTaikhoan.Size = new System.Drawing.Size(523, 275);
-            this.dgvTaikhoan.TabIndex = 11;
+            this.dgvTaikhoan.TabIndex = 13;
             this.dgvTaikhoan.SelectionChanged += new System.EventHandler(this.dgvTaikhoan_SelectionChanged);
             // 
             // tendangnhap
@@ -149,6 +175,7 @@ namespace QuanLyThuVien.Taikhoan
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
             this.tendangnhap.DefaultCellStyle = dataGridViewCellStyle2;
             this.tendangnhap.HeaderText = "Tên đăng nhập";
+            this.tendangnhap.MinimumWidth = 6;
             this.tendangnhap.Name = "tendangnhap";
             this.tendangnhap.ReadOnly = true;
             this.tendangnhap.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -160,6 +187,7 @@ namespace QuanLyThuVien.Taikhoan
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2);
             this.matkhau.DefaultCellStyle = dataGridViewCellStyle3;
             this.matkhau.HeaderText = "Mật khẩu";
+            this.matkhau.MinimumWidth = 6;
             this.matkhau.Name = "matkhau";
             this.matkhau.ReadOnly = true;
             this.matkhau.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -171,6 +199,7 @@ namespace QuanLyThuVien.Taikhoan
             dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(2);
             this.loainguoidung.DefaultCellStyle = dataGridViewCellStyle4;
             this.loainguoidung.HeaderText = "Loại người dùng";
+            this.loainguoidung.MinimumWidth = 6;
             this.loainguoidung.Name = "loainguoidung";
             this.loainguoidung.ReadOnly = true;
             this.loainguoidung.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -185,16 +214,16 @@ namespace QuanLyThuVien.Taikhoan
             "10",
             "20",
             "50"});
-            this.cbSohang.Location = new System.Drawing.Point(140, 321);
+            this.cbSohang.Location = new System.Drawing.Point(141, 369);
             this.cbSohang.Name = "cbSohang";
             this.cbSohang.Size = new System.Drawing.Size(75, 30);
-            this.cbSohang.TabIndex = 12;
+            this.cbSohang.TabIndex = 14;
             this.cbSohang.SelectedIndexChanged += new System.EventHandler(this.cbSohang_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(53, 324);
+            this.label4.Location = new System.Drawing.Point(54, 372);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 24);
             this.label4.TabIndex = 15;
@@ -202,40 +231,40 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // btnFirst
             // 
-            this.btnFirst.Location = new System.Drawing.Point(233, 318);
+            this.btnFirst.Location = new System.Drawing.Point(234, 366);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(50, 35);
-            this.btnFirst.TabIndex = 13;
+            this.btnFirst.TabIndex = 15;
             this.btnFirst.Text = "<<";
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // btnLast
             // 
-            this.btnLast.Location = new System.Drawing.Point(478, 318);
+            this.btnLast.Location = new System.Drawing.Point(479, 366);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(50, 35);
-            this.btnLast.TabIndex = 16;
+            this.btnLast.TabIndex = 18;
             this.btnLast.Text = ">>";
             this.btnLast.UseVisualStyleBackColor = true;
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // btnBefore
             // 
-            this.btnBefore.Location = new System.Drawing.Point(289, 318);
+            this.btnBefore.Location = new System.Drawing.Point(290, 366);
             this.btnBefore.Name = "btnBefore";
             this.btnBefore.Size = new System.Drawing.Size(50, 35);
-            this.btnBefore.TabIndex = 14;
+            this.btnBefore.TabIndex = 16;
             this.btnBefore.Text = "<";
             this.btnBefore.UseVisualStyleBackColor = true;
             this.btnBefore.Click += new System.EventHandler(this.btnBefore_Click);
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(417, 318);
+            this.btnNext.Location = new System.Drawing.Point(418, 366);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 35);
-            this.btnNext.TabIndex = 15;
+            this.btnNext.TabIndex = 17;
             this.btnNext.Text = ">";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -243,7 +272,7 @@ namespace QuanLyThuVien.Taikhoan
             // lbCurrentpage
             // 
             this.lbCurrentpage.AutoSize = true;
-            this.lbCurrentpage.Location = new System.Drawing.Point(370, 324);
+            this.lbCurrentpage.Location = new System.Drawing.Point(371, 372);
             this.lbCurrentpage.Name = "lbCurrentpage";
             this.lbCurrentpage.Size = new System.Drawing.Size(0, 24);
             this.lbCurrentpage.TabIndex = 12;
@@ -311,6 +340,7 @@ namespace QuanLyThuVien.Taikhoan
             this.cbLoainguoidung.Name = "cbLoainguoidung";
             this.cbLoainguoidung.Size = new System.Drawing.Size(370, 30);
             this.cbLoainguoidung.TabIndex = 5;
+            this.cbLoainguoidung.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbLoainguoidung_KeyDown);
             // 
             // label3
             // 
@@ -328,6 +358,7 @@ namespace QuanLyThuVien.Taikhoan
             this.tbMatkhau.Name = "tbMatkhau";
             this.tbMatkhau.Size = new System.Drawing.Size(370, 28);
             this.tbMatkhau.TabIndex = 3;
+            this.tbMatkhau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbMatkhau_KeyDown);
             // 
             // label2
             // 
@@ -345,6 +376,8 @@ namespace QuanLyThuVien.Taikhoan
             this.tbTendangnhap.Name = "tbTendangnhap";
             this.tbTendangnhap.Size = new System.Drawing.Size(370, 28);
             this.tbTendangnhap.TabIndex = 1;
+            this.tbTendangnhap.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTendangnhap_KeyDown);
+            this.tbTendangnhap.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTendangnhap_KeyPress);
             // 
             // label1
             // 
@@ -357,10 +390,9 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // fDanhsachtaikhoan
             // 
-            this.AcceptButton = this.btnLuu;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 556);
+            this.ClientSize = new System.Drawing.Size(564, 597);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -406,5 +438,7 @@ namespace QuanLyThuVien.Taikhoan
         private System.Windows.Forms.DataGridViewTextBoxColumn loainguoidung;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnTimkiem;
+        private System.Windows.Forms.TextBox tbTimkiem;
     }
 }

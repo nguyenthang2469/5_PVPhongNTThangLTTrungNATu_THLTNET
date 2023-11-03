@@ -48,7 +48,7 @@ namespace QuanLyThuVien
             this.label1.Location = new System.Drawing.Point(14, 25);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(141, 24);
+            this.label1.Size = new System.Drawing.Size(175, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tên đăng nhập";
             // 
@@ -57,8 +57,9 @@ namespace QuanLyThuVien
             this.tbTendangnhap.Location = new System.Drawing.Point(164, 25);
             this.tbTendangnhap.Margin = new System.Windows.Forms.Padding(5);
             this.tbTendangnhap.Name = "tbTendangnhap";
-            this.tbTendangnhap.Size = new System.Drawing.Size(301, 28);
+            this.tbTendangnhap.Size = new System.Drawing.Size(301, 34);
             this.tbTendangnhap.TabIndex = 1;
+            this.tbTendangnhap.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTendangnhap_KeyPress);
             // 
             // label2
             // 
@@ -66,7 +67,7 @@ namespace QuanLyThuVien
             this.label2.Location = new System.Drawing.Point(14, 71);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 24);
+            this.label2.Size = new System.Drawing.Size(109, 29);
             this.label2.TabIndex = 2;
             this.label2.Text = "Mật khẩu";
             // 
@@ -95,7 +96,7 @@ namespace QuanLyThuVien
             this.tbMatkhau.Location = new System.Drawing.Point(164, 71);
             this.tbMatkhau.Margin = new System.Windows.Forms.Padding(5);
             this.tbMatkhau.Name = "tbMatkhau";
-            this.tbMatkhau.Size = new System.Drawing.Size(301, 28);
+            this.tbMatkhau.Size = new System.Drawing.Size(301, 34);
             this.tbMatkhau.TabIndex = 3;
             this.tbMatkhau.UseSystemPasswordChar = true;
             // 
@@ -104,7 +105,7 @@ namespace QuanLyThuVien
             this.ckbShowhidepassword.AutoSize = true;
             this.ckbShowhidepassword.Location = new System.Drawing.Point(475, 81);
             this.ckbShowhidepassword.Name = "ckbShowhidepassword";
-            this.ckbShowhidepassword.Size = new System.Drawing.Size(15, 14);
+            this.ckbShowhidepassword.Size = new System.Drawing.Size(18, 17);
             this.ckbShowhidepassword.TabIndex = 4;
             this.toolTip1.SetToolTip(this.ckbShowhidepassword, "Hiển thị mật khẩu");
             this.ckbShowhidepassword.UseVisualStyleBackColor = true;
@@ -118,7 +119,7 @@ namespace QuanLyThuVien
             this.lbQuenmatkhau.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lbQuenmatkhau.Location = new System.Drawing.Point(164, 165);
             this.lbQuenmatkhau.Name = "lbQuenmatkhau";
-            this.lbQuenmatkhau.Size = new System.Drawing.Size(139, 24);
+            this.lbQuenmatkhau.Size = new System.Drawing.Size(174, 29);
             this.lbQuenmatkhau.TabIndex = 7;
             this.lbQuenmatkhau.Text = "Quên mật khẩu";
             this.lbQuenmatkhau.Click += new System.EventHandler(this.lbQuenmatkhau_Click);
@@ -126,7 +127,7 @@ namespace QuanLyThuVien
             // fDangnhap
             // 
             this.AcceptButton = this.btnDangnhap;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(515, 208);
             this.Controls.Add(this.lbQuenmatkhau);
