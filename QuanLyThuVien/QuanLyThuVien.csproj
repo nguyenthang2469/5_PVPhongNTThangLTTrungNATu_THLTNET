@@ -76,16 +76,16 @@
     <Compile Include="Taikhoan\fDoimatkhau.Designer.cs">
       <DependentUpon>fDoimatkhau.cs</DependentUpon>
     </Compile>
-    <Compile Include="Taikhoan\fThongtindocgia.cs">
+    <Compile Include="Docgia\fThongtindocgia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Taikhoan\fThongtindocgia.Designer.cs">
+    <Compile Include="Docgia\fThongtindocgia.Designer.cs">
       <DependentUpon>fThongtindocgia.cs</DependentUpon>
     </Compile>
-    <Compile Include="Taikhoan\fThongtinnhanvien.cs">
+    <Compile Include="Thuthu\fThongtinnhanvien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Taikhoan\fThongtinnhanvien.Designer.cs">
+    <Compile Include="Thuthu\fThongtinnhanvien.Designer.cs">
       <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Taikhoan\fDangnhap.resx">
@@ -109,10 +109,10 @@
     <EmbeddedResource Include="Taikhoan\fDoimatkhau.resx">
       <DependentUpon>fDoimatkhau.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Taikhoan\fThongtindocgia.resx">
+    <EmbeddedResource Include="Docgia\fThongtindocgia.resx">
       <DependentUpon>fThongtindocgia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Taikhoan\fThongtinnhanvien.resx">
+    <EmbeddedResource Include="Thuthu\fThongtinnhanvien.resx">
       <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

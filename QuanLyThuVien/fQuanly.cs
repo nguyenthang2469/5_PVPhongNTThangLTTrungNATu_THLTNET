@@ -20,9 +20,17 @@ namespace QuanLyThuVien
         {
             this.user = fDangnhap.user;
             InitializeComponent();
+        }
+
+        private void fQuanly_Load(object sender, EventArgs e)
+        {
             if (user["loainguoidung"].ToString().Equals("quanly"))
             {
                 thôngTinCáNhânToolStripMenuItem.Visible = false;
+            }
+            if (user["loainguoidung"].ToString().Equals("docgia"))
+            {
+                quảnLýTàiKhoảnToolStripMenuItem.Visible = false;
             }
         }
 
@@ -73,16 +81,9 @@ namespace QuanLyThuVien
             f.ShowDialog();
         }
 
-        private void fQuanly_Load(object sender, EventArgs e)
-        {
-            if(!user["loainguoidung"].ToString().Equals("quanly")) {
-                quảnLýTàiKhoảnToolStripMenuItem.Visible = false;
-            }
-        }
-
         private void quảnLýTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fDanhsachtaikhoan f = new fDanhsachtaikhoan();
+            fDanhsachtaikhoan f = new fDanhsachtaikhoan(user);
             f.ShowDialog();
         }
     }
