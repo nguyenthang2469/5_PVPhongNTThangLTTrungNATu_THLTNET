@@ -32,6 +32,8 @@ namespace QuanLyThuVien
             {
                 quảnLýTàiKhoảnToolStripMenuItem.Visible = false;
             }
+            ucThongtinnhom uc = new ucThongtinnhom();
+            addUsercontrol(uc);
         }
 
         private void thôngTinCáNhânToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,6 +87,20 @@ namespace QuanLyThuVien
         {
             fDanhsachtaikhoan f = new fDanhsachtaikhoan(user);
             f.ShowDialog();
+        }
+
+        private void addUsercontrol(UserControl userControl)
+        {
+            userControl.Dock = DockStyle.Fill;
+            pnMain.Controls.Clear();
+            pnMain.Controls.Add(userControl);
+            userControl.BringToFront();
+        }
+
+        private void thôngTinNhómToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ucThongtinnhom uc = new ucThongtinnhom();
+            addUsercontrol(uc);
         }
     }
 }
