@@ -88,6 +88,12 @@
     <Compile Include="Thuthu\fThongtinnhanvien.Designer.cs">
       <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucThongtinnhom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucThongtinnhom.Designer.cs">
+      <DependentUpon>ucThongtinnhom.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Taikhoan\fDangnhap.resx">
       <DependentUpon>fDangnhap.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Thuthu\fThongtinnhanvien.resx">
       <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucThongtinnhom.resx">
+      <DependentUpon>ucThongtinnhom.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
