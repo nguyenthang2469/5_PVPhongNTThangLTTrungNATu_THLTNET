@@ -1,4 +1,5 @@
 ﻿using QuanLyThuVien.Taikhoan;
+using QuanLyThuVien.Thuthu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,8 +33,6 @@ namespace QuanLyThuVien
             {
                 quảnLýTàiKhoảnToolStripMenuItem.Visible = false;
             }
-            ucThongtinnhom uc = new ucThongtinnhom();
-            addUsercontrol(uc);
         }
 
         private void thôngTinCáNhânToolStripMenuItem_Click(object sender, EventArgs e)
