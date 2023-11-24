@@ -31,7 +31,7 @@ namespace QuanLyThuVien.Taikhoan
         }
         public fThongtindocgia()
         {
-            user = fDangnhap.user;
+            //user = fDangnhap.user;
             InitializeComponent();
             dtpNgaysinh.CustomFormat = "dd/MM/yyyy";
             dtpNgaytaothe.CustomFormat = "dd/MM/yyyy";

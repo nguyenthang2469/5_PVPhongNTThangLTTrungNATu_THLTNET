@@ -29,7 +29,7 @@ namespace QuanLyThuVien.Taikhoan
 
         public fThongtinnhanvien()
         {
-            user = fDangnhap.user;
+            //user = fDangnhap.user;
             InitializeComponent();
             dtpNgaysinh.CustomFormat = "dd/MM/yyyy";
             loadInfo();

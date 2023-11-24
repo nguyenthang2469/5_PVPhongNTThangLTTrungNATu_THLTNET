@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyThuVien.Taikhoan;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace QuanLyThuVien
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fDangnhap());
+            Application.Run(new frmLogin());
         }
     }
 }

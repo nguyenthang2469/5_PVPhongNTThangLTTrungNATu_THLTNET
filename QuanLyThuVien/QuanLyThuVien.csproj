@@ -33,8 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Guna.UI">
+      <HintPath>..\..\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI WinForms\.net 4.0\Guna.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Guna.UI2">
+      <HintPath>..\..\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI2 WinForms\.net 4.0\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,41 +56,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CHUCNANG.cs" />
     <Compile Include="CSDL\Account.cs" />
     <Compile Include="CSDL\DB.cs" />
     <Compile Include="CSDL\Nhanvien.cs" />
     <Compile Include="CSDL\Docgia.cs" />
-    <Compile Include="Taikhoan\fDangnhap.cs">
+    <Compile Include="frmQuanly.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Taikhoan\fDangnhap.Designer.cs">
-      <DependentUpon>fDangnhap.cs</DependentUpon>
+    <Compile Include="frmQuanly.Designer.cs">
+      <DependentUpon>frmQuanly.cs</DependentUpon>
     </Compile>
-    <Compile Include="fQuanly.cs">
+    <Compile Include="frmThongtinnhom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fQuanly.Designer.cs">
-      <DependentUpon>fQuanly.cs</DependentUpon>
+    <Compile Include="frmThongtinnhom.Designer.cs">
+      <DependentUpon>frmThongtinnhom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTrangchu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTrangchu.Designer.cs">
+      <DependentUpon>frmTrangchu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Taikhoan\fDanhsachtaikhoan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Taikhoan\fDanhsachtaikhoan.Designer.cs">
-      <DependentUpon>fDanhsachtaikhoan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Taikhoan\fDoimatkhau.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Taikhoan\fDoimatkhau.Designer.cs">
-      <DependentUpon>fDoimatkhau.cs</DependentUpon>
-    </Compile>
     <Compile Include="Docgia\fThongtindocgia.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Docgia\fThongtindocgia.Designer.cs">
       <DependentUpon>fThongtindocgia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Taikhoan\frmDoimatkhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Taikhoan\frmDoimatkhau.Designer.cs">
+      <DependentUpon>frmDoimatkhau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Taikhoan\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Taikhoan\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Taikhoan\frmQuanlytaikhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Taikhoan\frmQuanlytaikhoan.Designer.cs">
+      <DependentUpon>frmQuanlytaikhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Thuthu\fThongtinnhanvien.cs">
       <SubType>Form</SubType>
@@ -88,41 +116,34 @@
     <Compile Include="Thuthu\fThongtinnhanvien.Designer.cs">
       <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucThongtinnhom.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucThongtinnhom.Designer.cs">
-      <DependentUpon>ucThongtinnhom.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Taikhoan\fDangnhap.resx">
-      <DependentUpon>fDangnhap.cs</DependentUpon>
+    <EmbeddedResource Include="frmQuanly.resx">
+      <DependentUpon>frmQuanly.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fQuanly.resx">
-      <DependentUpon>fQuanly.cs</DependentUpon>
+    <EmbeddedResource Include="frmThongtinnhom.resx">
+      <DependentUpon>frmThongtinnhom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTrangchu.resx">
+      <DependentUpon>frmTrangchu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Taikhoan\fDanhsachtaikhoan.resx">
-      <DependentUpon>fDanhsachtaikhoan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Taikhoan\fDoimatkhau.resx">
-      <DependentUpon>fDoimatkhau.cs</DependentUpon>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Docgia\fThongtindocgia.resx">
       <DependentUpon>fThongtindocgia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Taikhoan\frmDoimatkhau.resx">
+      <DependentUpon>frmDoimatkhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Taikhoan\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Taikhoan\frmQuanlytaikhoan.resx">
+      <DependentUpon>frmQuanlytaikhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Thuthu\fThongtinnhanvien.resx">
       <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucThongtinnhom.resx">
-      <DependentUpon>ucThongtinnhom.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -136,6 +157,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\close-eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\image_school.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\login.jfif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons\book.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons\search.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\list.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
