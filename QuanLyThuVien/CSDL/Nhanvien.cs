@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QuanLyThuVien.CSDL
 {
@@ -17,61 +18,86 @@ namespace QuanLyThuVien.CSDL
             using (SqlConnection conn = connect())
             {
                 string sql = "SELECT * FROM NhanVien";
-                SqlDataAdapter ad = new SqlDataAdapter(sql, conn);
-                ad.Fill(dt);
-                ad.Dispose();
-                conn.Close();
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
             }
             return dt;
         }
 
-        public static DataRow getNhanvien(string tendangnhap)
+        public static Tuple<int, DataTable> searchNhanvien(int pageSize, int pageIndex, string keyword = "")
+        {
+            DataTable dt = new DataTable();
+            int totalAccount = 0;
+
+            using (SqlConnection conn = connect())
+            {
+                conn.Open();
+                int offset = (pageIndex - 1) * pageSize;
+
+                string sqlCount = "SELECT COUNT(*) FROM NhanVien";
+                string sqlSelect = "SELECT * FROM NhanVien";
+
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    sqlCount += " WHERE manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword";
+                    sqlSelect += " WHERE manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword";
+                }
+
+                using (SqlCommand countCmd = new SqlCommand(sqlCount, conn))
+                {
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        countCmd.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+                    totalAccount = (int)countCmd.ExecuteScalar();
+                }
+
+                sqlSelect += " ORDER BY tendangnhap OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY";
+
+                using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
+                {
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+
+                    cm.Parameters.AddWithValue("@offset", offset);
+                    cm.Parameters.AddWithValue("@pageSize", pageSize);
+
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
+
+            // Trả về Tuple với totalAccount và listAccount
+            return Tuple.Create(totalAccount, dt);
+        }
+
+        public static DataRow getNhanvien(string manhanvien)
         {
             DataTable dt = new DataTable();
             using (SqlConnection conn = connect())
             {
-                string sql = "SELECT * FROM NhanVien WHERE tendangnhap = '" + tendangnhap + "'";
-                SqlDataAdapter ad = new SqlDataAdapter(sql, conn);
-                ad.Fill(dt);
-                ad.Dispose();
+                string sql = "SELECT * FROM NhanVien WHERE manhanvien = @manhanvien";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@manhanvien", manhanvien);
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
                 conn.Close();
             }
-            if (dt.Rows.Count > 0)
-            {
-                return dt.Rows[0]; // Trả về hàng đầu tiên
-            }
-            else
-            {
-                return null; // Không tìm thấy bản ghi
-            }
+            return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
-        public static DataRow searchNhanvien(string field, string keySearch)
-        {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = connect())
-            {
-                string sql = "SELECT * FROM NhanVien WHERE " + field + " LIKE '" + keySearch + "%'";
-                SqlDataAdapter ad = new SqlDataAdapter(sql, conn);
-                ad.Fill(dt);
-                ad.Dispose();
-                conn.Close();
-            }
-            if (dt.Rows.Count > 0)
-            {
-                return dt.Rows[0]; // Trả về hàng đầu tiên
-            }
-            else
-            {
-                return null; // Không tìm thấy bản ghi
-            }
-        }
-
-        public static HttpStatusCode CreateNhanvien(
+        public static bool CreateNhanvien(
             string manhanvien,
             string tennhanvien,
             DateTime ngaysinh,
-            int gioitinh,
+            string gioitinh,
             string sodienthoai,
             string tendangnhap
         ) {
@@ -79,34 +105,29 @@ namespace QuanLyThuVien.CSDL
             using (SqlConnection conn = connect())
             {
                 conn.Open();
-                string sql = $"INSERT INTO NhanVien VALUES ('" +
-                    $"{manhanvien}'," +
-                    $"N'{tennhanvien}'," +
-                    $"'{ngaysinh.ToString("yyyy-MM-dd")}', " +
-                    $"'{gioitinh}'," +
-                    $"'{sodienthoai}'," +
-                    $"'{tendangnhap}')";
-                SqlCommand cm = new SqlCommand(sql, conn);
-                rowsAffected = cm.ExecuteNonQuery();
-                cm.Dispose();
-                conn.Close();
+                string sql = "INSERT INTO NhanVien VALUES (@manhanvien, @tennhanvien, @ngaysinh, @gioitinh, @sodienthoai, @tendangnhap)";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@manhanvien", manhanvien);
+                    cm.Parameters.AddWithValue("@tennhanvien", tennhanvien);
+                    cm.Parameters.AddWithValue("@ngaysinh", ngaysinh.ToString("yyyy-MM-dd"));
+                    cm.Parameters.AddWithValue("@gioitinh", gioitinh);
+                    cm.Parameters.AddWithValue("@sodienthoai", sodienthoai);
+                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
+
+                    rowsAffected = cm.ExecuteNonQuery();
+                }
             }
-            if (rowsAffected > 0) // Nếu có dòng thay đổi
-            {
-                return HttpStatusCode.Created; // Trả về status code 200 nếu cập nhật thành công
-            }
-            else
-            {
-                return HttpStatusCode.InternalServerError; // Hoặc mã trạng thái khác tùy theo trường hợp
-            }
+            return rowsAffected > 0;
         }
 
-        public static HttpStatusCode UpdateNhanvien(
+        public static bool UpdateNhanvien(
             string manhanvien,
             string tennhanvien,
             DateTime ngaysinh,
-            int gioitinh,
-            string sodienthoai
+            string gioitinh,
+            string sodienthoai,
+            string tendangnhap
         )
         {
             int rowsAffected = 0;
@@ -114,45 +135,42 @@ namespace QuanLyThuVien.CSDL
             {
                 conn.Open();
                 string sql = $"UPDATE NhanVien SET " +
-                    $"tennhanvien = N'{tennhanvien}', " +
-                    $"ngaysinh = '{ngaysinh.ToString("yyyy - MM - dd")}', " +
-                    $"gioitinh = '{gioitinh}', " +
-                    $"sodienthoai = '{sodienthoai}'" +
-                    $"WHERE manhanvien = '{manhanvien}'";
-                SqlCommand cm = new SqlCommand(sql, conn);
-                rowsAffected = cm.ExecuteNonQuery();
-                cm.Dispose();
-                conn.Close();
+                    "tennhanvien = @tennhanvien, " +
+                    "ngaysinh = @ngaysinh, " +
+                    "gioitinh = @gioitinh, " +
+                    "sodienthoai = @sodienthoai, " +
+                    "tendangnhap = @tendangnhap " +
+                    "WHERE manhanvien = @manhanvien";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@tennhanvien", tennhanvien);
+                    cm.Parameters.AddWithValue("@ngaysinh", ngaysinh.ToString("yyyy - MM - dd"));
+                    cm.Parameters.AddWithValue("@gioitinh", gioitinh);
+                    cm.Parameters.AddWithValue("@sodienthoai", sodienthoai);
+                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
+                    cm.Parameters.AddWithValue("@manhanvien", manhanvien);
+
+                    rowsAffected = cm.ExecuteNonQuery();
+                }
             }
-            if (rowsAffected > 0) // Nếu có dòng thay đổi
-            {
-                return HttpStatusCode.OK; // Trả về status code 200 nếu cập nhật thành công
-            }
-            else
-            {
-                return HttpStatusCode.InternalServerError; // Hoặc mã trạng thái khác tùy theo trường hợp
-            }
+            return rowsAffected > 0;
         }
-        public static HttpStatusCode DeleteNhanvien(string manhanvien)
+        public static bool DeleteNhanvien(string manhanvien, string tendangnhap)
         {
             int rowsAffected = 0;
             using (SqlConnection conn = connect())
             {
                 conn.Open();
-                string sql = "DELETE FROM NhanVien WHERE manhanvien = '" + manhanvien + "'";
-                SqlCommand cm = new SqlCommand(sql, conn);
-                rowsAffected = cm.ExecuteNonQuery();
-                cm.Dispose();
-                conn.Close();
+                string sql = "DELETE FROM NhanVien WHERE manhanvien = @manhanvien AND tendangnhap = @tendangnhap";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@manhanvien", manhanvien);
+                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
+
+                    rowsAffected = cm.ExecuteNonQuery();
+                }
             }
-            if (rowsAffected > 0) // Nếu có dòng thay đổi
-            {
-                return HttpStatusCode.OK; // Trả về status code 200 nếu xóa thành công
-            }
-            else
-            {
-                return HttpStatusCode.InternalServerError; // Hoặc mã trạng thái khác tùy theo trường hợp
-            }
+            return rowsAffected > 0 && Account.DeleteAccount(tendangnhap);
         }
     }
 }

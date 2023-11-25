@@ -15,6 +15,7 @@ namespace QuanLyThuVien
     {
         private bool shouldExit = false;
         private string tendangnhap = string.Empty;
+        private bool isSidebarVisible = true;
 
         public frmTrangchu()
         {
@@ -31,6 +32,7 @@ namespace QuanLyThuVien
         {
             guna2ShadowForm1.SetShadowForm(this);
             btnTrangchu_Click(btnTrangchu, EventArgs.Empty);
+            lbTendangnhap.Text = tendangnhap;
         }
 
         private void btnTrangchu_Click(object sender, EventArgs e)
@@ -85,6 +87,46 @@ namespace QuanLyThuVien
                     Application.Exit();
                 }
             }
+        }
+
+        private void btnSidebar_Click(object sender, EventArgs e)
+        {
+            if (isSidebarVisible)
+            {
+                guna2Panel_left.Width = 58;
+                lbTendangnhap.Visible = false;
+                lbXinchao.Visible = false;
+                ptbBook.Visible = false;
+
+                foreach (Control control in guna2Panel_left.Controls)
+                {
+                    if (control is Guna.UI2.WinForms.Guna2Button)
+                    {
+                        Guna.UI2.WinForms.Guna2Button button = (Guna.UI2.WinForms.Guna2Button)control;
+                        button.Tag = button.Text;
+                        button.Text = string.Empty;
+                        button.Width = 54;
+                    }
+                }
+            }
+            else
+            {
+                guna2Panel_left.Width = 205;
+                lbTendangnhap.Visible = true;
+                lbXinchao.Visible = true;
+                ptbBook.Visible = true;
+                foreach (Control control in guna2Panel_left.Controls)
+                {
+                    if (control is Guna.UI2.WinForms.Guna2Button)
+                    {
+                        Guna.UI2.WinForms.Guna2Button button = (Guna.UI2.WinForms.Guna2Button)control;
+                        button.Width = 201;
+                        button.Text = button.Tag?.ToString();
+                    }
+                }
+            }
+
+            isSidebarVisible = !isSidebarVisible;
         }
     }
 }

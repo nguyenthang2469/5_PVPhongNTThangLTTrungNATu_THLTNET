@@ -79,21 +79,21 @@ namespace QuanLyThuVien.Taikhoan
                 MessageBox.Show("Bạn chưa nhập " + message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             } else
             {
-                if (Nhanvien.UpdateNhanvien(nhanvien["manhanvien"].ToString(), tennhanvien, ngaysinh, gioitinh, sodienthoai) == System.Net.HttpStatusCode.OK)
-                {
-                    MessageBox.Show("Cập nhật thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    loadInfo();
-                    tbTennhanvien.Enabled = false;
-                    dtpNgaysinh.Enabled = false;
-                    cbGioitinh.Enabled = false;
-                    tbSodienthoai.Enabled = false;
-                    (sender as Button).Visible = false;
-                    btnCapnhat.Visible = true;
-                }
-                else
-                {
-                    MessageBox.Show("Xảy ra lỗi trong qua trình cập nhật", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                //if (Nhanvien.UpdateNhanvien(nhanvien["manhanvien"].ToString(), tennhanvien, ngaysinh, gioitinh, sodienthoai) == System.Net.HttpStatusCode.OK)
+                //{
+                //    MessageBox.Show("Cập nhật thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    loadInfo();
+                //    tbTennhanvien.Enabled = false;
+                //    dtpNgaysinh.Enabled = false;
+                //    cbGioitinh.Enabled = false;
+                //    tbSodienthoai.Enabled = false;
+                //    (sender as Button).Visible = false;
+                //    btnCapnhat.Visible = true;
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Xảy ra lỗi trong qua trình cập nhật", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
             }
         }
     }

@@ -11,30 +11,19 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien.Taikhoan
 {
-    public partial class frmQuanlytaikhoan : Form
+    public partial class frmQuanlynhanvien : Form
     {
         private int chucnanghientai = CHUCNANG.NONE;
         private int pageIndex = 1;
         private int pageSize = 10; 
         private int totalPages = 0;
         private string keySearch = "";
-        private string loainguoidung = "quanly";
-        DataGridViewRow selectedRow = null;
+        private DataGridViewRow selectedRow = null;
+        private List<string> usernames = new List<string>();
 
-        Dictionary<string, string> roles = new Dictionary<string, string>
-        {
-            { "thuthu", "Thủ thư" },
-            { "docgia", "Độc giả" }
-        };
-        public frmQuanlytaikhoan()
+        public frmQuanlynhanvien()
         {
             InitializeComponent();
-        }
-
-        public frmQuanlytaikhoan(string loainguoidung)
-        {
-            InitializeComponent();
-            this.loainguoidung = loainguoidung;
         }
 
         private void btnLast_Click(object sender, EventArgs e)
@@ -85,26 +74,30 @@ namespace QuanLyThuVien.Taikhoan
             }
             else
             {
-                string tendangnhap = tbTendangnhap.Text.Trim();
-                string matkhau = tbMatkhau.Text.Trim();
-                string loainguoidung = (string)cbLoainguoidung.SelectedValue;
+                string manhanvien = tbManhanvien.Text.Trim();
+                string tennhanvien = tbTennhanvien.Text.Trim();
+                DateTime ngaysinh = dtpNgaysinh.Value;
+                string gioitinh = (string)cbGioitinh.SelectedItem;
+                string sdt = tbSdt.Text.Trim();
+                string tendangnhap = (string)cbTendangnhap.SelectedItem;
                 if (chucnanghientai == CHUCNANG.ADD)
                 {
                     if (checkInput() == false)
                     {
                         return;
                     }
-                    if (Account.getAccount(tendangnhap) != null)
+                    if (Nhanvien.getNhanvien(manhanvien) != null)
                     {
-                        MessageBox.Show("Tên đăng nhập đã tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Mã nhân viên đã tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    if (Account.CreateAccount(tendangnhap, matkhau, loainguoidung))
+                    if (Nhanvien.CreateNhanvien(manhanvien, tennhanvien, ngaysinh, gioitinh, sdt, tendangnhap))
                     {
-                        dgvNguoidung.Enabled = true;
+                        dgvNhanvien.Enabled = true;
                         SwitchMode(CHUCNANG.NONE);
                         loadData();
                         btnThem.Focus();
+                        loadComboboxTendangnhap();
                         MessageBox.Show("Thêm thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -120,14 +113,15 @@ namespace QuanLyThuVien.Taikhoan
                     }
                     if (Account.getAccount(tendangnhap) == null)
                     {
-                        MessageBox.Show("Tên đăng nhập không tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Mã nhân viên không tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    if (Account.UpdateAccount(tendangnhap, matkhau, loainguoidung))
+                    if (Nhanvien.UpdateNhanvien(manhanvien, tennhanvien, ngaysinh, gioitinh, sdt, tendangnhap))
                     {
-                        MessageBox.Show("Cập nhật thành công", "Thông báo chỉnh sửa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         SwitchMode(CHUCNANG.NONE);
                         loadData();
+                        loadComboboxTendangnhap();
+                        MessageBox.Show("Cập nhật thành công", "Thông báo chỉnh sửa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -141,16 +135,17 @@ namespace QuanLyThuVien.Taikhoan
         {
             if(chucnanghientai == CHUCNANG.NONE)
             {
-                DialogResult result = MessageBox.Show("Bạn chắc chắn muốn xóa người dùng này?", "Cảnh báo",
+                DialogResult result = MessageBox.Show("Bạn chắc chắn muốn xóa nhân viên này?", "Cảnh báo",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.No)
                 {
                     return;
                 }
-                string tendangnhap = dgvNguoidung.CurrentRow.Cells[0].Value.ToString();
-                if (Account.DeleteAccount(tendangnhap))
+                string manhanvien = dgvNhanvien.CurrentRow.Cells[1].Value.ToString();
+                string tendangnhap = dgvNhanvien.CurrentRow.Cells[6].Value.ToString();
+                if (Nhanvien.DeleteNhanvien(manhanvien, tendangnhap))
                 {
-                    MessageBox.Show("Xóa tài khoản " + tendangnhap + " thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xóa nhân viên " + manhanvien + " thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     loadData();
                 }
                 else
@@ -166,26 +161,51 @@ namespace QuanLyThuVien.Taikhoan
         private void btnThem_Click(object sender, EventArgs e)
         {
             SwitchMode(CHUCNANG.ADD);
-            dgvNguoidung.Enabled = false;
+            dgvNhanvien.Enabled = false;
         }
 
         private void frmQuanlytaikhoan_Load(object sender, EventArgs e)
         {
             cbSohang.SelectedIndex = 2;
-            cbLoainguoidung.DataSource = new BindingSource(roles, null);
-            cbLoainguoidung.DisplayMember = "Value";
-            cbLoainguoidung.ValueMember = "Key";
+            dtpNgaysinh.CustomFormat = "dd/MM/yyyy";
+            loadComboboxTendangnhap();
+        }
+
+        private void loadComboboxTendangnhap()
+        {
+            try
+            {
+                DataTable dt = DB.getData("SELECT tendangnhap FROM NguoiDung " +
+                    "WHERE tendangnhap NOT IN(SELECT tendangnhap FROM NhanVien where tendangnhap IS NOT NULL) " +
+                    "AND NOT tendangnhap = 'admin' AND loainguoidung = 'thuthu'"
+                );
+                cbTendangnhap.Items.Clear();
+                usernames.Clear();
+                foreach (DataRow row in dt.Rows)
+                {
+                    usernames.Add(row["tendangnhap"].ToString());
+                }
+                cbTendangnhap.Items.AddRange(usernames.ToArray());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lấy dữ liệu tên đăng nhập thất bại", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void loadData()
         {
-            Tuple<int, DataTable> result = Account.searchAccount(loainguoidung, pageSize, pageIndex, keySearch);
-            DataTable accounts = result.Item2;
-            lbSonguoidung.Text = "Tổng số người dùng: " + result.Item1;
+            Tuple<int, DataTable> result = Nhanvien.searchNhanvien(pageSize, pageIndex, keySearch);
+            DataTable employees = result.Item2;
+            lbSonguoidung.Text = "Tổng số nhân viên: " + result.Item1;
             totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
-            if (result.Item1 == 0) MessageBox.Show("Không tìm thấy bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            dgvNguoidung.DataSource = accounts;
+            employees.Columns.Add("stt", typeof(int));
+            employees.Columns["stt"].SetOrdinal(0); // Set vị trí cho cột stt làm cột đầu trong Datatable
+            for (int i = 0; i < employees.Rows.Count; i++)
+            {
+                employees.Rows[i]["stt"] = ((pageIndex - 1) * pageSize) + i + 1;
+            }
+            dgvNhanvien.DataSource = employees;
             UpdatePager();
             if (pageIndex == 1)
             {
@@ -214,49 +234,68 @@ namespace QuanLyThuVien.Taikhoan
             lbChimuc.Text = pageIndex + "/" + totalPages;
         }
 
-        private void dgvNguoidung_SelectionChanged(object sender, EventArgs e)
+        private void dgvNhanvien_SelectionChanged(object sender, EventArgs e)
         {
             if (chucnanghientai == CHUCNANG.UPDATE && selectedRow != null)
             {
-                dgvNguoidung.SelectionChanged -= dgvNguoidung_SelectionChanged;
-                dgvNguoidung.ClearSelection();
+                dgvNhanvien.SelectionChanged -= dgvNhanvien_SelectionChanged;
+                dgvNhanvien.ClearSelection();
                 selectedRow.Selected = true;
-                dgvNguoidung.SelectionChanged += dgvNguoidung_SelectionChanged;
+                dgvNhanvien.SelectionChanged += dgvNhanvien_SelectionChanged;
                 return;
             } else
             {
                 this.selectedRow = null;
-                if (dgvNguoidung.SelectedRows.Count > 0)
+                if (dgvNhanvien.SelectedRows.Count > 0)
                 {
-                    this.selectedRow = dgvNguoidung.CurrentRow;
-                    tbTendangnhap.Text = selectedRow.Cells[0].Value.ToString();
-                    tbMatkhau.Text = selectedRow.Cells[1].Value.ToString();
-                    cbLoainguoidung.SelectedValue = selectedRow.Cells[2].Value.ToString();
+                    this.selectedRow = dgvNhanvien.CurrentRow;
+                    setComboboxTendangnhap(selectedRow.Cells[6].Value.ToString());
+                    tbManhanvien.Text = (string)selectedRow.Cells[1].Value;
+                    tbTennhanvien.Text = (string)selectedRow.Cells[2].Value;
+                    dtpNgaysinh.Value = (DateTime)selectedRow.Cells[3].Value;
+                    cbGioitinh.SelectedItem = selectedRow.Cells[4].Value;
+                    tbSdt.Text = (string)selectedRow.Cells[5].Value;
+                    cbTendangnhap.SelectedItem = selectedRow.Cells[6].Value;
                     btnSua.Enabled = true;
                     btnXoa.Enabled = true;
+                    return;
                 } else if(chucnanghientai == CHUCNANG.NONE)
                 {
                     btnSua.Enabled = false;
                     btnXoa.Enabled = false;
                 }
+                cbTendangnhap.Items.Clear();
+                cbTendangnhap.Items.AddRange(usernames.ToArray());
+            }
+        }
+
+        private void setComboboxTendangnhap(string tendangnhap)
+        {
+            cbTendangnhap.Items.Clear();
+            cbTendangnhap.Items.AddRange(usernames.ToArray());
+            if(!string.IsNullOrEmpty(tendangnhap))
+            {
+                cbTendangnhap.Items.Add(tendangnhap);
             }
         }
 
         private void clearInput()
         {
-            tbTendangnhap.Text = "";
-            tbMatkhau.Text = "";
-            cbLoainguoidung.SelectedIndex = -1;
+            tbManhanvien.Text = "";
+            tbTennhanvien.Text = "";
+            cbGioitinh.SelectedIndex = -1;
+            tbSdt.Text = "";
+            cbTendangnhap.SelectedIndex = -1;
         }
 
         private void setStateInput(bool enabled)
         {
-            tbTendangnhap.Enabled = enabled;
-            tbMatkhau.Enabled = enabled;
-            if (loainguoidung.Equals("quanly"))
-            {
-                cbLoainguoidung.Enabled = enabled;
-            }
+            tbManhanvien.Enabled = enabled;
+            tbTennhanvien.Enabled = enabled;
+            tbSdt.Enabled = enabled;
+            dtpNgaysinh.Enabled = enabled;
+            cbGioitinh.Enabled = enabled;
+            cbTendangnhap.Enabled = enabled;
             tbTimkiem.Enabled = !enabled;
         }
 
@@ -288,25 +327,17 @@ namespace QuanLyThuVien.Taikhoan
                 case CHUCNANG.ADD:
                     {
                         setStateInput(true);
-                        tbTendangnhap.Focus();
+                        tbManhanvien.Focus();
                         setStateButton(false);
                         clearInput();
-                        dgvNguoidung.ClearSelection();
-                        if (loainguoidung.Equals("quanly"))
-                        {
-                            cbLoainguoidung.SelectedIndex = -1;
-                        }
-                        else
-                        {
-                            cbLoainguoidung.SelectedIndex = 1;
-                        }
+                        dgvNhanvien.ClearSelection();
                         break;
                     }
                 case CHUCNANG.UPDATE:
                     {
                         setStateInput(true);
-                        tbTendangnhap.Enabled = false;
-                        tbMatkhau.Focus();
+                        tbManhanvien.Enabled = false;
+                        tbTennhanvien.Focus();
                         setStateButton(false);
                         break;
                     }
@@ -315,8 +346,8 @@ namespace QuanLyThuVien.Taikhoan
                         clearInput();
                         setStateInput(false);
                         setStateButton(true);
-                        dgvNguoidung.Enabled = true;
-                        dgvNguoidung_SelectionChanged(dgvNguoidung, EventArgs.Empty);
+                        dgvNhanvien.Enabled = true;
+                        dgvNhanvien_SelectionChanged(dgvNhanvien, EventArgs.Empty);
                         break;
                     }
             }
@@ -324,25 +355,39 @@ namespace QuanLyThuVien.Taikhoan
 
         private bool checkInput()
         {
-            string tendangnhap = tbTendangnhap.Text.Trim();
-            string matkhau = tbMatkhau.Text.Trim();
-            string loainguoidung = (string)cbLoainguoidung.SelectedValue;
-            if (tendangnhap.Length == 0)
+            string manhanvien = tbManhanvien.Text.Trim();
+            string tennhanvien = tbTennhanvien.Text.Trim();
+            string gioitinh = (string)cbGioitinh.SelectedItem;
+            string sdt = tbSdt.Text.Trim();
+            string tendangnhap = (string)cbTendangnhap.SelectedItem;
+            if (manhanvien.Length == 0)
             {
-                MessageBox.Show("Vui lòng nhập tên đăng nhập", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                tbTendangnhap.Focus();
+                MessageBox.Show("Vui lòng nhập mã nhân viên", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tbManhanvien.Focus();
                 return false;
             }
-            if (matkhau.Length == 0)
+            if (tennhanvien.Length == 0)
             {
-                MessageBox.Show("Vui lòng nhập mật khẩu", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                tbMatkhau.Focus();
+                MessageBox.Show("Vui lòng nhập tên nhân viên", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tbTennhanvien.Focus();
                 return false;
             }
-            if (loainguoidung == null || loainguoidung.Length == 0)
+            if (gioitinh == null || gioitinh.Length == 0)
             {
-                MessageBox.Show("Vui lòng chọn loại người dùng", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cbLoainguoidung.Focus();
+                MessageBox.Show("Vui lòng chọn giới tính", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cbGioitinh.Focus();
+                return false;
+            }
+            if (sdt.Length == 0)
+            {
+                MessageBox.Show("Vui lòng nhập số điện thoại", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tbSdt.Focus();
+                return false;
+            }
+            if (tendangnhap == null || tendangnhap.Length == 0)
+            {
+                MessageBox.Show("Vui lòng chọn tên đăng nhập", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cbTendangnhap.Focus();
                 return false;
             }
             return true;
@@ -356,7 +401,7 @@ namespace QuanLyThuVien.Taikhoan
             loadData();
         }
 
-        private void cbSohang_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void cbSohang_SelectedIndexChanged(object sender, EventArgs e)
         {
             pageSize = int.Parse((sender as ComboBox).SelectedItem.ToString());
             pageIndex = 1;
@@ -376,6 +421,15 @@ namespace QuanLyThuVien.Taikhoan
             if (e.KeyCode == Keys.Enter)
             {
                 btnTimkiem.PerformClick();
+            }
+        }
+
+        private void dgvNhanvien_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvNhanvien.Columns["colNgaySinh"] != null && e.ColumnIndex == dgvNhanvien.Columns["colNgaySinh"].Index && e.Value != null)
+            {
+                DateTime ngaySinh = (DateTime)e.Value;
+                e.Value = ngaySinh.ToString("dd/MM/yyyy");
             }
         }
     }
