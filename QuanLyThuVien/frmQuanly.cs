@@ -28,22 +28,23 @@ namespace QuanLyThuVien
             switch (selectedIndex)
             {
                 case 0:
-                    addFormContent(new frmQuanlytaikhoan());
+                    addFormContent(new frmQuanlytaikhoan(), tabNguoidung);
                     break;
                 case 1:
+                    addFormContent(new frmQuanlynhanvien(), tabThuthu);
                     break;
             }
         }
 
-        private void addFormContent(Object _frm)
+        private void addFormContent(Object _frm, TabPage tabPage)
         {
-            if (tabNguoidung.Controls.Count > 0) tabNguoidung.Controls.Clear();
+            if (tabPage.Controls.Count > 0) tabPage.Controls.Clear();
             Form frm = _frm as Form;
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Dock = DockStyle.Fill;
-            tabNguoidung.Controls.Add(frm);
-            tabNguoidung.Tag = frm;
+            tabPage.Controls.Add(frm);
+            tabPage.Tag = frm;
             frm.Show();
         }
 

@@ -12,31 +12,6 @@ namespace QuanLyThuVien.CSDL
 {
     public class Account : DB
     {
-        public static int count(string loainguoidung)
-        {
-            int count = 0;
-            using (SqlConnection conn = connect())
-            {
-                conn.Open();
-                string whereClause = "";
-                if(loainguoidung.Equals("quanly"))
-                {
-                    whereClause = " WHERE loainguoidung <> 'quanly'";
-                } else if(loainguoidung.Equals("thuthu"))
-                {
-                    whereClause = " WHERE loainguoidung = 'docgia'";
-                }
-                string sql = "SELECT COUNT(*) FROM NguoiDung" + whereClause;
-                MessageBox.Show(sql);
-                using (SqlCommand cm = new SqlCommand(sql, conn))
-                {
-                    count = (int)cm.ExecuteScalar();
-                }
-                MessageBox.Show(count.ToString());
-                conn.Close();
-            }
-            return count;
-        }
 
         public static DataTable getAllAccount()
         {
@@ -49,7 +24,6 @@ namespace QuanLyThuVien.CSDL
                     SqlDataAdapter ad = new SqlDataAdapter(cm);
                     ad.Fill(dt);
                 }
-                conn.Close();
             }
             return dt;
         }
@@ -111,20 +85,12 @@ namespace QuanLyThuVien.CSDL
                 using (SqlCommand cm = new SqlCommand(sql, conn))
                 {
                     cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
-
                     SqlDataAdapter ad = new SqlDataAdapter(cm);
                     ad.Fill(dt);
                 }
                 conn.Close();
             }
-            if (dt.Rows.Count > 0)
-            {
-                return dt.Rows[0]; // Trả về hàng đầu tiên
-            }
-            else
-            {
-                return null; // Không tìm thấy bản ghi
-            }
+            return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
         public static bool CreateAccount(string tendangnhap, string matkhau, string loainguoidung)
@@ -133,17 +99,17 @@ namespace QuanLyThuVien.CSDL
             using (SqlConnection conn = connect())
             {
                 conn.Open();
-                string sql = $"INSERT INTO NguoiDung VALUES ('{tendangnhap}','{matkhau}','{loainguoidung}')";
-                SqlCommand cm = new SqlCommand(sql, conn);
-                rowsAffected = cm.ExecuteNonQuery();
-                cm.Dispose();
-                conn.Close();
+                string sql = "INSERT INTO NguoiDung VALUES (@tendangnhap, @matkhau, @loainguoidung)";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
+                    cm.Parameters.AddWithValue("@matkhau", matkhau);
+                    cm.Parameters.AddWithValue("@loainguoidung", loainguoidung);
+
+                    rowsAffected = cm.ExecuteNonQuery();
+                }
             }
-            if (rowsAffected > 0) // Nếu có dòng thay đổi
-            {
-                return true; // Trả về status code 200 nếu cập nhật thành công
-            }
-            return false; // Hoặc mã trạng thái khác tùy theo trường hợp
+            return rowsAffected > 0;
         }
 
         public static bool UpdateAccount(string tendangnhap, string matkhau)
@@ -152,17 +118,16 @@ namespace QuanLyThuVien.CSDL
             using (SqlConnection conn = connect())
             {
                 conn.Open();
-                string sql = $"UPDATE NguoiDung SET matkhau = '{matkhau}' WHERE tendangnhap = '{tendangnhap}'";
-                SqlCommand cm = new SqlCommand(sql, conn);
-                rowsAffected = cm.ExecuteNonQuery();
-                cm.Dispose();
-                conn.Close();
+                string sql = "UPDATE NguoiDung SET matkhau = @matkhau WHERE tendangnhap = @tendangnhap";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
+                    cm.Parameters.AddWithValue("@matkhau", matkhau);
+
+                    rowsAffected = cm.ExecuteNonQuery();
+                }
             }
-            if (rowsAffected > 0) // Nếu có dòng thay đổi
-            {
-                return true; // Trả về status code 200 nếu cập nhật thành công
-            }
-            return false; // Hoặc mã trạng thái khác tùy theo trường hợp
+            return rowsAffected > 0;
         }
 
         public static bool UpdateAccount(string tendangnhap, string matkhau, string loainguoidung)
@@ -171,17 +136,17 @@ namespace QuanLyThuVien.CSDL
             using (SqlConnection conn = connect())
             {
                 conn.Open();
-                string sql = $"UPDATE NguoiDung SET matkhau = '{matkhau}' , loainguoidung = '{loainguoidung}'  WHERE tendangnhap = '{tendangnhap}'";
-                SqlCommand cm = new SqlCommand(sql, conn);
-                rowsAffected = cm.ExecuteNonQuery();
-                cm.Dispose();
-                conn.Close();
+                string sql = "UPDATE NguoiDung SET matkhau = @matkhau , loainguoidung = @loainguoidung WHERE tendangnhap = @tendangnhap";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
+                    cm.Parameters.AddWithValue("@matkhau", matkhau);
+                    cm.Parameters.AddWithValue("@loainguoidung", loainguoidung);
+
+                    rowsAffected = cm.ExecuteNonQuery();
+                }
             }
-            if (rowsAffected > 0) // Nếu có dòng thay đổi
-            {
-                return true; // Trả về status code 200 nếu cập nhật thành công
-            }
-            return false; // Hoặc mã trạng thái khác tùy theo trường hợp
+            return rowsAffected > 0;
         }
 
         public static bool DeleteAccount(string tendangnhap)
@@ -190,17 +155,15 @@ namespace QuanLyThuVien.CSDL
             using (SqlConnection conn = connect())
             {
                 conn.Open();
-                string sql = $"DELETE FROM NguoiDung WHERE tendangnhap = '{tendangnhap}'";
-                SqlCommand cm = new SqlCommand(sql, conn);
-                rowsAffected = cm.ExecuteNonQuery();
-                cm.Dispose();
-                conn.Close();
+                string sql = "DELETE FROM NguoiDung WHERE tendangnhap = @tendangnhap";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
+
+                    rowsAffected = cm.ExecuteNonQuery();
+                }
             }
-            if (rowsAffected > 0) // Nếu có dòng thay đổi
-            {
-                return true; // Trả về status code 200 nếu xóa thành công
-            }
-            return false; // Hoặc mã trạng thái khác tùy theo trường hợp
+            return rowsAffected > 0;
         }
     }
 }

@@ -79,6 +79,16 @@
     <Compile Include="frmTrangchu.Designer.cs">
       <DependentUpon>frmTrangchu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Nhanvien\frmQuanlynhanvien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Nhanvien\frmQuanlynhanvien.Designer.cs">
+      <DependentUpon>frmQuanlynhanvien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Nhanvien\fThongtinnhanvien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Nhanvien\fThongtinnhanvien.Designer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,12 +120,6 @@
     <Compile Include="Taikhoan\frmQuanlytaikhoan.Designer.cs">
       <DependentUpon>frmQuanlytaikhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Thuthu\fThongtinnhanvien.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Thuthu\fThongtinnhanvien.Designer.cs">
-      <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="frmQuanly.resx">
       <DependentUpon>frmQuanly.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTrangchu.resx">
       <DependentUpon>frmTrangchu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nhanvien\frmQuanlynhanvien.resx">
+      <DependentUpon>frmQuanlynhanvien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nhanvien\fThongtinnhanvien.resx">
+      <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -141,9 +151,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Taikhoan\frmQuanlytaikhoan.resx">
       <DependentUpon>frmQuanlytaikhoan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Thuthu\fThongtinnhanvien.resx">
-      <DependentUpon>fThongtinnhanvien.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

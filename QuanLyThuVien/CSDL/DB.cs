@@ -17,5 +17,17 @@ namespace QuanLyThuVien.CSDL
         {
             return new SqlConnection(connectionString);
         }
+
+        public static DataTable getData(string sql)
+        {
+            SqlConnection conn = connect();
+            conn.Open();
+            SqlDataAdapter ad = new SqlDataAdapter(sql, conn);
+            DataTable dt = new DataTable();
+            ad.Fill(dt);
+            ad.Dispose();
+            conn.Close();
+            return dt;
+        }
     }
 }

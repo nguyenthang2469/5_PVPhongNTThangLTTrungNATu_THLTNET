@@ -82,7 +82,7 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2GroupBox1.CustomBorderThickness = new System.Windows.Forms.Padding(0);
             this.guna2GroupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2GroupBox1.Location = new System.Drawing.Point(0, 147);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(0, 143);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
             this.guna2GroupBox1.ShadowDecoration.Parent = this.guna2GroupBox1;
             this.guna2GroupBox1.Size = new System.Drawing.Size(866, 418);
@@ -102,6 +102,7 @@ namespace QuanLyThuVien.Taikhoan
             // btnTimkiem
             // 
             this.btnTimkiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTimkiem.Animated = true;
             this.btnTimkiem.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnTimkiem.BorderRadius = 5;
             this.btnTimkiem.BorderThickness = 1;
@@ -158,6 +159,7 @@ namespace QuanLyThuVien.Taikhoan
             // btnLast
             // 
             this.btnLast.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLast.Animated = true;
             this.btnLast.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnLast.BorderRadius = 5;
             this.btnLast.BorderThickness = 1;
@@ -191,7 +193,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvNguoidung.BackgroundColor = System.Drawing.Color.White;
             this.dgvNguoidung.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvNguoidung.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvNguoidung.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvNguoidung.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -208,7 +210,7 @@ namespace QuanLyThuVien.Taikhoan
             this.colLoainguoidung});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
@@ -227,6 +229,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvNguoidung.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvNguoidung.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvNguoidung.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.dgvNguoidung.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dgvNguoidung.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.dgvNguoidung.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvNguoidung.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -243,7 +246,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvNguoidung.ThemeStyle.BackColor = System.Drawing.Color.White;
             this.dgvNguoidung.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvNguoidung.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
-            this.dgvNguoidung.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvNguoidung.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvNguoidung.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvNguoidung.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
             this.dgvNguoidung.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
@@ -251,8 +254,8 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvNguoidung.ThemeStyle.ReadOnly = true;
             this.dgvNguoidung.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvNguoidung.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvNguoidung.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dgvNguoidung.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dgvNguoidung.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvNguoidung.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.dgvNguoidung.ThemeStyle.RowsStyle.Height = 38;
             this.dgvNguoidung.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvNguoidung.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
@@ -282,6 +285,7 @@ namespace QuanLyThuVien.Taikhoan
             // btnAfter
             // 
             this.btnAfter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAfter.Animated = true;
             this.btnAfter.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnAfter.BorderRadius = 5;
             this.btnAfter.BorderThickness = 1;
@@ -362,6 +366,7 @@ namespace QuanLyThuVien.Taikhoan
             // btnBefore
             // 
             this.btnBefore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBefore.Animated = true;
             this.btnBefore.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnBefore.BorderRadius = 5;
             this.btnBefore.BorderThickness = 1;
@@ -386,6 +391,7 @@ namespace QuanLyThuVien.Taikhoan
             // btnFirst
             // 
             this.btnFirst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFirst.Animated = true;
             this.btnFirst.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnFirst.BorderRadius = 5;
             this.btnFirst.BorderThickness = 1;
@@ -461,6 +467,7 @@ namespace QuanLyThuVien.Taikhoan
             // btnSua
             // 
             this.btnSua.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSua.Animated = true;
             this.btnSua.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnSua.BorderRadius = 5;
             this.btnSua.BorderThickness = 1;
@@ -505,7 +512,7 @@ namespace QuanLyThuVien.Taikhoan
             this.tbMatkhau.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbMatkhau.Name = "tbMatkhau";
             this.tbMatkhau.PasswordChar = '\0';
-            this.tbMatkhau.PlaceholderText = "Mật khẩu";
+            this.tbMatkhau.PlaceholderText = "";
             this.tbMatkhau.SelectedText = "";
             this.tbMatkhau.ShadowDecoration.BorderRadius = 4;
             this.tbMatkhau.ShadowDecoration.Parent = this.tbMatkhau;
@@ -535,7 +542,7 @@ namespace QuanLyThuVien.Taikhoan
             this.tbTendangnhap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbTendangnhap.Name = "tbTendangnhap";
             this.tbTendangnhap.PasswordChar = '\0';
-            this.tbTendangnhap.PlaceholderText = "Tên đăng nhập";
+            this.tbTendangnhap.PlaceholderText = "";
             this.tbTendangnhap.SelectedText = "";
             this.tbTendangnhap.ShadowDecoration.BorderRadius = 4;
             this.tbTendangnhap.ShadowDecoration.Parent = this.tbTendangnhap;
@@ -547,6 +554,7 @@ namespace QuanLyThuVien.Taikhoan
             // btnXoa
             // 
             this.btnXoa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnXoa.Animated = true;
             this.btnXoa.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
             this.btnXoa.BorderRadius = 5;
             this.btnXoa.BorderThickness = 1;
@@ -572,6 +580,7 @@ namespace QuanLyThuVien.Taikhoan
             // btnThem
             // 
             this.btnThem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnThem.Animated = true;
             this.btnThem.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnThem.BorderRadius = 5;
             this.btnThem.BorderThickness = 1;
@@ -626,7 +635,7 @@ namespace QuanLyThuVien.Taikhoan
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(866, 559);
+            this.ClientSize = new System.Drawing.Size(866, 560);
             this.Controls.Add(this.guna2GroupBox1);
             this.Controls.Add(this.guna2Panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

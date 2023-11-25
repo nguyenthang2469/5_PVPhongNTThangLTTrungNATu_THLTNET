@@ -31,28 +31,28 @@ namespace QuanLyThuVien
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabNguoidung = new System.Windows.Forms.TabPage();
+            this.tabThuthu = new System.Windows.Forms.TabPage();
+            this.tabDocgia = new System.Windows.Forms.TabPage();
+            this.tabSach = new System.Windows.Forms.TabPage();
             this.tabTacgia = new System.Windows.Forms.TabPage();
             this.tabNhaxuatban = new System.Windows.Forms.TabPage();
-            this.tabSach = new System.Windows.Forms.TabPage();
-            this.tabDocgia = new System.Windows.Forms.TabPage();
-            this.tabThuthu = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabNguoidung);
+            this.tabControl1.Controls.Add(this.tabThuthu);
+            this.tabControl1.Controls.Add(this.tabDocgia);
+            this.tabControl1.Controls.Add(this.tabSach);
             this.tabControl1.Controls.Add(this.tabTacgia);
             this.tabControl1.Controls.Add(this.tabNhaxuatban);
-            this.tabControl1.Controls.Add(this.tabSach);
-            this.tabControl1.Controls.Add(this.tabDocgia);
-            this.tabControl1.Controls.Add(this.tabThuthu);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(900, 600);
+            this.tabControl1.Size = new System.Drawing.Size(900, 700);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -68,6 +68,36 @@ namespace QuanLyThuVien
             this.tabNguoidung.Size = new System.Drawing.Size(892, 567);
             this.tabNguoidung.TabIndex = 0;
             this.tabNguoidung.Text = "Người dùng";
+            // 
+            // tabThuthu
+            // 
+            this.tabThuthu.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tabThuthu.Location = new System.Drawing.Point(4, 29);
+            this.tabThuthu.Name = "tabThuthu";
+            this.tabThuthu.Size = new System.Drawing.Size(892, 667);
+            this.tabThuthu.TabIndex = 5;
+            this.tabThuthu.Text = "Thủ thư";
+            this.tabThuthu.UseVisualStyleBackColor = true;
+            // 
+            // tabDocgia
+            // 
+            this.tabDocgia.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tabDocgia.Location = new System.Drawing.Point(4, 29);
+            this.tabDocgia.Name = "tabDocgia";
+            this.tabDocgia.Size = new System.Drawing.Size(892, 567);
+            this.tabDocgia.TabIndex = 4;
+            this.tabDocgia.Text = "Độc giả";
+            this.tabDocgia.UseVisualStyleBackColor = true;
+            // 
+            // tabSach
+            // 
+            this.tabSach.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tabSach.Location = new System.Drawing.Point(4, 29);
+            this.tabSach.Name = "tabSach";
+            this.tabSach.Size = new System.Drawing.Size(892, 567);
+            this.tabSach.TabIndex = 3;
+            this.tabSach.Text = "Sách";
+            this.tabSach.UseVisualStyleBackColor = true;
             // 
             // tabTacgia
             // 
@@ -90,41 +120,11 @@ namespace QuanLyThuVien
             this.tabNhaxuatban.Text = "Nhà xuất bản";
             this.tabNhaxuatban.UseVisualStyleBackColor = true;
             // 
-            // tabSach
-            // 
-            this.tabSach.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabSach.Location = new System.Drawing.Point(4, 29);
-            this.tabSach.Name = "tabSach";
-            this.tabSach.Size = new System.Drawing.Size(892, 567);
-            this.tabSach.TabIndex = 3;
-            this.tabSach.Text = "Sách";
-            this.tabSach.UseVisualStyleBackColor = true;
-            // 
-            // tabDocgia
-            // 
-            this.tabDocgia.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabDocgia.Location = new System.Drawing.Point(4, 29);
-            this.tabDocgia.Name = "tabDocgia";
-            this.tabDocgia.Size = new System.Drawing.Size(892, 567);
-            this.tabDocgia.TabIndex = 4;
-            this.tabDocgia.Text = "Độc giả";
-            this.tabDocgia.UseVisualStyleBackColor = true;
-            // 
-            // tabThuthu
-            // 
-            this.tabThuthu.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabThuthu.Location = new System.Drawing.Point(4, 29);
-            this.tabThuthu.Name = "tabThuthu";
-            this.tabThuthu.Size = new System.Drawing.Size(892, 567);
-            this.tabThuthu.TabIndex = 5;
-            this.tabThuthu.Text = "Thủ thư";
-            this.tabThuthu.UseVisualStyleBackColor = true;
-            // 
             // frmQuanly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 600);
+            this.ClientSize = new System.Drawing.Size(900, 700);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmQuanly";
