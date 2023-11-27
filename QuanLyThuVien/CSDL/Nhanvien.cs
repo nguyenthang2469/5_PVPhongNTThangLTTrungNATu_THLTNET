@@ -55,7 +55,7 @@ namespace QuanLyThuVien.CSDL
                     totalAccount = (int)countCmd.ExecuteScalar();
                 }
 
-                sqlSelect += " ORDER BY tendangnhap OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY";
+                sqlSelect += " ORDER BY manhanvien OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY";
 
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
                 {
@@ -88,12 +88,27 @@ namespace QuanLyThuVien.CSDL
                     SqlDataAdapter ad = new SqlDataAdapter(cm);
                     ad.Fill(dt);
                 }
-                conn.Close();
             }
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
-        public static bool CreateNhanvien(
+        public static DataRow getNhanvienByTendangnhap(string tendangnhap)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = connect())
+            {
+                string sql = "SELECT * FROM NhanVien WHERE tendangnhap = @tendangnhap";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
+            return dt.Rows.Count > 0 ? dt.Rows[0] : null;
+        }
+
+        public static bool createNhanvien(
             string manhanvien,
             string tennhanvien,
             DateTime ngaysinh,
@@ -121,13 +136,12 @@ namespace QuanLyThuVien.CSDL
             return rowsAffected > 0;
         }
 
-        public static bool UpdateNhanvien(
+        public static bool updateNhanvien(
             string manhanvien,
             string tennhanvien,
             DateTime ngaysinh,
             string gioitinh,
-            string sodienthoai,
-            string tendangnhap
+            string sodienthoai
         )
         {
             int rowsAffected = 0;
@@ -139,7 +153,6 @@ namespace QuanLyThuVien.CSDL
                     "ngaysinh = @ngaysinh, " +
                     "gioitinh = @gioitinh, " +
                     "sodienthoai = @sodienthoai, " +
-                    "tendangnhap = @tendangnhap " +
                     "WHERE manhanvien = @manhanvien";
                 using (SqlCommand cm = new SqlCommand(sql, conn))
                 {
@@ -147,7 +160,6 @@ namespace QuanLyThuVien.CSDL
                     cm.Parameters.AddWithValue("@ngaysinh", ngaysinh.ToString("yyyy - MM - dd"));
                     cm.Parameters.AddWithValue("@gioitinh", gioitinh);
                     cm.Parameters.AddWithValue("@sodienthoai", sodienthoai);
-                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
                     cm.Parameters.AddWithValue("@manhanvien", manhanvien);
 
                     rowsAffected = cm.ExecuteNonQuery();
@@ -155,17 +167,16 @@ namespace QuanLyThuVien.CSDL
             }
             return rowsAffected > 0;
         }
-        public static bool DeleteNhanvien(string manhanvien, string tendangnhap)
+        public static bool deleteNhanvien(string manhanvien, string tendangnhap)
         {
             int rowsAffected = 0;
             using (SqlConnection conn = connect())
             {
                 conn.Open();
-                string sql = "DELETE FROM NhanVien WHERE manhanvien = @manhanvien AND tendangnhap = @tendangnhap";
+                string sql = "DELETE FROM NhanVien WHERE manhanvien = @manhanvien";
                 using (SqlCommand cm = new SqlCommand(sql, conn))
                 {
                     cm.Parameters.AddWithValue("@manhanvien", manhanvien);
-                    cm.Parameters.AddWithValue("@tendangnhap", tendangnhap);
 
                     rowsAffected = cm.ExecuteNonQuery();
                 }

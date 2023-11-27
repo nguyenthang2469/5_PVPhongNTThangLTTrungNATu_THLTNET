@@ -91,7 +91,7 @@ namespace QuanLyThuVien.Taikhoan
                         MessageBox.Show("Mã nhân viên đã tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    if (Nhanvien.CreateNhanvien(manhanvien, tennhanvien, ngaysinh, gioitinh, sdt, tendangnhap))
+                    if (Nhanvien.createNhanvien(manhanvien, tennhanvien, ngaysinh, gioitinh, sdt, tendangnhap))
                     {
                         dgvNhanvien.Enabled = true;
                         SwitchMode(CHUCNANG.NONE);
@@ -111,12 +111,7 @@ namespace QuanLyThuVien.Taikhoan
                     {
                         return;
                     }
-                    if (Account.getAccount(tendangnhap) == null)
-                    {
-                        MessageBox.Show("Mã nhân viên không tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
-                    if (Nhanvien.UpdateNhanvien(manhanvien, tennhanvien, ngaysinh, gioitinh, sdt, tendangnhap))
+                    if (Nhanvien.updateNhanvien(manhanvien, tennhanvien, ngaysinh, gioitinh, sdt))
                     {
                         SwitchMode(CHUCNANG.NONE);
                         loadData();
@@ -143,7 +138,7 @@ namespace QuanLyThuVien.Taikhoan
                 }
                 string manhanvien = dgvNhanvien.CurrentRow.Cells[1].Value.ToString();
                 string tendangnhap = dgvNhanvien.CurrentRow.Cells[6].Value.ToString();
-                if (Nhanvien.DeleteNhanvien(manhanvien, tendangnhap))
+                if (Nhanvien.deleteNhanvien(manhanvien, tendangnhap))
                 {
                     MessageBox.Show("Xóa nhân viên " + manhanvien + " thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     loadData();
@@ -164,7 +159,7 @@ namespace QuanLyThuVien.Taikhoan
             dgvNhanvien.Enabled = false;
         }
 
-        private void frmQuanlytaikhoan_Load(object sender, EventArgs e)
+        private void frmQuanlynhanvien_Load(object sender, EventArgs e)
         {
             cbSohang.SelectedIndex = 2;
             dtpNgaysinh.CustomFormat = "dd/MM/yyyy";
@@ -337,6 +332,7 @@ namespace QuanLyThuVien.Taikhoan
                     {
                         setStateInput(true);
                         tbManhanvien.Enabled = false;
+                        cbTendangnhap.Enabled = false;
                         tbTennhanvien.Focus();
                         setStateButton(false);
                         break;

@@ -58,6 +58,7 @@ namespace QuanLyThuVien
             // 
             // tabNguoidung
             // 
+            this.tabNguoidung.AutoScroll = true;
             this.tabNguoidung.BackColor = System.Drawing.Color.White;
             this.tabNguoidung.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabNguoidung.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -71,20 +72,22 @@ namespace QuanLyThuVien
             // 
             // tabThuthu
             // 
+            this.tabThuthu.AutoScroll = true;
             this.tabThuthu.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabThuthu.Location = new System.Drawing.Point(4, 29);
             this.tabThuthu.Name = "tabThuthu";
-            this.tabThuthu.Size = new System.Drawing.Size(892, 667);
+            this.tabThuthu.Size = new System.Drawing.Size(892, 570);
             this.tabThuthu.TabIndex = 5;
             this.tabThuthu.Text = "Thủ thư";
             this.tabThuthu.UseVisualStyleBackColor = true;
             // 
             // tabDocgia
             // 
+            this.tabDocgia.AutoScroll = true;
             this.tabDocgia.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabDocgia.Location = new System.Drawing.Point(4, 29);
             this.tabDocgia.Name = "tabDocgia";
-            this.tabDocgia.Size = new System.Drawing.Size(892, 567);
+            this.tabDocgia.Size = new System.Drawing.Size(892, 570);
             this.tabDocgia.TabIndex = 4;
             this.tabDocgia.Text = "Độc giả";
             this.tabDocgia.UseVisualStyleBackColor = true;
@@ -94,7 +97,7 @@ namespace QuanLyThuVien
             this.tabSach.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabSach.Location = new System.Drawing.Point(4, 29);
             this.tabSach.Name = "tabSach";
-            this.tabSach.Size = new System.Drawing.Size(892, 567);
+            this.tabSach.Size = new System.Drawing.Size(892, 570);
             this.tabSach.TabIndex = 3;
             this.tabSach.Text = "Sách";
             this.tabSach.UseVisualStyleBackColor = true;
@@ -105,7 +108,7 @@ namespace QuanLyThuVien
             this.tabTacgia.Location = new System.Drawing.Point(4, 29);
             this.tabTacgia.Name = "tabTacgia";
             this.tabTacgia.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTacgia.Size = new System.Drawing.Size(892, 567);
+            this.tabTacgia.Size = new System.Drawing.Size(892, 570);
             this.tabTacgia.TabIndex = 1;
             this.tabTacgia.Text = "Tác giả";
             this.tabTacgia.UseVisualStyleBackColor = true;
@@ -115,7 +118,7 @@ namespace QuanLyThuVien
             this.tabNhaxuatban.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabNhaxuatban.Location = new System.Drawing.Point(4, 29);
             this.tabNhaxuatban.Name = "tabNhaxuatban";
-            this.tabNhaxuatban.Size = new System.Drawing.Size(892, 567);
+            this.tabNhaxuatban.Size = new System.Drawing.Size(892, 570);
             this.tabNhaxuatban.TabIndex = 2;
             this.tabNhaxuatban.Text = "Nhà xuất bản";
             this.tabNhaxuatban.UseVisualStyleBackColor = true;
@@ -124,7 +127,8 @@ namespace QuanLyThuVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 700);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(900, 600);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmQuanly";

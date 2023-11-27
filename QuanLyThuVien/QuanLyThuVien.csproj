@@ -61,6 +61,12 @@
     <Compile Include="CSDL\DB.cs" />
     <Compile Include="CSDL\Nhanvien.cs" />
     <Compile Include="CSDL\Docgia.cs" />
+    <Compile Include="Docgia\frmQuanlydocgia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docgia\frmQuanlydocgia.Designer.cs">
+      <DependentUpon>frmQuanlydocgia.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmQuanly.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     <Compile Include="Taikhoan\frmQuanlytaikhoan.Designer.cs">
       <DependentUpon>frmQuanlytaikhoan.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Docgia\frmQuanlydocgia.resx">
+      <DependentUpon>frmQuanlydocgia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmQuanly.resx">
       <DependentUpon>frmQuanly.cs</DependentUpon>
     </EmbeddedResource>
