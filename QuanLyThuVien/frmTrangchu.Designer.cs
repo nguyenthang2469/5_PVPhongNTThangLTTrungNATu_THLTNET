@@ -78,7 +78,7 @@ namespace QuanLyThuVien
             this.guna2Panel_left.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel_left.Name = "guna2Panel_left";
             this.guna2Panel_left.ShadowDecoration.Parent = this.guna2Panel_left;
-            this.guna2Panel_left.Size = new System.Drawing.Size(205, 653);
+            this.guna2Panel_left.Size = new System.Drawing.Size(205, 700);
             this.guna2Panel_left.TabIndex = 0;
             // 
             // lbTendangnhap
@@ -127,7 +127,7 @@ namespace QuanLyThuVien
             this.btnDoimatkhau.Image = ((System.Drawing.Image)(resources.GetObject("btnDoimatkhau.Image")));
             this.btnDoimatkhau.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnDoimatkhau.ImageOffset = new System.Drawing.Point(8, 0);
-            this.btnDoimatkhau.Location = new System.Drawing.Point(1, 545);
+            this.btnDoimatkhau.Location = new System.Drawing.Point(1, 592);
             this.btnDoimatkhau.Name = "btnDoimatkhau";
             this.btnDoimatkhau.ShadowDecoration.Parent = this.btnDoimatkhau;
             this.btnDoimatkhau.Size = new System.Drawing.Size(201, 45);
@@ -156,7 +156,7 @@ namespace QuanLyThuVien
             this.btnDangxuat.Image = ((System.Drawing.Image)(resources.GetObject("btnDangxuat.Image")));
             this.btnDangxuat.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnDangxuat.ImageOffset = new System.Drawing.Point(8, 0);
-            this.btnDangxuat.Location = new System.Drawing.Point(1, 596);
+            this.btnDangxuat.Location = new System.Drawing.Point(1, 643);
             this.btnDangxuat.Name = "btnDangxuat";
             this.btnDangxuat.ShadowDecoration.Parent = this.btnDangxuat;
             this.btnDangxuat.Size = new System.Drawing.Size(201, 45);
@@ -318,7 +318,7 @@ namespace QuanLyThuVien
             this.guna2Panel_top.Location = new System.Drawing.Point(205, 0);
             this.guna2Panel_top.Name = "guna2Panel_top";
             this.guna2Panel_top.ShadowDecoration.Parent = this.guna2Panel_top;
-            this.guna2Panel_top.Size = new System.Drawing.Size(900, 53);
+            this.guna2Panel_top.Size = new System.Drawing.Size(995, 53);
             this.guna2Panel_top.TabIndex = 1;
             // 
             // lbCurrentPage
@@ -376,7 +376,7 @@ namespace QuanLyThuVien
             this.guna2ControlBox3.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox3.HoverState.Parent = this.guna2ControlBox3;
             this.guna2ControlBox3.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox3.Location = new System.Drawing.Point(750, 3);
+            this.guna2ControlBox3.Location = new System.Drawing.Point(845, 3);
             this.guna2ControlBox3.Name = "guna2ControlBox3";
             this.guna2ControlBox3.ShadowDecoration.Parent = this.guna2ControlBox3;
             this.guna2ControlBox3.Size = new System.Drawing.Size(45, 29);
@@ -389,7 +389,7 @@ namespace QuanLyThuVien
             this.guna2ControlBox2.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox2.HoverState.Parent = this.guna2ControlBox2;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(801, 3);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(896, 3);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.ShadowDecoration.Parent = this.guna2ControlBox2;
             this.guna2ControlBox2.Size = new System.Drawing.Size(45, 29);
@@ -401,7 +401,7 @@ namespace QuanLyThuVien
             this.guna2ControlBox1.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox1.HoverState.Parent = this.guna2ControlBox1;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(852, 3);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(947, 3);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.ShadowDecoration.Parent = this.guna2ControlBox1;
             this.guna2ControlBox1.Size = new System.Drawing.Size(45, 29);
@@ -418,14 +418,14 @@ namespace QuanLyThuVien
             this.pnContent.Location = new System.Drawing.Point(205, 53);
             this.pnContent.Name = "pnContent";
             this.pnContent.ShadowDecoration.Parent = this.pnContent;
-            this.pnContent.Size = new System.Drawing.Size(900, 600);
+            this.pnContent.Size = new System.Drawing.Size(995, 647);
             this.pnContent.TabIndex = 2;
             // 
             // frmTrangchu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1105, 653);
+            this.ClientSize = new System.Drawing.Size(1200, 700);
             this.Controls.Add(this.pnContent);
             this.Controls.Add(this.guna2Panel_top);
             this.Controls.Add(this.guna2Panel_left);

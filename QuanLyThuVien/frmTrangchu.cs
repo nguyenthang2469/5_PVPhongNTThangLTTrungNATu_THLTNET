@@ -13,6 +13,7 @@ namespace QuanLyThuVien
 {
     public partial class frmTrangchu : Form
     {
+        public static Form formtrangchu;
         private bool shouldExit = false;
         private string tendangnhap = string.Empty;
         private bool isSidebarVisible = true;
@@ -30,9 +31,11 @@ namespace QuanLyThuVien
 
         private void frmTrangchu_Load(object sender, EventArgs e)
         {
+            pnContent.Width = 2000;
             guna2ShadowForm1.SetShadowForm(this);
             btnTrangchu_Click(btnTrangchu, EventArgs.Empty);
             lbTendangnhap.Text = tendangnhap;
+            formtrangchu = this;
         }
 
         private void btnTrangchu_Click(object sender, EventArgs e)
@@ -48,6 +51,14 @@ namespace QuanLyThuVien
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Dock = DockStyle.Fill;
+            if(frm.Width > 900)
+            {
+                pnContent.Width = frm.Width;
+            }
+            if(frm.Height > 600)
+            {
+                pnContent.Height = frm.Height;
+            }
             pnContent.Controls.Add(frm);
             pnContent.Tag = frm;
             lbCurrentPage.Text = frm.Text;

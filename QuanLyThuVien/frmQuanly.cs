@@ -14,8 +14,6 @@ namespace QuanLyThuVien
 {
     public partial class frmQuanly : Form
     {
-        
-
         public frmQuanly()
         {
             InitializeComponent();
@@ -33,6 +31,9 @@ namespace QuanLyThuVien
                 case 1:
                     addFormContent(new frmQuanlynhanvien(), tabThuthu);
                     break;
+                case 2:
+                    addFormContent(new frmQuanlydocgia(), tabDocgia);
+                    break;
             }
         }
 
@@ -42,6 +43,14 @@ namespace QuanLyThuVien
             Form frm = _frm as Form;
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
+            if (frm.Width > 900)
+            {
+                frmTrangchu.formtrangchu.Width = frm.Width + 205;
+            }
+            if (frm.Height > 600)
+            {
+                frmTrangchu.formtrangchu.Height = frm.Height + 53;
+            }
             frm.Dock = DockStyle.Fill;
             tabPage.Controls.Add(frm);
             tabPage.Tag = frm;
