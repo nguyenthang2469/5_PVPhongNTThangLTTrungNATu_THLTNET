@@ -59,6 +59,9 @@
     <Compile Include="CHUCNANG.cs" />
     <Compile Include="CSDL\Account.cs" />
     <Compile Include="CSDL\DB.cs" />
+    <Compile Include="CSDL\Sach.cs" />
+    <Compile Include="CSDL\NhaXB.cs" />
+    <Compile Include="CSDL\TacGia.cs" />
     <Compile Include="CSDL\Nhanvien.cs" />
     <Compile Include="CSDL\Docgia.cs" />
     <Compile Include="Docgia\frmQuanlydocgia.cs">
@@ -73,17 +76,23 @@
     <Compile Include="frmQuanly.Designer.cs">
       <DependentUpon>frmQuanly.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmQuanlysach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanlysach.Designer.cs">
+      <DependentUpon>frmQuanlysach.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmThongtinnhom.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmThongtinnhom.Designer.cs">
       <DependentUpon>frmThongtinnhom.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTrangchu.cs">
+    <Compile Include="frmTrangchuAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTrangchu.Designer.cs">
-      <DependentUpon>frmTrangchu.cs</DependentUpon>
+    <Compile Include="frmTrangchuAdmin.Designer.cs">
+      <DependentUpon>frmTrangchuAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Nhanvien\frmQuanlynhanvien.cs">
       <SubType>Form</SubType>
@@ -132,11 +141,14 @@
     <EmbeddedResource Include="frmQuanly.resx">
       <DependentUpon>frmQuanly.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanlysach.resx">
+      <DependentUpon>frmQuanlysach.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmThongtinnhom.resx">
       <DependentUpon>frmThongtinnhom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTrangchu.resx">
-      <DependentUpon>frmTrangchu.cs</DependentUpon>
+    <EmbeddedResource Include="frmTrangchuAdmin.resx">
+      <DependentUpon>frmTrangchuAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Nhanvien\frmQuanlynhanvien.resx">
       <DependentUpon>frmQuanlynhanvien.cs</DependentUpon>

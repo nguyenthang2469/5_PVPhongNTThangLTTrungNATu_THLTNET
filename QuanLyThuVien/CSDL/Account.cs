@@ -28,7 +28,7 @@ namespace QuanLyThuVien.CSDL
             return dt;
         }
 
-        public static Tuple<int, DataTable> searchAccount(string loainguoidung, int pageSize, int pageIndex, string keyword = "")
+        public static Tuple<int, DataTable> searchAccount(string loainguoidung, int pageSize, int pageIndex, string keyword = "", string loainguoidungTimkiem = "")
         {
             DataTable dt = new DataTable();
             int totalAccount = 0;
@@ -52,7 +52,10 @@ namespace QuanLyThuVien.CSDL
                     // Trả về Tuple với totalAccount = 0 và listAccount = null
                     return Tuple.Create(0, (DataTable)null);
                 }
-
+                if(loainguoidungTimkiem != "")
+                {
+                    condition += " AND loainguoidung = '" + loainguoidungTimkiem + "'";
+                }
                 string sql = $"SELECT COUNT(*) FROM NguoiDung WHERE tendangnhap like @keyword and {condition}";
                 using (SqlCommand countCmd = new SqlCommand(sql, conn))
                 {

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien.Taikhoan
 {
-    public partial class frmQuanlydocgia : Form
+    public partial class frmQuanlysach : Form
     {
         private int chucnanghientai = CHUCNANG.NONE;
         private int pageIndex = 1;
@@ -19,37 +19,41 @@ namespace QuanLyThuVien.Taikhoan
         private int totalPages = 0;
         private string keySearch = "";
         private DataGridViewRow selectedRow = null;
-        private List<string> usernames = new List<string>();
+        Dictionary<string, string> tacgiaDictionary = new Dictionary<string, string>();
+        Dictionary<string, string> nhaxbDictionary = new Dictionary<string, string>();
 
-        public frmQuanlydocgia()
+        public frmQuanlysach()
         {
             InitializeComponent();
         }
 
-        private void frmQuanlytdocgia_Load(object sender, EventArgs e)
+        private void frmQuanlysach_Load(object sender, EventArgs e)
         {
             cbSohang.SelectedIndex = 2;
-            dtpNgaysinh.CustomFormat = "dd/MM/yyyy";
-            dtpNgaytaothe.CustomFormat = "dd/MM/yyyy";
-            loadComboboxTendangnhap();
-            loadComboboxManhanvien();
+            dtpNgayxuatban.CustomFormat = "dd/MM/yyyy";
+            loadComboboxTacgia();
+            loadComboboxNhaxb();
         }
 
-        private void loadComboboxTendangnhap()
+        private void loadComboboxTacgia()
         {
             try
             {
-                DataTable dt = DB.getData("SELECT tendangnhap FROM NguoiDung " +
-                    "WHERE tendangnhap NOT IN(SELECT tendangnhap FROM DocGia where tendangnhap IS NOT NULL) " +
-                    "AND NOT tendangnhap = 'admin' AND loainguoidung = 'docgia'"
-                );
-                cbTendangnhap.Items.Clear();
-                usernames.Clear();
+                tacgiaDictionary.Clear();
+                DataTable dt = Tacgia.getAllTacgia();
+                cbTacgia.Items.Clear();
                 foreach (DataRow row in dt.Rows)
                 {
-                    usernames.Add(row["tendangnhap"].ToString());
+                    string displayText = $"{row[0].ToString()}-{row[1].ToString()}";
+
+                    tacgiaDictionary.Add(row[0].ToString(), displayText);
                 }
-                cbTendangnhap.Items.AddRange(usernames.ToArray());
+                if(tacgiaDictionary.Count > 0)
+                {
+                    cbTacgia.DataSource = new BindingSource(tacgiaDictionary, null);
+                    cbTacgia.DisplayMember = "Value";
+                    cbTacgia.ValueMember = "Key";
+                }
             }
             catch (Exception)
             {
@@ -57,24 +61,24 @@ namespace QuanLyThuVien.Taikhoan
             }
         }
 
-        private void loadComboboxManhanvien()
+        private void loadComboboxNhaxb()
         {
             try
             {
-                Dictionary<string, string> nhanvienDictionary = new Dictionary<string, string>();
-                DataTable dt = Nhanvien.getAllNhanvien();
-                cbManhanvien.Items.Clear();
+                nhaxbDictionary.Clear();
+                DataTable dt = NhaXB.getAllNhaXB();
+                cbNhaxuatban.Items.Clear();
                 foreach (DataRow row in dt.Rows)
                 {
-                    string displayText = $"{row["manhanvien"].ToString()}-{row["tennhanvien"].ToString()}";
+                    string displayText = $"{row[0].ToString()}-{row[1].ToString()}";
 
-                    nhanvienDictionary.Add(row["manhanvien"].ToString(), displayText);
+                    nhaxbDictionary.Add(row[0].ToString(), displayText);
                 }
-                if(nhanvienDictionary.Count > 0)
+                if(nhaxbDictionary.Count > 0)
                 {
-                    cbManhanvien.DataSource = new BindingSource(nhanvienDictionary, null);
-                    cbManhanvien.DisplayMember = "Value";
-                    cbManhanvien.ValueMember = "Key";
+                    cbNhaxuatban.DataSource = new BindingSource(nhaxbDictionary, null);
+                    cbNhaxuatban.DisplayMember = "Value";
+                    cbNhaxuatban.ValueMember = "Key";
                 }
             }
             catch (Exception)
@@ -85,9 +89,9 @@ namespace QuanLyThuVien.Taikhoan
 
         private void loadData()
         {
-            Tuple<int, DataTable> result = Docgia.searchDocgia(pageSize, pageIndex, keySearch);
+            Tuple<int, DataTable> result = Sach.searchSach(pageSize, pageIndex, keySearch);
             DataTable dt = result.Item2;
-            lbSonguoidung.Text = "Tổng số độc giả: " + result.Item1;
+            lbSonguoidung.Text = "Tổng số sách: " + result.Item1;
             totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
             dt.Columns.Add("stt", typeof(int));
             dt.Columns["stt"].SetOrdinal(0); // Set vị trí cho cột stt làm cột đầu trong Datatable
@@ -95,7 +99,7 @@ namespace QuanLyThuVien.Taikhoan
             {
                 dt.Rows[i]["stt"] = ((pageIndex - 1) * pageSize) + i + 1;
             }
-            dgvDocgia.DataSource = dt;
+            dgvSach.DataSource = dt;
             UpdatePager();
             if (pageIndex == 1)
             {
@@ -175,7 +179,7 @@ namespace QuanLyThuVien.Taikhoan
         private void btnThem_Click(object sender, EventArgs e)
         {
             SwitchMode(CHUCNANG.ADD);
-            dgvDocgia.Enabled = false;
+            dgvSach.Enabled = false;
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -186,33 +190,30 @@ namespace QuanLyThuVien.Taikhoan
             }
             else
             {
-                string madocgia = tbMadocgia.Text.Trim();
-                string tendocgia = tbTendocgia.Text.Trim();
-                DateTime ngaysinh = dtpNgaysinh.Value;
-                string gioitinh = (string)cbGioitinh.SelectedItem;
-                string diachi = tbDiachi.Text.Trim();
-                string lophoc = tbLophoc.Text.Trim();
-                DateTime ngaytaothe = dtpNgaytaothe.Value;
-                string manhanvientaothe = (string)cbManhanvien.SelectedValue;
-                string tendangnhap = (string)cbTendangnhap.SelectedItem;
+                string masach = tbMasach.Text.Trim();
+                string tensach = tbTensach.Text.Trim();
+                string loaisach = tbLoaisach.Text.Trim();
+                string tacgia = (string)cbTacgia.SelectedValue;
+                string nhaxb = (string)cbNhaxuatban.SelectedValue;
+                DateTime ngayxuatban = dtpNgayxuatban.Value;
+                int soluong = (int)nudSoluong.Value;
                 if (chucnanghientai == CHUCNANG.ADD)
                 {
                     if (checkInput() == false)
                     {
                         return;
                     }
-                    if (Docgia.getDocgia(madocgia) != null)
+                    if (Sach.getSach(masach) != null)
                     {
-                        MessageBox.Show("Mã độc giả đã tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Mã sách đã tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    if (Docgia.createDocgia(madocgia, tendocgia, ngaysinh, gioitinh, diachi, lophoc, ngaytaothe, manhanvientaothe, tendangnhap))
+                    if (Sach.createSach(masach, tensach, loaisach, tacgia, nhaxb, ngayxuatban, soluong))
                     {
-                        dgvDocgia.Enabled = true;
+                        dgvSach.Enabled = true;
                         SwitchMode(CHUCNANG.NONE);
                         loadData();
                         btnThem.Focus();
-                        loadComboboxTendangnhap();
                         MessageBox.Show("Thêm thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -226,11 +227,10 @@ namespace QuanLyThuVien.Taikhoan
                     {
                         return;
                     }
-                    if (Docgia.updateDocgia(madocgia, tendocgia, ngaysinh, gioitinh, diachi, lophoc, ngaytaothe, manhanvientaothe))
+                    if (Sach.updateSach(masach, tensach, loaisach, tacgia, nhaxb, ngayxuatban, soluong))
                     {
                         SwitchMode(CHUCNANG.NONE);
                         loadData();
-                        loadComboboxTendangnhap();
                         MessageBox.Show("Cập nhật thành công", "Thông báo chỉnh sửa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -245,17 +245,16 @@ namespace QuanLyThuVien.Taikhoan
         {
             if(chucnanghientai == CHUCNANG.NONE)
             {
-                DialogResult result = MessageBox.Show("Bạn chắc chắn muốn xóa độc giả này?", "Cảnh báo",
+                DialogResult result = MessageBox.Show("Bạn chắc chắn muốn xóa sách này?", "Cảnh báo",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.No)
                 {
                     return;
                 }
-                string madocgia = dgvDocgia.CurrentRow.Cells[1].Value.ToString();
-                string tendangnhap = dgvDocgia.CurrentRow.Cells[9].Value.ToString();
-                if (Docgia.deleteDocgia(madocgia, tendangnhap))
+                string masach = dgvSach.CurrentRow.Cells[1].Value.ToString();
+                if (Sach.deleteSach(masach))
                 {
-                    MessageBox.Show("Xóa độc giả " + madocgia + " thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xóa sách thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     loadData();
                 }
                 else
@@ -268,129 +267,112 @@ namespace QuanLyThuVien.Taikhoan
             }
         }
 
-        private void dgvDocgia_SelectionChanged(object sender, EventArgs e)
+        private void dgvSach_SelectionChanged(object sender, EventArgs e)
         {
             if (chucnanghientai == CHUCNANG.UPDATE && selectedRow != null)
             {
-                dgvDocgia.SelectionChanged -= dgvDocgia_SelectionChanged;
-                dgvDocgia.ClearSelection();
+                dgvSach.SelectionChanged -= dgvSach_SelectionChanged;
+                dgvSach.ClearSelection();
                 selectedRow.Selected = true;
-                dgvDocgia.SelectionChanged += dgvDocgia_SelectionChanged;
+                dgvSach.SelectionChanged += dgvSach_SelectionChanged;
                 return;
             } else
             {
                 this.selectedRow = null;
-                if (dgvDocgia.SelectedRows.Count > 0)
+                if (dgvSach.SelectedRows.Count > 0)
                 {
-                    this.selectedRow = dgvDocgia.CurrentRow;
-                    setComboboxTendangnhap(selectedRow.Cells[9].Value.ToString());
-                    tbMadocgia.Text = (string)selectedRow.Cells[1].Value;
-                    tbTendocgia.Text = (string)selectedRow.Cells[2].Value;
-                    dtpNgaysinh.Value = (DateTime)selectedRow.Cells[3].Value;
-                    cbGioitinh.SelectedItem = selectedRow.Cells[4].Value;
-                    tbDiachi.Text = (string)selectedRow.Cells[5].Value;
-                    tbLophoc.Text = (string)selectedRow.Cells[6].Value;
-                    dtpNgaytaothe.Value = (DateTime)selectedRow.Cells[7].Value;
-                    cbManhanvien.SelectedValue = selectedRow.Cells[8].Value;
-                    cbTendangnhap.SelectedItem = selectedRow.Cells[9].Value;
+                    this.selectedRow = dgvSach.CurrentRow;
+                    tbMasach.Text = (string)selectedRow.Cells["colMasach"].Value;
+                    tbTensach.Text = (string)selectedRow.Cells["colTensach"].Value;
+                    tbLoaisach.Text = (string)selectedRow.Cells["colLoaisach"].Value;
+                    cbTacgia.SelectedValue = selectedRow.Cells["colMatacgia"].Value;
+                    cbNhaxuatban.SelectedValue = selectedRow.Cells["colManhaxuatban"].Value;
+                    dtpNgayxuatban.Value = (DateTime)selectedRow.Cells["colNgayxuatban"].Value;
+                    decimal soluong;
+                    if (decimal.TryParse(selectedRow.Cells["colSoluong"].Value.ToString(), out soluong))
+                    {
+                        nudSoluong.Value = soluong;
+                    }
                     btnSua.Enabled = true;
                     btnXoa.Enabled = true;
-                    return;
                 } else if(chucnanghientai == CHUCNANG.NONE)
                 {
                     btnSua.Enabled = false;
                     btnXoa.Enabled = false;
                 }
-                cbTendangnhap.Items.Clear();
-                cbTendangnhap.Items.AddRange(usernames.ToArray());
             }
         }
 
-        private void dgvDocgia_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvSach_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            bool isColumnNgaysinh = dgvDocgia.Columns["colNgaySinh"] != null
-                && e.ColumnIndex == dgvDocgia.Columns["colNgaySinh"].Index
+            bool isColumnNgayxb = dgvSach.Columns["colNgayxuatban"] != null
+                && e.ColumnIndex == dgvSach.Columns["colNgayxuatban"].Index
                 && e.Value != null;
-            bool isColumnNgaytaothe = dgvDocgia.Columns["colNgaytaothe"] != null
-                && e.ColumnIndex == dgvDocgia.Columns["colNgaytaothe"].Index
-                && e.Value != null;
-            if (isColumnNgaysinh || isColumnNgaytaothe)
+            if (isColumnNgayxb)
             {
                 DateTime ngaySinh = (DateTime)e.Value;
                 e.Value = ngaySinh.ToString("dd/MM/yyyy");
             }
         }
 
-        private void setComboboxTendangnhap(string tendangnhap)
-        {
-            cbTendangnhap.Items.Clear();
-            cbTendangnhap.Items.AddRange(usernames.ToArray());
-            if(!string.IsNullOrEmpty(tendangnhap))
-            {
-                cbTendangnhap.Items.Add(tendangnhap);
-            }
-        }
-
         private void clearInput()
         {
-            tbMadocgia.Text = "";
-            tbTendocgia.Text = "";
-            cbGioitinh.SelectedIndex = -1;
-            tbDiachi.Text = "";
-            tbLophoc.Text = "";
-            cbManhanvien.SelectedIndex = -1;
-            cbTendangnhap.SelectedIndex = -1;
+            tbMasach.Text = "";
+            tbTensach.Text = "";
+            tbLoaisach.Text = "";
+            cbTacgia.SelectedIndex = -1;
+            cbNhaxuatban.SelectedIndex = -1;
+            nudSoluong.Value = 0;
         }
 
         private bool checkInput()
         {
-            string madocgia = tbMadocgia.Text.Trim();
-            string tendocgia = tbTendocgia.Text.Trim();
-            string gioitinh = (string)cbGioitinh.SelectedItem;
-            string diachi = tbDiachi.Text.Trim();
-            string lophoc = tbLophoc.Text.Trim();
-            string manhanvientaothe = (string)cbManhanvien.SelectedValue;
-            string tendangnhap = (string)cbTendangnhap.SelectedItem;
-            if (madocgia.Length == 0)
+            string masach = tbMasach.Text.Trim();
+            string tensach = tbTensach.Text.Trim();
+            string loaisach = tbLoaisach.Text.Trim();
+            string tacgia = (string)cbTacgia.SelectedValue;
+            string nhaxb = (string)cbNhaxuatban.SelectedValue;
+            string soluong = nudSoluong.Value.ToString();
+            if (masach.Length == 0)
             {
-                MessageBox.Show("Vui lòng nhập mã độc giả", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                tbMadocgia.Focus();
+                MessageBox.Show("Vui lòng nhập mã sách", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tbMasach.Focus();
                 return false;
             }
-            if (tendocgia.Length == 0)
+            if (tensach.Length == 0)
             {
-                MessageBox.Show("Vui lòng nhập tên độc giả", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                tbTendocgia.Focus();
+                MessageBox.Show("Vui lòng nhập tên sách", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tbTensach.Focus();
                 return false;
             }
-            if (gioitinh == null || gioitinh.Length == 0)
+            if (loaisach.Length == 0)
             {
-                MessageBox.Show("Vui lòng chọn giới tính", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cbGioitinh.Focus();
+                MessageBox.Show("Vui lòng nhập loại sách", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tbLoaisach.Focus();
                 return false;
             }
-            if (diachi.Length == 0)
+            if (tacgia == null || tacgia.Length == 0)
             {
-                MessageBox.Show("Vui lòng nhập địa chỉ", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                tbDiachi.Focus();
+                MessageBox.Show("Vui lòng chọn tác giả", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cbTacgia.Focus();
                 return false;
             }
-            if (lophoc.Length == 0)
+            if (nhaxb == null || nhaxb.Length == 0)
             {
-                MessageBox.Show("Vui lòng nhập lớp học", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                tbLophoc.Focus();
+                MessageBox.Show("Vui lòng chọn nhà xuất bản", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cbNhaxuatban.Focus();
                 return false;
             }
-            if (manhanvientaothe == null || manhanvientaothe.Length == 0)
+            if(soluong.Length == 0)
             {
-                MessageBox.Show("Vui lòng chọn mã nhân viên tạo thẻ", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cbManhanvien.Focus();
+                MessageBox.Show("Vui lòng nhập số lượng", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                nudSoluong.Focus();
                 return false;
             }
-            if (tendangnhap == null || tendangnhap.Length == 0)
+            if (int.Parse(soluong) <= 0)
             {
-                MessageBox.Show("Vui lòng chọn tên đăng nhập", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cbTendangnhap.Focus();
+                MessageBox.Show("Số lượng phải lớn hơn 0", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                nudSoluong.Focus();
                 return false;
             }
             return true;
@@ -398,15 +380,13 @@ namespace QuanLyThuVien.Taikhoan
 
         private void setStateInput(bool enabled)
         {
-            tbMadocgia.Enabled = enabled;
-            tbTendocgia.Enabled = enabled;
-            dtpNgaysinh.Enabled = enabled;
-            cbGioitinh.Enabled = enabled;
-            tbDiachi.Enabled = enabled;
-            tbLophoc.Enabled = enabled;
-            dtpNgaytaothe.Enabled = enabled;
-            cbManhanvien.Enabled = enabled;
-            cbTendangnhap.Enabled = enabled;
+            tbMasach.Enabled = enabled;
+            tbTensach.Enabled = enabled;
+            tbLoaisach.Enabled = enabled;
+            cbTacgia.Enabled = enabled;
+            cbNhaxuatban.Enabled = enabled;
+            dtpNgayxuatban.Enabled = enabled;
+            nudSoluong.Enabled = enabled;
             tbTimkiem.Enabled = !enabled;
         }
 
@@ -438,18 +418,17 @@ namespace QuanLyThuVien.Taikhoan
                 case CHUCNANG.ADD:
                     {
                         setStateInput(true);
-                        tbMadocgia.Focus();
+                        tbMasach.Focus();
                         setStateButton(false);
                         clearInput();
-                        dgvDocgia.ClearSelection();
+                        dgvSach.ClearSelection();
                         break;
                     }
                 case CHUCNANG.UPDATE:
                     {
                         setStateInput(true);
-                        tbMadocgia.Enabled = false;
-                        cbTendangnhap.Enabled = false;
-                        tbTendocgia.Focus();
+                        tbMasach.Enabled = false;
+                        tbTensach.Focus();
                         setStateButton(false);
                         break;
                     }
@@ -458,8 +437,8 @@ namespace QuanLyThuVien.Taikhoan
                         clearInput();
                         setStateInput(false);
                         setStateButton(true);
-                        dgvDocgia.Enabled = true;
-                        dgvDocgia_SelectionChanged(dgvDocgia, EventArgs.Empty);
+                        dgvSach.Enabled = true;
+                        dgvSach_SelectionChanged(dgvSach, EventArgs.Empty);
                         break;
                     }
             }

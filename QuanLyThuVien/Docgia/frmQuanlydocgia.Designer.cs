@@ -29,6 +29,7 @@ namespace QuanLyThuVien.Taikhoan
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanlydocgia));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -87,25 +88,28 @@ namespace QuanLyThuVien.Taikhoan
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocgia)).BeginInit();
             this.guna2Panel1.SuspendLayout();
-            this.guna2Panel2.SuspendLayout();
+            this.guna2Panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbSonguoidung
             // 
+            this.lbSonguoidung.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lbSonguoidung.AutoSize = true;
             this.lbSonguoidung.BackColor = System.Drawing.Color.Transparent;
             this.lbSonguoidung.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbSonguoidung.Location = new System.Drawing.Point(12, 310);
+            this.lbSonguoidung.Location = new System.Drawing.Point(15, 16);
             this.lbSonguoidung.Name = "lbSonguoidung";
             this.lbSonguoidung.Size = new System.Drawing.Size(0, 20);
             this.lbSonguoidung.TabIndex = 19;
             // 
             // btnTimkiem
             // 
-            this.btnTimkiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTimkiem.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnTimkiem.Animated = true;
             this.btnTimkiem.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnTimkiem.BorderRadius = 5;
@@ -119,17 +123,17 @@ namespace QuanLyThuVien.Taikhoan
             this.btnTimkiem.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
             this.btnTimkiem.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnTimkiem.HoverState.Parent = this.btnTimkiem;
-            this.btnTimkiem.Location = new System.Drawing.Point(1037, 10);
+            this.btnTimkiem.Location = new System.Drawing.Point(1041, 222);
             this.btnTimkiem.Name = "btnTimkiem";
             this.btnTimkiem.ShadowDecoration.Parent = this.btnTimkiem;
             this.btnTimkiem.Size = new System.Drawing.Size(80, 30);
-            this.btnTimkiem.TabIndex = 10;
+            this.btnTimkiem.TabIndex = 13;
             this.btnTimkiem.Text = "Tìm kiếm";
             this.btnTimkiem.Click += new System.EventHandler(this.btnTimkiem_Click);
             // 
             // tbTimkiem
             // 
-            this.tbTimkiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbTimkiem.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tbTimkiem.Animated = true;
             this.tbTimkiem.AutoRoundedCorners = true;
             this.tbTimkiem.BackColor = System.Drawing.Color.Transparent;
@@ -147,22 +151,24 @@ namespace QuanLyThuVien.Taikhoan
             this.tbTimkiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tbTimkiem.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.tbTimkiem.HoverState.Parent = this.tbTimkiem;
-            this.tbTimkiem.Location = new System.Drawing.Point(826, 7);
+            this.tbTimkiem.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbTimkiem.IconLeft")));
+            this.tbTimkiem.IconLeftOffset = new System.Drawing.Point(5, 0);
+            this.tbTimkiem.Location = new System.Drawing.Point(716, 219);
             this.tbTimkiem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbTimkiem.Name = "tbTimkiem";
             this.tbTimkiem.PasswordChar = '\0';
-            this.tbTimkiem.PlaceholderText = "Từ khóa";
+            this.tbTimkiem.PlaceholderText = "Nhập từ khóa";
             this.tbTimkiem.SelectedText = "";
             this.tbTimkiem.ShadowDecoration.BorderRadius = 4;
             this.tbTimkiem.ShadowDecoration.Parent = this.tbTimkiem;
-            this.tbTimkiem.Size = new System.Drawing.Size(201, 36);
-            this.tbTimkiem.TabIndex = 9;
-            this.tbTimkiem.TextOffset = new System.Drawing.Point(8, 0);
+            this.tbTimkiem.Size = new System.Drawing.Size(310, 36);
+            this.tbTimkiem.TabIndex = 12;
+            this.tbTimkiem.TextOffset = new System.Drawing.Point(2, 0);
             this.tbTimkiem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTimkiem_KeyDown);
             // 
             // btnLast
             // 
-            this.btnLast.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLast.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnLast.Animated = true;
             this.btnLast.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnLast.BorderRadius = 5;
@@ -177,11 +183,11 @@ namespace QuanLyThuVien.Taikhoan
             this.btnLast.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
             this.btnLast.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnLast.HoverState.Parent = this.btnLast;
-            this.btnLast.Location = new System.Drawing.Point(1086, 304);
+            this.btnLast.Location = new System.Drawing.Point(1073, 11);
             this.btnLast.Name = "btnLast";
             this.btnLast.ShadowDecoration.Parent = this.btnLast;
             this.btnLast.Size = new System.Drawing.Size(46, 30);
-            this.btnLast.TabIndex = 16;
+            this.btnLast.TabIndex = 19;
             this.btnLast.Text = ">>";
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
@@ -192,7 +198,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvDocgia.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.dgvDocgia.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvDocgia.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dgvDocgia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.dgvDocgia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDocgia.BackgroundColor = System.Drawing.Color.White;
             this.dgvDocgia.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -230,7 +236,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvDocgia.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvDocgia.EnableHeadersVisualStyles = false;
             this.dgvDocgia.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvDocgia.Location = new System.Drawing.Point(3, 52);
+            this.dgvDocgia.Location = new System.Drawing.Point(19, 3);
             this.dgvDocgia.MultiSelect = false;
             this.dgvDocgia.Name = "dgvDocgia";
             this.dgvDocgia.ReadOnly = true;
@@ -253,8 +259,8 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvDocgia.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dgvDocgia.RowTemplate.Height = 38;
             this.dgvDocgia.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDocgia.Size = new System.Drawing.Size(1138, 244);
-            this.dgvDocgia.TabIndex = 11;
+            this.dgvDocgia.Size = new System.Drawing.Size(1102, 266);
+            this.dgvDocgia.TabIndex = 14;
             this.dgvDocgia.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Default;
             this.dgvDocgia.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvDocgia.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -277,7 +283,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvDocgia.ThemeStyle.RowsStyle.Height = 38;
             this.dgvDocgia.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDocgia.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvDocgia.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNhanvien_CellFormatting);
+            this.dgvDocgia.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDocgia_CellFormatting);
             this.dgvDocgia.SelectionChanged += new System.EventHandler(this.dgvDocgia_SelectionChanged);
             // 
             // colSTT
@@ -402,7 +408,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // btnFirst
             // 
-            this.btnFirst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFirst.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnFirst.Animated = true;
             this.btnFirst.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnFirst.BorderRadius = 5;
@@ -417,17 +423,17 @@ namespace QuanLyThuVien.Taikhoan
             this.btnFirst.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
             this.btnFirst.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnFirst.HoverState.Parent = this.btnFirst;
-            this.btnFirst.Location = new System.Drawing.Point(861, 305);
+            this.btnFirst.Location = new System.Drawing.Point(848, 12);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.ShadowDecoration.Parent = this.btnFirst;
             this.btnFirst.Size = new System.Drawing.Size(46, 30);
-            this.btnFirst.TabIndex = 13;
+            this.btnFirst.TabIndex = 16;
             this.btnFirst.Text = "<<";
             this.btnFirst.Click += new System.EventHandler(this.btnFist_Click);
             // 
             // btnAfter
             // 
-            this.btnAfter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAfter.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnAfter.Animated = true;
             this.btnAfter.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnAfter.BorderRadius = 5;
@@ -442,17 +448,17 @@ namespace QuanLyThuVien.Taikhoan
             this.btnAfter.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
             this.btnAfter.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnAfter.HoverState.Parent = this.btnAfter;
-            this.btnAfter.Location = new System.Drawing.Point(1026, 304);
+            this.btnAfter.Location = new System.Drawing.Point(1013, 11);
             this.btnAfter.Name = "btnAfter";
             this.btnAfter.ShadowDecoration.Parent = this.btnAfter;
             this.btnAfter.Size = new System.Drawing.Size(46, 30);
-            this.btnAfter.TabIndex = 15;
+            this.btnAfter.TabIndex = 18;
             this.btnAfter.Text = ">";
             this.btnAfter.Click += new System.EventHandler(this.btnAfter_Click);
             // 
             // btnBefore
             // 
-            this.btnBefore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBefore.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnBefore.Animated = true;
             this.btnBefore.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnBefore.BorderRadius = 5;
@@ -467,21 +473,21 @@ namespace QuanLyThuVien.Taikhoan
             this.btnBefore.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
             this.btnBefore.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnBefore.HoverState.Parent = this.btnBefore;
-            this.btnBefore.Location = new System.Drawing.Point(921, 305);
+            this.btnBefore.Location = new System.Drawing.Point(908, 12);
             this.btnBefore.Name = "btnBefore";
             this.btnBefore.ShadowDecoration.Parent = this.btnBefore;
             this.btnBefore.Size = new System.Drawing.Size(46, 30);
-            this.btnBefore.TabIndex = 14;
+            this.btnBefore.TabIndex = 17;
             this.btnBefore.Text = "<";
             this.btnBefore.Click += new System.EventHandler(this.btnBefore_Click);
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(676, 310);
+            this.label4.Location = new System.Drawing.Point(663, 17);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 20);
             this.label4.TabIndex = 11;
@@ -489,7 +495,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // cbSohang
             // 
-            this.cbSohang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSohang.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cbSohang.Animated = true;
             this.cbSohang.BackColor = System.Drawing.Color.Transparent;
             this.cbSohang.BorderRadius = 5;
@@ -513,20 +519,20 @@ namespace QuanLyThuVien.Taikhoan
             this.cbSohang.ItemsAppearance.Parent = this.cbSohang;
             this.cbSohang.ItemsAppearance.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.cbSohang.ItemsAppearance.SelectedForeColor = System.Drawing.Color.White;
-            this.cbSohang.Location = new System.Drawing.Point(760, 302);
+            this.cbSohang.Location = new System.Drawing.Point(747, 9);
             this.cbSohang.Name = "cbSohang";
             this.cbSohang.ShadowDecoration.Parent = this.cbSohang;
             this.cbSohang.Size = new System.Drawing.Size(85, 36);
-            this.cbSohang.TabIndex = 12;
+            this.cbSohang.TabIndex = 15;
             this.cbSohang.SelectedIndexChanged += new System.EventHandler(this.cbSohang_SelectedIndexChanged);
             // 
             // lbChimuc
             // 
-            this.lbChimuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbChimuc.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lbChimuc.AutoSize = true;
             this.lbChimuc.BackColor = System.Drawing.Color.Transparent;
             this.lbChimuc.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbChimuc.Location = new System.Drawing.Point(981, 309);
+            this.lbChimuc.Location = new System.Drawing.Point(968, 16);
             this.lbChimuc.Name = "lbChimuc";
             this.lbChimuc.Size = new System.Drawing.Size(31, 20);
             this.lbChimuc.TabIndex = 15;
@@ -534,9 +540,10 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // guna2Panel1
             // 
-            this.guna2Panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.guna2Panel1.BackColor = System.Drawing.Color.White;
+            this.guna2Panel1.Controls.Add(this.tbTimkiem);
             this.guna2Panel1.Controls.Add(this.cbManhanvien);
+            this.guna2Panel1.Controls.Add(this.btnTimkiem);
             this.guna2Panel1.Controls.Add(this.label10);
             this.guna2Panel1.Controls.Add(this.dtpNgaytaothe);
             this.guna2Panel1.Controls.Add(this.label9);
@@ -559,15 +566,17 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.guna2Panel1.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.FillColor = System.Drawing.Color.White;
-            this.guna2Panel1.Location = new System.Drawing.Point(-1, 0);
+            this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
-            this.guna2Panel1.Size = new System.Drawing.Size(1144, 220);
+            this.guna2Panel1.Size = new System.Drawing.Size(1145, 268);
             this.guna2Panel1.TabIndex = 2;
             // 
             // cbManhanvien
             // 
+            this.cbManhanvien.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cbManhanvien.AutoRoundedCorners = true;
             this.cbManhanvien.BackColor = System.Drawing.Color.White;
             this.cbManhanvien.BorderRadius = 18;
@@ -585,27 +594,29 @@ namespace QuanLyThuVien.Taikhoan
             this.cbManhanvien.HoverState.Parent = this.cbManhanvien;
             this.cbManhanvien.ItemHeight = 32;
             this.cbManhanvien.ItemsAppearance.Parent = this.cbManhanvien;
-            this.cbManhanvien.Location = new System.Drawing.Point(835, 76);
+            this.cbManhanvien.Location = new System.Drawing.Point(838, 76);
             this.cbManhanvien.Name = "cbManhanvien";
             this.cbManhanvien.ShadowDecoration.Color = System.Drawing.Color.Transparent;
             this.cbManhanvien.ShadowDecoration.Parent = this.cbManhanvien;
             this.cbManhanvien.Size = new System.Drawing.Size(282, 38);
-            this.cbManhanvien.TabIndex = 20;
+            this.cbManhanvien.TabIndex = 7;
             this.cbManhanvien.TextOffset = new System.Drawing.Point(8, 0);
             this.cbManhanvien.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enter);
             // 
             // label10
             // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(712, 85);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(111, 20);
+            this.label10.Size = new System.Drawing.Size(85, 20);
             this.label10.TabIndex = 21;
-            this.label10.Text = "Mã NV tạo thẻ";
+            this.label10.Text = "NV tạo thẻ";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dtpNgaytaothe
             // 
+            this.dtpNgaytaothe.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dtpNgaytaothe.AutoRoundedCorners = true;
             this.dtpNgaytaothe.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.dtpNgaytaothe.BorderRadius = 17;
@@ -613,6 +624,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dtpNgaytaothe.CheckedState.Parent = this.dtpNgaytaothe;
             this.dtpNgaytaothe.Enabled = false;
             this.dtpNgaytaothe.FillColor = System.Drawing.Color.White;
+            this.dtpNgaytaothe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dtpNgaytaothe.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNgaytaothe.HoverState.Parent = this.dtpNgaytaothe;
             this.dtpNgaytaothe.Location = new System.Drawing.Point(488, 77);
@@ -621,12 +633,13 @@ namespace QuanLyThuVien.Taikhoan
             this.dtpNgaytaothe.Name = "dtpNgaytaothe";
             this.dtpNgaytaothe.ShadowDecoration.Parent = this.dtpNgaytaothe;
             this.dtpNgaytaothe.Size = new System.Drawing.Size(203, 36);
-            this.dtpNgaytaothe.TabIndex = 18;
+            this.dtpNgaytaothe.TabIndex = 4;
             this.dtpNgaytaothe.Value = new System.DateTime(2023, 11, 24, 0, 0, 0, 0);
             this.dtpNgaytaothe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enter);
             // 
             // label9
             // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(379, 85);
             this.label9.Name = "label9";
@@ -637,6 +650,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // tbLophoc
             // 
+            this.tbLophoc.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tbLophoc.Animated = true;
             this.tbLophoc.AutoRoundedCorners = true;
             this.tbLophoc.BorderRadius = 17;
@@ -662,12 +676,13 @@ namespace QuanLyThuVien.Taikhoan
             this.tbLophoc.ShadowDecoration.BorderRadius = 4;
             this.tbLophoc.ShadowDecoration.Parent = this.tbLophoc;
             this.tbLophoc.Size = new System.Drawing.Size(203, 36);
-            this.tbLophoc.TabIndex = 16;
+            this.tbLophoc.TabIndex = 5;
             this.tbLophoc.TextOffset = new System.Drawing.Point(8, 0);
             this.tbLophoc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enter);
             // 
             // label8
             // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(379, 136);
             this.label8.Name = "label8";
@@ -678,6 +693,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // cbGioitinh
             // 
+            this.cbGioitinh.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cbGioitinh.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbGioitinh.AutoRoundedCorners = true;
             this.cbGioitinh.BackColor = System.Drawing.Color.Transparent;
@@ -705,12 +721,13 @@ namespace QuanLyThuVien.Taikhoan
             this.cbGioitinh.ShadowDecoration.Color = System.Drawing.Color.Transparent;
             this.cbGioitinh.ShadowDecoration.Parent = this.cbGioitinh;
             this.cbGioitinh.Size = new System.Drawing.Size(232, 38);
-            this.cbGioitinh.TabIndex = 15;
+            this.cbGioitinh.TabIndex = 2;
             this.cbGioitinh.TextOffset = new System.Drawing.Point(8, 0);
             this.cbGioitinh.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enter);
             // 
             // cbTendangnhap
             // 
+            this.cbTendangnhap.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cbTendangnhap.AutoRoundedCorners = true;
             this.cbTendangnhap.BackColor = System.Drawing.Color.White;
             this.cbTendangnhap.BorderRadius = 18;
@@ -728,17 +745,18 @@ namespace QuanLyThuVien.Taikhoan
             this.cbTendangnhap.HoverState.Parent = this.cbTendangnhap;
             this.cbTendangnhap.ItemHeight = 32;
             this.cbTendangnhap.ItemsAppearance.Parent = this.cbTendangnhap;
-            this.cbTendangnhap.Location = new System.Drawing.Point(835, 127);
+            this.cbTendangnhap.Location = new System.Drawing.Point(838, 127);
             this.cbTendangnhap.Name = "cbTendangnhap";
             this.cbTendangnhap.ShadowDecoration.Color = System.Drawing.Color.Transparent;
             this.cbTendangnhap.ShadowDecoration.Parent = this.cbTendangnhap;
             this.cbTendangnhap.Size = new System.Drawing.Size(282, 38);
-            this.cbTendangnhap.TabIndex = 5;
+            this.cbTendangnhap.TabIndex = 8;
             this.cbTendangnhap.TextOffset = new System.Drawing.Point(8, 0);
             this.cbTendangnhap.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enter);
             // 
             // label7
             // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(712, 136);
             this.label7.Name = "label7";
@@ -749,6 +767,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // tbDiachi
             // 
+            this.tbDiachi.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tbDiachi.Animated = true;
             this.tbDiachi.AutoRoundedCorners = true;
             this.tbDiachi.BorderRadius = 17;
@@ -765,7 +784,7 @@ namespace QuanLyThuVien.Taikhoan
             this.tbDiachi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tbDiachi.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.tbDiachi.HoverState.Parent = this.tbDiachi;
-            this.tbDiachi.Location = new System.Drawing.Point(835, 26);
+            this.tbDiachi.Location = new System.Drawing.Point(838, 26);
             this.tbDiachi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbDiachi.Name = "tbDiachi";
             this.tbDiachi.PasswordChar = '\0';
@@ -774,12 +793,13 @@ namespace QuanLyThuVien.Taikhoan
             this.tbDiachi.ShadowDecoration.BorderRadius = 4;
             this.tbDiachi.ShadowDecoration.Parent = this.tbDiachi;
             this.tbDiachi.Size = new System.Drawing.Size(282, 36);
-            this.tbDiachi.TabIndex = 4;
+            this.tbDiachi.TabIndex = 6;
             this.tbDiachi.TextOffset = new System.Drawing.Point(8, 0);
             this.tbDiachi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enter);
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(712, 34);
             this.label6.Name = "label6";
@@ -790,6 +810,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // dtpNgaysinh
             // 
+            this.dtpNgaysinh.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dtpNgaysinh.AutoRoundedCorners = true;
             this.dtpNgaysinh.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.dtpNgaysinh.BorderRadius = 17;
@@ -797,6 +818,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dtpNgaysinh.CheckedState.Parent = this.dtpNgaysinh;
             this.dtpNgaysinh.Enabled = false;
             this.dtpNgaysinh.FillColor = System.Drawing.Color.White;
+            this.dtpNgaysinh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dtpNgaysinh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNgaysinh.HoverState.Parent = this.dtpNgaysinh;
             this.dtpNgaysinh.Location = new System.Drawing.Point(488, 26);
@@ -805,12 +827,13 @@ namespace QuanLyThuVien.Taikhoan
             this.dtpNgaysinh.Name = "dtpNgaysinh";
             this.dtpNgaysinh.ShadowDecoration.Parent = this.dtpNgaysinh;
             this.dtpNgaysinh.Size = new System.Drawing.Size(203, 36);
-            this.dtpNgaysinh.TabIndex = 2;
+            this.dtpNgaysinh.TabIndex = 3;
             this.dtpNgaysinh.Value = new System.DateTime(2023, 11, 24, 0, 0, 0, 0);
             this.dtpNgaysinh.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enter);
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(379, 34);
             this.label5.Name = "label5";
@@ -821,7 +844,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // btnSua
             // 
-            this.btnSua.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSua.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnSua.Animated = true;
             this.btnSua.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnSua.BorderRadius = 5;
@@ -837,16 +860,17 @@ namespace QuanLyThuVien.Taikhoan
             this.btnSua.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
             this.btnSua.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnSua.HoverState.Parent = this.btnSua;
-            this.btnSua.Location = new System.Drawing.Point(944, 177);
+            this.btnSua.Location = new System.Drawing.Point(935, 177);
             this.btnSua.Name = "btnSua";
             this.btnSua.ShadowDecoration.Parent = this.btnSua;
             this.btnSua.Size = new System.Drawing.Size(80, 30);
-            this.btnSua.TabIndex = 7;
+            this.btnSua.TabIndex = 10;
             this.btnSua.Text = "Sửa";
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // tbTendocgia
             // 
+            this.tbTendocgia.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tbTendocgia.Animated = true;
             this.tbTendocgia.AutoRoundedCorners = true;
             this.tbTendocgia.BorderRadius = 17;
@@ -878,6 +902,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // tbMadocgia
             // 
+            this.tbMadocgia.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tbMadocgia.AutoRoundedCorners = true;
             this.tbMadocgia.BorderRadius = 17;
             this.tbMadocgia.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -908,7 +933,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // btnXoa
             // 
-            this.btnXoa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnXoa.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnXoa.Animated = true;
             this.btnXoa.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
             this.btnXoa.BorderRadius = 5;
@@ -924,17 +949,17 @@ namespace QuanLyThuVien.Taikhoan
             this.btnXoa.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(33)))), ((int)(((byte)(48)))));
             this.btnXoa.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnXoa.HoverState.Parent = this.btnXoa;
-            this.btnXoa.Location = new System.Drawing.Point(1037, 177);
+            this.btnXoa.Location = new System.Drawing.Point(1040, 177);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.ShadowDecoration.Parent = this.btnXoa;
             this.btnXoa.Size = new System.Drawing.Size(80, 30);
-            this.btnXoa.TabIndex = 8;
+            this.btnXoa.TabIndex = 11;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThem
             // 
-            this.btnThem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnThem.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnThem.Animated = true;
             this.btnThem.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.btnThem.BorderRadius = 5;
@@ -949,16 +974,17 @@ namespace QuanLyThuVien.Taikhoan
             this.btnThem.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
             this.btnThem.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnThem.HoverState.Parent = this.btnThem;
-            this.btnThem.Location = new System.Drawing.Point(851, 177);
+            this.btnThem.Location = new System.Drawing.Point(830, 177);
             this.btnThem.Name = "btnThem";
             this.btnThem.ShadowDecoration.Parent = this.btnThem;
             this.btnThem.Size = new System.Drawing.Size(80, 30);
-            this.btnThem.TabIndex = 6;
+            this.btnThem.TabIndex = 9;
             this.btnThem.Text = "Thêm";
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(15, 136);
             this.label3.Name = "label3";
@@ -969,6 +995,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 85);
             this.label2.Name = "label2";
@@ -979,6 +1006,7 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 34);
             this.label1.Name = "label1";
@@ -987,25 +1015,31 @@ namespace QuanLyThuVien.Taikhoan
             this.label1.Text = "Mã độc giả";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // guna2Panel2
+            // guna2Panel3
             // 
-            this.guna2Panel2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.guna2Panel2.Controls.Add(this.lbSonguoidung);
-            this.guna2Panel2.Controls.Add(this.tbTimkiem);
-            this.guna2Panel2.Controls.Add(this.btnLast);
-            this.guna2Panel2.Controls.Add(this.btnFirst);
-            this.guna2Panel2.Controls.Add(this.btnTimkiem);
-            this.guna2Panel2.Controls.Add(this.btnAfter);
-            this.guna2Panel2.Controls.Add(this.dgvDocgia);
-            this.guna2Panel2.Controls.Add(this.btnBefore);
-            this.guna2Panel2.Controls.Add(this.lbChimuc);
-            this.guna2Panel2.Controls.Add(this.label4);
-            this.guna2Panel2.Controls.Add(this.cbSohang);
-            this.guna2Panel2.Location = new System.Drawing.Point(-1, 220);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.ShadowDecoration.Parent = this.guna2Panel2;
-            this.guna2Panel2.Size = new System.Drawing.Size(1144, 353);
-            this.guna2Panel2.TabIndex = 20;
+            this.guna2Panel3.Controls.Add(this.lbSonguoidung);
+            this.guna2Panel3.Controls.Add(this.btnLast);
+            this.guna2Panel3.Controls.Add(this.cbSohang);
+            this.guna2Panel3.Controls.Add(this.label4);
+            this.guna2Panel3.Controls.Add(this.btnFirst);
+            this.guna2Panel3.Controls.Add(this.lbChimuc);
+            this.guna2Panel3.Controls.Add(this.btnBefore);
+            this.guna2Panel3.Controls.Add(this.btnAfter);
+            this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.guna2Panel3.Location = new System.Drawing.Point(0, 543);
+            this.guna2Panel3.Name = "guna2Panel3";
+            this.guna2Panel3.ShadowDecoration.Parent = this.guna2Panel3;
+            this.guna2Panel3.Size = new System.Drawing.Size(1145, 57);
+            this.guna2Panel3.TabIndex = 21;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgvDocgia);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 268);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1145, 275);
+            this.panel1.TabIndex = 22;
             // 
             // frmQuanlydocgia
             // 
@@ -1014,8 +1048,9 @@ namespace QuanLyThuVien.Taikhoan
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1145, 573);
-            this.Controls.Add(this.guna2Panel2);
+            this.ClientSize = new System.Drawing.Size(1145, 600);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.guna2Panel3);
             this.Controls.Add(this.guna2Panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -1026,8 +1061,9 @@ namespace QuanLyThuVien.Taikhoan
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocgia)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
-            this.guna2Panel2.ResumeLayout(false);
-            this.guna2Panel2.PerformLayout();
+            this.guna2Panel3.ResumeLayout(false);
+            this.guna2Panel3.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1059,7 +1095,6 @@ namespace QuanLyThuVien.Taikhoan
         private System.Windows.Forms.Label label6;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgaysinh;
         private System.Windows.Forms.Label label5;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2ComboBox cbGioitinh;
         private Guna.UI2.WinForms.Guna2TextBox tbLophoc;
         private System.Windows.Forms.Label label8;
@@ -1077,5 +1112,7 @@ namespace QuanLyThuVien.Taikhoan
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgaytaothe;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManhanvientaothe;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTendangnhap;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+        private System.Windows.Forms.Panel panel1;
     }
 }

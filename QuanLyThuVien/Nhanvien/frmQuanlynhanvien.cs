@@ -26,6 +26,77 @@ namespace QuanLyThuVien.Taikhoan
             InitializeComponent();
         }
 
+        private void frmQuanlynhanvien_Load(object sender, EventArgs e)
+        {
+            cbSohang.SelectedIndex = 2;
+            dtpNgaysinh.CustomFormat = "dd/MM/yyyy";
+            loadComboboxTendangnhap();
+        }
+
+        private void loadComboboxTendangnhap()
+        {
+            try
+            {
+                DataTable dt = DB.getData("SELECT tendangnhap FROM NguoiDung " +
+                    "WHERE tendangnhap NOT IN(SELECT tendangnhap FROM NhanVien where tendangnhap IS NOT NULL) " +
+                    "AND NOT tendangnhap = 'admin' AND loainguoidung = 'thuthu'"
+                );
+                cbTendangnhap.Items.Clear();
+                usernames.Clear();
+                foreach (DataRow row in dt.Rows)
+                {
+                    usernames.Add(row["tendangnhap"].ToString());
+                }
+                cbTendangnhap.Items.AddRange(usernames.ToArray());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lấy dữ liệu thất bại", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void loadData()
+        {
+            Tuple<int, DataTable> result = Nhanvien.searchNhanvien(pageSize, pageIndex, keySearch);
+            DataTable employees = result.Item2;
+            lbSonguoidung.Text = "Tổng số nhân viên: " + result.Item1;
+            totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
+            employees.Columns.Add("stt", typeof(int));
+            employees.Columns["stt"].SetOrdinal(0); // Set vị trí cho cột stt làm cột đầu trong Datatable
+            for (int i = 0; i < employees.Rows.Count; i++)
+            {
+                employees.Rows[i]["stt"] = ((pageIndex - 1) * pageSize) + i + 1;
+            }
+            dgvNhanvien.DataSource = employees;
+            UpdatePager();
+            if (pageIndex == 1)
+            {
+                btnFirst.Enabled = false;
+                btnBefore.Enabled = false;
+            }
+            else
+            {
+                btnFirst.Enabled = true;
+                btnBefore.Enabled = true;
+            }
+            if (pageIndex == totalPages || totalPages == 0)
+            {
+                btnLast.Enabled = false;
+                btnAfter.Enabled = false;
+            }
+            else
+            {
+                btnLast.Enabled = true;
+                btnAfter.Enabled = true;
+            }
+            if (keySearch != "" && result.Item1 == 0) MessageBox.Show("Không tìm thấy bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void UpdatePager()
+        {
+            lbChimuc.Text = (pageIndex > totalPages ? 0 : pageIndex) + "/" + totalPages;
+        }
+
         private void btnLast_Click(object sender, EventArgs e)
         {
             if (pageIndex < totalPages)
@@ -157,76 +228,6 @@ namespace QuanLyThuVien.Taikhoan
         {
             SwitchMode(CHUCNANG.ADD);
             dgvNhanvien.Enabled = false;
-        }
-
-        private void frmQuanlynhanvien_Load(object sender, EventArgs e)
-        {
-            cbSohang.SelectedIndex = 2;
-            dtpNgaysinh.CustomFormat = "dd/MM/yyyy";
-            loadComboboxTendangnhap();
-        }
-
-        private void loadComboboxTendangnhap()
-        {
-            try
-            {
-                DataTable dt = DB.getData("SELECT tendangnhap FROM NguoiDung " +
-                    "WHERE tendangnhap NOT IN(SELECT tendangnhap FROM NhanVien where tendangnhap IS NOT NULL) " +
-                    "AND NOT tendangnhap = 'admin' AND loainguoidung = 'thuthu'"
-                );
-                cbTendangnhap.Items.Clear();
-                usernames.Clear();
-                foreach (DataRow row in dt.Rows)
-                {
-                    usernames.Add(row["tendangnhap"].ToString());
-                }
-                cbTendangnhap.Items.AddRange(usernames.ToArray());
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Lấy dữ liệu tên đăng nhập thất bại", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void loadData()
-        {
-            Tuple<int, DataTable> result = Nhanvien.searchNhanvien(pageSize, pageIndex, keySearch);
-            DataTable employees = result.Item2;
-            lbSonguoidung.Text = "Tổng số nhân viên: " + result.Item1;
-            totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
-            employees.Columns.Add("stt", typeof(int));
-            employees.Columns["stt"].SetOrdinal(0); // Set vị trí cho cột stt làm cột đầu trong Datatable
-            for (int i = 0; i < employees.Rows.Count; i++)
-            {
-                employees.Rows[i]["stt"] = ((pageIndex - 1) * pageSize) + i + 1;
-            }
-            dgvNhanvien.DataSource = employees;
-            UpdatePager();
-            if (pageIndex == 1)
-            {
-                btnFirst.Enabled = false;
-                btnBefore.Enabled = false;
-            }
-            else
-            {
-                btnFirst.Enabled = true;
-                btnBefore.Enabled = true;
-            }
-            if (pageIndex == totalPages)
-            {
-                btnLast.Enabled = false;
-                btnAfter.Enabled = false;
-            }
-            else
-            {
-                btnLast.Enabled = true;
-                btnAfter.Enabled = true;
-            }
-        }
-
-        private void UpdatePager()
-        {
-            lbChimuc.Text = pageIndex + "/" + totalPages;
         }
 
         private void dgvNhanvien_SelectionChanged(object sender, EventArgs e)

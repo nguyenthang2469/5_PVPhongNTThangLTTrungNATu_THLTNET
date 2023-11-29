@@ -34,6 +34,15 @@ namespace QuanLyThuVien
                 case 2:
                     addFormContent(new frmQuanlydocgia(), tabDocgia);
                     break;
+                case 3:
+                    addFormContent(new frmQuanlysach(), tabSach);
+                    break;
+                case 4:
+                    addFormContent(new frmQuanlydocgia(), tabTacgia);
+                    break;
+                case 5:
+                    addFormContent(new frmQuanlydocgia(), tabNhaxuatban);
+                    break;
             }
         }
 
@@ -45,11 +54,11 @@ namespace QuanLyThuVien
             frm.FormBorderStyle = FormBorderStyle.None;
             if (frm.Width > 900)
             {
-                frmTrangchu.formtrangchu.Width = frm.Width + 205;
+                frmTrangchuAdmin.formtrangchu.Width = frm.Width + 205;
             }
             if (frm.Height > 600)
             {
-                frmTrangchu.formtrangchu.Height = frm.Height + 53;
+                frmTrangchuAdmin.formtrangchu.Height = frm.Height + 53;
             }
             frm.Dock = DockStyle.Fill;
             tabPage.Controls.Add(frm);
