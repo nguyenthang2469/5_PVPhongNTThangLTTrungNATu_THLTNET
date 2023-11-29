@@ -76,6 +76,18 @@
     <Compile Include="frmQuanly.Designer.cs">
       <DependentUpon>frmQuanly.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmQuanlynhaxuatban.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanlynhaxuatban.Designer.cs">
+      <DependentUpon>frmQuanlynhaxuatban.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanlytacgia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanlytacgia.Designer.cs">
+      <DependentUpon>frmQuanlytacgia.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmQuanlysach.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +152,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanly.resx">
       <DependentUpon>frmQuanly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanlynhaxuatban.resx">
+      <DependentUpon>frmQuanlynhaxuatban.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanlytacgia.resx">
+      <DependentUpon>frmQuanlytacgia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanlysach.resx">
       <DependentUpon>frmQuanlysach.cs</DependentUpon>

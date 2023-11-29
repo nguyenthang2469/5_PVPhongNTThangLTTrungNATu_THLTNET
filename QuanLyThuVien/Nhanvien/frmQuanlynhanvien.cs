@@ -69,27 +69,42 @@ namespace QuanLyThuVien.Taikhoan
             }
             dgvNhanvien.DataSource = employees;
             UpdatePager();
-            if (pageIndex == 1)
+            showButtonPage();
+            if (keySearch != "" && result.Item1 == 0) MessageBox.Show("Không tìm thấy bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void showButtonPage(bool isShow = true)
+        {
+            if (isShow)
+            {
+                if (pageIndex == 1)
+                {
+                    btnFirst.Enabled = false;
+                    btnBefore.Enabled = false;
+                }
+                else
+                {
+                    btnFirst.Enabled = true;
+                    btnBefore.Enabled = true;
+                }
+                if (pageIndex == totalPages || totalPages == 0)
+                {
+                    btnLast.Enabled = false;
+                    btnAfter.Enabled = false;
+                }
+                else
+                {
+                    btnLast.Enabled = true;
+                    btnAfter.Enabled = true;
+                }
+            }
+            else
             {
                 btnFirst.Enabled = false;
-                btnBefore.Enabled = false;
-            }
-            else
-            {
-                btnFirst.Enabled = true;
-                btnBefore.Enabled = true;
-            }
-            if (pageIndex == totalPages || totalPages == 0)
-            {
                 btnLast.Enabled = false;
+                btnBefore.Enabled = false;
                 btnAfter.Enabled = false;
             }
-            else
-            {
-                btnLast.Enabled = true;
-                btnAfter.Enabled = true;
-            }
-            if (keySearch != "" && result.Item1 == 0) MessageBox.Show("Không tìm thấy bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void UpdatePager()
@@ -103,7 +118,6 @@ namespace QuanLyThuVien.Taikhoan
             {
                 pageIndex = totalPages;
                 loadData();
-                UpdatePager();
             }
         }
 
@@ -113,7 +127,6 @@ namespace QuanLyThuVien.Taikhoan
             {
                 pageIndex++;
                 loadData();
-                UpdatePager();
             }
         }
 
@@ -123,7 +136,6 @@ namespace QuanLyThuVien.Taikhoan
             {
                 pageIndex--;
                 loadData();
-                UpdatePager();
             }
         }
 
@@ -133,7 +145,6 @@ namespace QuanLyThuVien.Taikhoan
             {
                 pageIndex = 1;
                 loadData();
-                UpdatePager();
             }
         }
 
@@ -293,6 +304,7 @@ namespace QuanLyThuVien.Taikhoan
             cbGioitinh.Enabled = enabled;
             cbTendangnhap.Enabled = enabled;
             tbTimkiem.Enabled = !enabled;
+            cbSohang.Enabled = !enabled;
         }
 
         private void setStateButton(bool state)
@@ -313,6 +325,7 @@ namespace QuanLyThuVien.Taikhoan
             btnXoa.Enabled = true;
             btnTimkiem.Enabled = state;
             btnThem.Visible = state;
+            showButtonPage(state);
         }
 
         private void SwitchMode(int chucNang)

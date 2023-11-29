@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyThuVien.CSDL
 {
-    class Tacgia : DB
+    class TacGia : DB
     {
         public static DataTable getAllTacgia()
         {
@@ -121,7 +121,7 @@ namespace QuanLyThuVien.CSDL
             {
                 conn.Open();
                 string sql = $"UPDATE TacGia SET " +
-                    "tentacgia = @tentacgia, " +
+                    "tentacgia = @tentacgia " +
                     "WHERE matacgia = @matacgia";
                 using (SqlCommand cm = new SqlCommand(sql, conn))
                 {
