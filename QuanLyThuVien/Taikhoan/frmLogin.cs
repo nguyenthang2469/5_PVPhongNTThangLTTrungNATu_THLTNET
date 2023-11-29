@@ -84,13 +84,13 @@ namespace QuanLyThuVien.Taikhoan
                         Form frm = null;
                         if(dr["loainguoidung"].ToString().Equals("quanly"))
                         {
-                            frm = new frmTrangchu(dr["tendangnhap"].ToString());
+                            frm = new frmTrangchuAdmin(dr["tendangnhap"].ToString());
                         } else if(dr["loainguoidung"].ToString().Equals("thuthu"))
                         {
-                            frm = new frmTrangchu();
+                            frm = new frmTrangchuAdmin();
                         } else
                         {
-                            frm = new frmTrangchu();
+                            frm = new frmTrangchuAdmin();
                         }
                         this.Hide();
                         logout = false;

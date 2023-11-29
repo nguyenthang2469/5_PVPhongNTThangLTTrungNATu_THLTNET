@@ -11,19 +11,19 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien
 {
-    public partial class frmTrangchu : Form
+    public partial class frmTrangchuAdmin : Form
     {
         public static Form formtrangchu;
         private bool shouldExit = false;
         private string tendangnhap = string.Empty;
         private bool isSidebarVisible = true;
 
-        public frmTrangchu()
+        public frmTrangchuAdmin()
         {
             InitializeComponent();
         }
 
-        public frmTrangchu(string tendangnhap)
+        public frmTrangchuAdmin(string tendangnhap)
         {
             InitializeComponent();
             this.tendangnhap = tendangnhap;

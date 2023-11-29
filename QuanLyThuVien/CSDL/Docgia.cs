@@ -22,7 +22,6 @@ namespace QuanLyThuVien.CSDL
                     SqlDataAdapter ad = new SqlDataAdapter(cm);
                     ad.Fill(dt);
                 }
-                conn.Close();
             }
             return dt;
         }

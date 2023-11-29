@@ -18,14 +18,16 @@ namespace QuanLyThuVien.Taikhoan
         private int pageSize = 10; 
         private int totalPages = 0;
         private string keySearch = "";
+        private string loainguoidungTimkiem = "";
         private string loainguoidung = "quanly";
         DataGridViewRow selectedRow = null;
-
-        Dictionary<string, string> roles = new Dictionary<string, string>
+        SortedDictionary<string, string> roles = new SortedDictionary<string, string>
         {
             { "thuthu", "Thủ thư" },
             { "docgia", "Độc giả" }
         };
+
+        
         public frmQuanlytaikhoan()
         {
             InitializeComponent();
@@ -35,6 +37,55 @@ namespace QuanLyThuVien.Taikhoan
         {
             InitializeComponent();
             this.loainguoidung = loainguoidung;
+        }
+
+        private void frmQuanlytaikhoan_Load(object sender, EventArgs e)
+        {
+            cbSohang.SelectedIndex = 2;
+            cbLoainguoidung.DataSource = new BindingSource(roles, null);
+            cbLoainguoidung.DisplayMember = "Value";
+            cbLoainguoidung.ValueMember = "Key";
+            roles.Add("-1", "Loại người dùng");
+            cbTimkiemloainguoidung.DataSource = new BindingSource(roles, null);
+            cbTimkiemloainguoidung.DisplayMember = "Value";
+            cbTimkiemloainguoidung.ValueMember = "Key";
+        }
+
+        private void loadData()
+        {
+            Tuple<int, DataTable> result = Account.searchAccount(loainguoidung, pageSize, pageIndex, keySearch, loainguoidungTimkiem);
+            DataTable accounts = result.Item2;
+            lbSonguoidung.Text = "Tổng số người dùng: " + result.Item1;
+            totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
+
+            dgvNguoidung.DataSource = accounts;
+            UpdatePager();
+            if (pageIndex == 1)
+            {
+                btnFirst.Enabled = false;
+                btnBefore.Enabled = false;
+            }
+            else
+            {
+                btnFirst.Enabled = true;
+                btnBefore.Enabled = true;
+            }
+            if (pageIndex == totalPages || totalPages == 0)
+            {
+                btnLast.Enabled = false;
+                btnAfter.Enabled = false;
+            }
+            else
+            {
+                btnLast.Enabled = true;
+                btnAfter.Enabled = true;
+            }
+            if (keySearch != "" && result.Item1 == 0) MessageBox.Show("Không tìm thấy bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void UpdatePager()
+        {
+            lbChimuc.Text = (pageIndex > totalPages ? 0 : pageIndex) + "/" + totalPages;
         }
 
         private void btnLast_Click(object sender, EventArgs e)
@@ -167,51 +218,6 @@ namespace QuanLyThuVien.Taikhoan
         {
             SwitchMode(CHUCNANG.ADD);
             dgvNguoidung.Enabled = false;
-        }
-
-        private void frmQuanlytaikhoan_Load(object sender, EventArgs e)
-        {
-            cbSohang.SelectedIndex = 2;
-            cbLoainguoidung.DataSource = new BindingSource(roles, null);
-            cbLoainguoidung.DisplayMember = "Value";
-            cbLoainguoidung.ValueMember = "Key";
-        }
-
-        private void loadData()
-        {
-            Tuple<int, DataTable> result = Account.searchAccount(loainguoidung, pageSize, pageIndex, keySearch);
-            DataTable accounts = result.Item2;
-            lbSonguoidung.Text = "Tổng số người dùng: " + result.Item1;
-            totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
-            if (result.Item1 == 0) MessageBox.Show("Không tìm thấy bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            dgvNguoidung.DataSource = accounts;
-            UpdatePager();
-            if (pageIndex == 1)
-            {
-                btnFirst.Enabled = false;
-                btnBefore.Enabled = false;
-            }
-            else
-            {
-                btnFirst.Enabled = true;
-                btnBefore.Enabled = true;
-            }
-            if (pageIndex == totalPages)
-            {
-                btnLast.Enabled = false;
-                btnAfter.Enabled = false;
-            }
-            else
-            {
-                btnLast.Enabled = true;
-                btnAfter.Enabled = true;
-            }
-        }
-
-        private void UpdatePager()
-        {
-            lbChimuc.Text = pageIndex + "/" + totalPages;
         }
 
         private void dgvNguoidung_SelectionChanged(object sender, EventArgs e)
@@ -356,7 +362,7 @@ namespace QuanLyThuVien.Taikhoan
             loadData();
         }
 
-        private void cbSohang_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void cbSohang_SelectedIndexChanged(object sender, EventArgs e)
         {
             pageSize = int.Parse((sender as ComboBox).SelectedItem.ToString());
             pageIndex = 1;
@@ -377,6 +383,16 @@ namespace QuanLyThuVien.Taikhoan
             {
                 btnTimkiem.PerformClick();
             }
+        }
+
+        private void cbTimkiemloainguoidung_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbTimkiemloainguoidung.SelectedIndex != 0)
+            {
+                this.loainguoidungTimkiem = (string)cbTimkiemloainguoidung.SelectedValue;
+            }
+            else this.loainguoidungTimkiem = "";
+            loadData();
         }
     }
 }

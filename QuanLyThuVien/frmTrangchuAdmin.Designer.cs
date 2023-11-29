@@ -1,7 +1,7 @@
 ﻿
 namespace QuanLyThuVien
 {
-    partial class frmTrangchu
+    partial class frmTrangchuAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace QuanLyThuVien
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTrangchu));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTrangchuAdmin));
             this.guna2Panel_left = new Guna.UI2.WinForms.Guna2Panel();
             this.lbTendangnhap = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lbXinchao = new Guna.UI2.WinForms.Guna2HtmlLabel();
