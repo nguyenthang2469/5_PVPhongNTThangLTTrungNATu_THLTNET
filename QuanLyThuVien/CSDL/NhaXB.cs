@@ -121,7 +121,7 @@ namespace QuanLyThuVien.CSDL
             {
                 conn.Open();
                 string sql = $"UPDATE NhaXuatBan SET " +
-                    "tennhaxuatban = @tennhaxuatban, " +
+                    "tennhaxuatban = @tennhaxuatban " +
                     "WHERE manhaxuatban = @manhaxuatban";
                 using (SqlCommand cm = new SqlCommand(sql, conn))
                 {

@@ -54,33 +54,53 @@ namespace QuanLyThuVien.Taikhoan
         private void loadData()
         {
             Tuple<int, DataTable> result = Account.searchAccount(loainguoidung, pageSize, pageIndex, keySearch, loainguoidungTimkiem);
-            DataTable accounts = result.Item2;
+            DataTable dt = result.Item2;
             lbSonguoidung.Text = "Tổng số người dùng: " + result.Item1;
             totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
-
-            dgvNguoidung.DataSource = accounts;
+            dt.Columns.Add("stt", typeof(int));
+            dt.Columns["stt"].SetOrdinal(0); // Set vị trí cho cột stt làm cột đầu trong Datatable
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[i]["stt"] = ((pageIndex - 1) * pageSize) + i + 1;
+            }
+            dgvNguoidung.DataSource = dt;
             UpdatePager();
-            if (pageIndex == 1)
+            showButtonPage();
+            if (keySearch != "" && result.Item1 == 0) MessageBox.Show("Không tìm thấy bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void showButtonPage(bool isShow = true)
+        {
+            if (isShow)
+            {
+                if (pageIndex == 1)
+                {
+                    btnFirst.Enabled = false;
+                    btnBefore.Enabled = false;
+                }
+                else
+                {
+                    btnFirst.Enabled = true;
+                    btnBefore.Enabled = true;
+                }
+                if (pageIndex == totalPages || totalPages == 0)
+                {
+                    btnLast.Enabled = false;
+                    btnAfter.Enabled = false;
+                }
+                else
+                {
+                    btnLast.Enabled = true;
+                    btnAfter.Enabled = true;
+                }
+            }
+            else
             {
                 btnFirst.Enabled = false;
-                btnBefore.Enabled = false;
-            }
-            else
-            {
-                btnFirst.Enabled = true;
-                btnBefore.Enabled = true;
-            }
-            if (pageIndex == totalPages || totalPages == 0)
-            {
                 btnLast.Enabled = false;
+                btnBefore.Enabled = false;
                 btnAfter.Enabled = false;
             }
-            else
-            {
-                btnLast.Enabled = true;
-                btnAfter.Enabled = true;
-            }
-            if (keySearch != "" && result.Item1 == 0) MessageBox.Show("Không tìm thấy bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void UpdatePager()
@@ -94,7 +114,6 @@ namespace QuanLyThuVien.Taikhoan
             {
                 pageIndex = totalPages;
                 loadData();
-                UpdatePager();
             }
         }
 
@@ -104,7 +123,6 @@ namespace QuanLyThuVien.Taikhoan
             {
                 pageIndex++;
                 loadData();
-                UpdatePager();
             }
         }
 
@@ -114,7 +132,6 @@ namespace QuanLyThuVien.Taikhoan
             {
                 pageIndex--;
                 loadData();
-                UpdatePager();
             }
         }
 
@@ -124,7 +141,6 @@ namespace QuanLyThuVien.Taikhoan
             {
                 pageIndex = 1;
                 loadData();
-                UpdatePager();
             }
         }
 
@@ -264,6 +280,7 @@ namespace QuanLyThuVien.Taikhoan
                 cbLoainguoidung.Enabled = enabled;
             }
             tbTimkiem.Enabled = !enabled;
+            cbSohang.Enabled = !enabled;
         }
 
         private void setStateButton(bool state)
@@ -284,6 +301,7 @@ namespace QuanLyThuVien.Taikhoan
             btnXoa.Enabled = true;
             btnTimkiem.Enabled = state;
             btnThem.Visible = state;
+            showButtonPage(state);
         }
 
         private void SwitchMode(int chucNang)

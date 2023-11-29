@@ -38,10 +38,10 @@ namespace QuanLyThuVien
                     addFormContent(new frmQuanlysach(), tabSach);
                     break;
                 case 4:
-                    addFormContent(new frmQuanlydocgia(), tabTacgia);
+                    addFormContent(new frmQuanlytacgia(), tabTacgia);
                     break;
                 case 5:
-                    addFormContent(new frmQuanlydocgia(), tabNhaxuatban);
+                    addFormContent(new frmQuanlynhaxuatban(), tabNhaxuatban);
                     break;
             }
         }
