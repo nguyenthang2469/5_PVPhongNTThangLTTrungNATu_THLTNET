@@ -86,6 +86,7 @@ namespace QuanLyThuVien.Taikhoan
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnXuatexcel = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSach)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoluong)).BeginInit();
@@ -538,6 +539,7 @@ namespace QuanLyThuVien.Taikhoan
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.White;
+            this.guna2Panel1.Controls.Add(this.btnXuatexcel);
             this.guna2Panel1.Controls.Add(this.tbTimkiem);
             this.guna2Panel1.Controls.Add(this.nudSoluong);
             this.guna2Panel1.Controls.Add(this.btnTimkiem);
@@ -951,6 +953,33 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2Panel3.Size = new System.Drawing.Size(1145, 325);
             this.guna2Panel3.TabIndex = 20;
             // 
+            // btnXuatexcel
+            // 
+            this.btnXuatexcel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnXuatexcel.Animated = true;
+            this.btnXuatexcel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnXuatexcel.BorderRadius = 5;
+            this.btnXuatexcel.BorderThickness = 1;
+            this.btnXuatexcel.CheckedState.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXuatexcel.CustomImages.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.FillColor = System.Drawing.Color.Transparent;
+            this.btnXuatexcel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatexcel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnXuatexcel.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnXuatexcel.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnXuatexcel.HoverState.ForeColor = System.Drawing.Color.White;
+            this.btnXuatexcel.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.HoverState.Image")));
+            this.btnXuatexcel.HoverState.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.Image")));
+            this.btnXuatexcel.ImageSize = new System.Drawing.Size(25, 25);
+            this.btnXuatexcel.Location = new System.Drawing.Point(23, 179);
+            this.btnXuatexcel.Name = "btnXuatexcel";
+            this.btnXuatexcel.ShadowDecoration.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Size = new System.Drawing.Size(80, 30);
+            this.btnXuatexcel.TabIndex = 27;
+            this.btnXuatexcel.Click += new System.EventHandler(this.btnXuatexcel_Click);
+            // 
             // frmQuanlysach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1021,5 +1050,6 @@ namespace QuanLyThuVien.Taikhoan
         private System.Windows.Forms.DataGridViewTextBoxColumn colTennhaxuatban;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgayxuatban;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoluong;
+        private Guna.UI2.WinForms.Guna2Button btnXuatexcel;
     }
 }

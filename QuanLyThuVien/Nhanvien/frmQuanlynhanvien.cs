@@ -1,10 +1,12 @@
-﻿using QuanLyThuVien.CSDL;
+﻿using Microsoft.Office.Interop.Excel;
+using QuanLyThuVien.CSDL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,7 +39,7 @@ namespace QuanLyThuVien.Taikhoan
         {
             try
             {
-                DataTable dt = DB.getData("SELECT tendangnhap FROM NguoiDung " +
+                System.Data.DataTable dt = DB.getData("SELECT tendangnhap FROM NguoiDung " +
                     "WHERE tendangnhap NOT IN(SELECT tendangnhap FROM NhanVien where tendangnhap IS NOT NULL) " +
                     "AND NOT tendangnhap = 'admin' AND loainguoidung = 'thuthu'"
                 );
@@ -57,8 +59,8 @@ namespace QuanLyThuVien.Taikhoan
 
         private void loadData()
         {
-            Tuple<int, DataTable> result = Nhanvien.searchNhanvien(pageSize, pageIndex, keySearch);
-            DataTable employees = result.Item2;
+            Tuple<int, System.Data.DataTable> result = Nhanvien.searchNhanvien(pageSize, pageIndex, keySearch);
+            System.Data.DataTable employees = result.Item2;
             lbSonguoidung.Text = "Tổng số nhân viên: " + result.Item1;
             totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
             employees.Columns.Add("stt", typeof(int));
@@ -440,6 +442,68 @@ namespace QuanLyThuVien.Taikhoan
             {
                 DateTime ngaySinh = (DateTime)e.Value;
                 e.Value = ngaySinh.ToString("dd/MM/yyyy");
+            }
+        }
+
+        private void btnXuatexcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Data.DataTable dataTable = Nhanvien.exportToExcel(keySearch);
+                // Tạo một ứng dụng Excel mới
+                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+                if (excelApp == null)
+                {
+                    MessageBox.Show("Excel chưa được cài trên máy của bạn", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Tạo một workbook mới và một worksheet mới
+                Workbook workbook = excelApp.Workbooks.Add();
+                Worksheet worksheet = (Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Danh sách nhân viên";
+
+                // Ghi dữ liệu từ DataTable vào ExcelWorksheet
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1] = dataTable.Columns[i].ColumnName;
+
+                    // Thiết lập định dạng cho cột số điện thoại
+                    if (dataTable.Columns[i].ColumnName == "Số điện thoại")
+                    {
+                        Range column = worksheet.Columns[i + 1];
+                        column.NumberFormat = "0000000000"; // 10 chữ số, hiển thị số 0 ở đầu
+                    }
+                }
+
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataTable.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dataTable.Rows[i][j];
+                    }
+                }
+                worksheet.Columns.AutoFit();
+
+                // Lưu workbook vào một file Excel
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Export to Excel";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    workbook.SaveAs(saveFileDialog.FileName);
+                    MessageBox.Show("Xuất Excel thành công!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // Đóng workbook và ứng dụng Excel
+                workbook.Close(false);
+                Marshal.ReleaseComObject(workbook); // Giải phóng tài nguyên COM
+                excelApp.Quit();
+                Marshal.ReleaseComObject(excelApp);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Xảy ra lỗi khi export: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

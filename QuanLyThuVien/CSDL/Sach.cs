@@ -95,6 +95,43 @@ namespace QuanLyThuVien.CSDL
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
+        public static DataTable exportToExcel(string keyword = "")
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = connect())
+            {
+                conn.Open();
+                string sqlSelect = "SELECT masach as 'Mã sách', " +
+                                    "tensach as 'Tên sách', " +
+                                    "loaisach as 'Loại sách', " +
+                                    "tentacgia as 'Tên tác giả', " +
+                                    "tennhaxuatban as 'Tên nhà xuất bản', " +
+                                    "FORMAT(ngayxuatban, 'dd/MM/yyyy') as 'Ngày xuất bản', " +
+                                    "soluong as 'Số lượng' FROM Sach s " +
+                                    "INNER JOIN TacGia tg ON s.matacgia = tg.matacgia " +
+                                    "INNER JOIN NhaXuatBan nxb ON s.manhaxuatban = nxb.manhaxuatban";
+
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    sqlSelect += " WHERE masach LIKE @keyword OR tensach LIKE @keyword OR loaisach LIKE @keyword OR tg.tentacgia LIKE @keyword OR nxb.tennhaxuatban LIKE @keyword";
+                }
+
+                using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
+                {
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
         public static bool createSach(
             string masach,
             string tensach,

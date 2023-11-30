@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
 
 namespace QuanLyThuVien.Taikhoan
 {
@@ -53,8 +55,8 @@ namespace QuanLyThuVien.Taikhoan
 
         private void loadData()
         {
-            Tuple<int, DataTable> result = Account.searchAccount(loainguoidung, pageSize, pageIndex, keySearch, loainguoidungTimkiem);
-            DataTable dt = result.Item2;
+            Tuple<int, System.Data.DataTable> result = Account.searchAccount(loainguoidung, pageSize, pageIndex, keySearch, loainguoidungTimkiem);
+            System.Data.DataTable dt = result.Item2;
             lbSonguoidung.Text = "Tổng số người dùng: " + result.Item1;
             totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
             dt.Columns.Add("stt", typeof(int));
@@ -411,6 +413,61 @@ namespace QuanLyThuVien.Taikhoan
             }
             else this.loainguoidungTimkiem = "";
             loadData();
+        }
+
+        private void btnXuatexcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Data.DataTable dataTable = Account.exportToExcel(loainguoidung, keySearch, loainguoidungTimkiem);
+                // Tạo một ứng dụng Excel mới
+                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+                if (excelApp == null)
+                {
+                    MessageBox.Show("Excel chưa được cài trên máy của bạn", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Tạo một workbook mới và một worksheet mới
+                Workbook workbook = excelApp.Workbooks.Add();
+                Worksheet worksheet = (Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Danh sách người dùng";
+
+                // Ghi dữ liệu từ DataTable vào ExcelWorksheet
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1] = dataTable.Columns[i].ColumnName;
+                }
+
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataTable.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dataTable.Rows[i][j];
+                    }
+                }
+                worksheet.Columns.AutoFit();
+
+                // Lưu workbook vào một file Excel
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Export to Excel";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    workbook.SaveAs(saveFileDialog.FileName);
+                    MessageBox.Show("Xuất Excel thành công!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // Đóng workbook và ứng dụng Excel
+                workbook.Close(false);
+                Marshal.ReleaseComObject(workbook); // Giải phóng tài nguyên COM
+                excelApp.Quit();
+                Marshal.ReleaseComObject(excelApp);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Xảy ra lỗi khi export: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

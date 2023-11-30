@@ -91,6 +91,45 @@ namespace QuanLyThuVien.CSDL
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
+        public static DataTable exportToExcel(string keyword = "")
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = connect())
+            {
+                conn.Open();
+
+                string sqlSelect = "SELECT madocgia as 'Mã độc giả', " +
+                                "tendocgia as 'Tên độc giả', " +
+                                "FORMAT(dg.ngaysinh, 'dd/MM/yyyy') as 'Ngày sinh', " +
+                                "dg.gioitinh as 'Giới tính', " +
+                                "diachi as 'Địa chỉ', " +
+                                "lophoc as 'Lớp học', " +
+                                "FORMAT(ngaytaothe, 'dd/MM/yyyy') as 'Ngày tạo thẻ', " +
+                                "manhanvientaothe as 'Mã nhân viên tạo thẻ', " +
+                                "nv.tennhanvien as 'Tên nhân viên tạo thẻ' FROM DocGia dg " +
+                                "INNER JOIN NhanVien nv ON nv.manhanvien = dg.manhanvientaothe";
+
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    sqlSelect += " WHERE madocgia LIKE @keyword OR tendocgia LIKE @keyword OR lophoc LIKE @keyword OR manhanvientaothe LIKE @keyword OR tendangnhap LIKE @keyword";
+                }
+
+                using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
+                {
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
         public static DataRow getDocgiaByTendangnhap(string tendangnhap)
         {
             DataTable dt = new DataTable();

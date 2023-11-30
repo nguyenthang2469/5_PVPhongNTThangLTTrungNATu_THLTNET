@@ -92,6 +92,40 @@ namespace QuanLyThuVien.CSDL
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
+        public static DataTable exportToExcel(string keyword = "")
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = connect())
+            {
+                conn.Open();
+
+                string sqlSelect = "SELECT manhanvien as 'Mã nhân viên', " +
+                                "tennhanvien as 'Tên nhân viên', " +
+                                "FORMAT(ngaysinh, 'dd/MM/yyyy') as 'Ngày sinh', " +
+                                "gioitinh as 'Giới tính', " +
+                                "sodienthoai as 'Số điện thoại' FROM NhanVien";
+
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    sqlSelect += " WHERE manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword";
+                }
+
+                using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
+                {
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
         public static DataRow getNhanvienByTendangnhap(string tendangnhap)
         {
             DataTable dt = new DataTable();

@@ -96,6 +96,45 @@ namespace QuanLyThuVien.CSDL
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
+        public static DataTable exportToExcel(string loainguoidung, string keyword = "", string loainguoidungTimkiem = "")
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = connect())
+            {
+                conn.Open();
+                string condition = "";
+
+                if (loainguoidung.Equals("quanly"))
+                {
+                    condition = "loainguoidung <> 'quanly'";
+                }
+                else if (loainguoidung.Equals("thuthu"))
+                {
+                    condition = "loainguoidung = 'docgia'";
+                }
+                else
+                {
+                    return null;
+                }
+                if (loainguoidungTimkiem != "")
+                {
+                    condition += " AND loainguoidung = '" + loainguoidungTimkiem + "'";
+                }
+
+                string sql = $"SELECT * FROM NguoiDung WHERE tendangnhap like @keyword and {condition} ORDER BY tendangnhap";
+                using (SqlCommand cm = new SqlCommand(sql, conn))
+                {
+                    cm.Parameters.AddWithValue("@keyword", $"{keyword}%");
+
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
         public static bool CreateAccount(string tendangnhap, string matkhau, string loainguoidung)
         {
             int rowsAffected = 0;

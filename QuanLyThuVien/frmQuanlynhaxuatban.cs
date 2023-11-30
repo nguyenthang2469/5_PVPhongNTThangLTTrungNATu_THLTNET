@@ -1,10 +1,12 @@
-﻿using QuanLyThuVien.CSDL;
+﻿using Microsoft.Office.Interop.Excel;
+using QuanLyThuVien.CSDL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,8 +34,8 @@ namespace QuanLyThuVien.Taikhoan
 
         private void loadData()
         {
-            Tuple<int, DataTable> result = NhaXB.searchNhaXB(pageSize, pageIndex, keySearch);
-            DataTable dt = result.Item2;
+            Tuple<int, System.Data.DataTable> result = NhaXB.searchNhaXB(pageSize, pageIndex, keySearch);
+            System.Data.DataTable dt = result.Item2;
             lbSonguoidung.Text = "Tổng số nhà xuất bản: " + result.Item1;
             totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
             dt.Columns.Add("stt", typeof(int));
@@ -352,6 +354,61 @@ namespace QuanLyThuVien.Taikhoan
             if (e.KeyCode == Keys.Enter)
             {
                 btnSua.PerformClick();
+            }
+        }
+
+        private void btnXuatexcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Data.DataTable dataTable = NhaXB.exportToExcel(keySearch);
+                // Tạo một ứng dụng Excel mới
+                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+                if (excelApp == null)
+                {
+                    MessageBox.Show("Excel chưa được cài trên máy của bạn", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Tạo một workbook mới và một worksheet mới
+                Workbook workbook = excelApp.Workbooks.Add();
+                Worksheet worksheet = (Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Danh sách nhà xuất bản";
+
+                // Ghi dữ liệu từ DataTable vào ExcelWorksheet
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1] = dataTable.Columns[i].ColumnName;
+                }
+
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataTable.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dataTable.Rows[i][j];
+                    }
+                }
+                worksheet.Columns.AutoFit();
+
+                // Lưu workbook vào một file Excel
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Export to Excel";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    workbook.SaveAs(saveFileDialog.FileName);
+                    MessageBox.Show("Xuất Excel thành công!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // Đóng workbook và ứng dụng Excel
+                workbook.Close(false);
+                Marshal.ReleaseComObject(workbook); // Giải phóng tài nguyên COM
+                excelApp.Quit();
+                Marshal.ReleaseComObject(excelApp);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Xảy ra lỗi khi export: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

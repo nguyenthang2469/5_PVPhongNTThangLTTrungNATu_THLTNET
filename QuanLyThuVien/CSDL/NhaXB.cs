@@ -91,6 +91,36 @@ namespace QuanLyThuVien.CSDL
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
+        public static DataTable exportToExcel(string keyword = "")
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = connect())
+            {
+                conn.Open();
+
+                string sqlSelect = "SELECT manhaxuatban as 'Mã nhà xuất bản', tennhaxuatban as 'Tên nhà xuất bản' FROM NhaXuatBan";
+
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    sqlSelect += " WHERE manhaxuatban LIKE @keyword OR tennhaxuatban LIKE @keyword";
+                }
+
+                using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
+                {
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
         public static bool createNhaXB(
             string manhaxuatban,
             string tennhaxuatban

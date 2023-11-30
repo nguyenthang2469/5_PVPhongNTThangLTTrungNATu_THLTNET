@@ -91,6 +91,36 @@ namespace QuanLyThuVien.CSDL
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
+        public static DataTable exportToExcel(string keyword = "")
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = connect())
+            {
+                conn.Open();
+
+                string sqlSelect = "SELECT matacgia as 'Mã tác giả', tentacgia as 'Tên tác giả' FROM TacGia";
+
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    sqlSelect += " WHERE matacgia LIKE @keyword OR tentacgia LIKE @keyword";
+                }
+
+                using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
+                {
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
         public static bool createTacgia(
             string matacgia,
             string tentacgia

@@ -34,14 +34,17 @@ namespace QuanLyThuVien.Taikhoan
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanlynhaxuatban));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanlynhaxuatban));
             this.lbSonguoidung = new System.Windows.Forms.Label();
             this.btnTimkiem = new Guna.UI2.WinForms.Guna2Button();
             this.btnLast = new Guna.UI2.WinForms.Guna2Button();
             this.dgvNhaxuatban = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.colSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colManhaxuatban = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTennhaxuatban = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnFirst = new Guna.UI2.WinForms.Guna2Button();
             this.btnAfter = new Guna.UI2.WinForms.Guna2Button();
             this.btnBefore = new Guna.UI2.WinForms.Guna2Button();
@@ -49,6 +52,7 @@ namespace QuanLyThuVien.Taikhoan
             this.cbSohang = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lbChimuc = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.tbTimkiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnSua = new Guna.UI2.WinForms.Guna2Button();
             this.tbTennhaxuatban = new Guna.UI2.WinForms.Guna2TextBox();
             this.tbManhaxuatban = new Guna.UI2.WinForms.Guna2TextBox();
@@ -58,10 +62,7 @@ namespace QuanLyThuVien.Taikhoan
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
-            this.tbTimkiem = new Guna.UI2.WinForms.Guna2TextBox();
-            this.colSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colManhaxuatban = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTennhaxuatban = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnXuatexcel = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhaxuatban)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -217,6 +218,42 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvNhaxuatban.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvNhaxuatban.SelectionChanged += new System.EventHandler(this.dgvTacgia_SelectionChanged);
             // 
+            // colSTT
+            // 
+            this.colSTT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colSTT.DataPropertyName = "stt";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colSTT.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colSTT.HeaderText = "STT";
+            this.colSTT.Name = "colSTT";
+            this.colSTT.ReadOnly = true;
+            this.colSTT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSTT.Width = 66;
+            // 
+            // colManhaxuatban
+            // 
+            this.colManhaxuatban.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colManhaxuatban.DataPropertyName = "manhaxuatban";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colManhaxuatban.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colManhaxuatban.HeaderText = "Mã nhà xuất bản";
+            this.colManhaxuatban.MinimumWidth = 80;
+            this.colManhaxuatban.Name = "colManhaxuatban";
+            this.colManhaxuatban.ReadOnly = true;
+            this.colManhaxuatban.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colManhaxuatban.Width = 155;
+            // 
+            // colTennhaxuatban
+            // 
+            this.colTennhaxuatban.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTennhaxuatban.DataPropertyName = "tennhaxuatban";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colTennhaxuatban.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colTennhaxuatban.HeaderText = "Tên nhà xuất bản";
+            this.colTennhaxuatban.Name = "colTennhaxuatban";
+            this.colTennhaxuatban.ReadOnly = true;
+            this.colTennhaxuatban.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // btnFirst
             // 
             this.btnFirst.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -352,6 +389,7 @@ namespace QuanLyThuVien.Taikhoan
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.White;
+            this.guna2Panel1.Controls.Add(this.btnXuatexcel);
             this.guna2Panel1.Controls.Add(this.tbTimkiem);
             this.guna2Panel1.Controls.Add(this.btnTimkiem);
             this.guna2Panel1.Controls.Add(this.btnSua);
@@ -370,6 +408,41 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
             this.guna2Panel1.Size = new System.Drawing.Size(866, 175);
             this.guna2Panel1.TabIndex = 2;
+            // 
+            // tbTimkiem
+            // 
+            this.tbTimkiem.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbTimkiem.Animated = true;
+            this.tbTimkiem.AutoRoundedCorners = true;
+            this.tbTimkiem.BackColor = System.Drawing.Color.Transparent;
+            this.tbTimkiem.BorderRadius = 17;
+            this.tbTimkiem.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.tbTimkiem.DefaultText = "";
+            this.tbTimkiem.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.tbTimkiem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.tbTimkiem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbTimkiem.DisabledState.Parent = this.tbTimkiem;
+            this.tbTimkiem.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbTimkiem.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbTimkiem.FocusedState.Parent = this.tbTimkiem;
+            this.tbTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTimkiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbTimkiem.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.tbTimkiem.HoverState.Parent = this.tbTimkiem;
+            this.tbTimkiem.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbTimkiem.IconLeft")));
+            this.tbTimkiem.IconLeftOffset = new System.Drawing.Point(5, 0);
+            this.tbTimkiem.Location = new System.Drawing.Point(418, 116);
+            this.tbTimkiem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbTimkiem.Name = "tbTimkiem";
+            this.tbTimkiem.PasswordChar = '\0';
+            this.tbTimkiem.PlaceholderText = "Nhập từ khóa";
+            this.tbTimkiem.SelectedText = "";
+            this.tbTimkiem.ShadowDecoration.BorderRadius = 4;
+            this.tbTimkiem.ShadowDecoration.Parent = this.tbTimkiem;
+            this.tbTimkiem.Size = new System.Drawing.Size(337, 36);
+            this.tbTimkiem.TabIndex = 10;
+            this.tbTimkiem.TextOffset = new System.Drawing.Point(2, 0);
+            this.tbTimkiem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTimkiem_KeyDown);
             // 
             // btnSua
             // 
@@ -560,76 +633,32 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2Panel3.Size = new System.Drawing.Size(866, 345);
             this.guna2Panel3.TabIndex = 20;
             // 
-            // tbTimkiem
+            // btnXuatexcel
             // 
-            this.tbTimkiem.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbTimkiem.Animated = true;
-            this.tbTimkiem.AutoRoundedCorners = true;
-            this.tbTimkiem.BackColor = System.Drawing.Color.Transparent;
-            this.tbTimkiem.BorderRadius = 17;
-            this.tbTimkiem.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tbTimkiem.DefaultText = "";
-            this.tbTimkiem.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.tbTimkiem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.tbTimkiem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.tbTimkiem.DisabledState.Parent = this.tbTimkiem;
-            this.tbTimkiem.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.tbTimkiem.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbTimkiem.FocusedState.Parent = this.tbTimkiem;
-            this.tbTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTimkiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tbTimkiem.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
-            this.tbTimkiem.HoverState.Parent = this.tbTimkiem;
-            this.tbTimkiem.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbTimkiem.IconLeft")));
-            this.tbTimkiem.IconLeftOffset = new System.Drawing.Point(5, 0);
-            this.tbTimkiem.Location = new System.Drawing.Point(418, 116);
-            this.tbTimkiem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbTimkiem.Name = "tbTimkiem";
-            this.tbTimkiem.PasswordChar = '\0';
-            this.tbTimkiem.PlaceholderText = "Nhập từ khóa";
-            this.tbTimkiem.SelectedText = "";
-            this.tbTimkiem.ShadowDecoration.BorderRadius = 4;
-            this.tbTimkiem.ShadowDecoration.Parent = this.tbTimkiem;
-            this.tbTimkiem.Size = new System.Drawing.Size(337, 36);
-            this.tbTimkiem.TabIndex = 10;
-            this.tbTimkiem.TextOffset = new System.Drawing.Point(2, 0);
-            this.tbTimkiem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTimkiem_KeyDown);
-            // 
-            // colSTT
-            // 
-            this.colSTT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colSTT.DataPropertyName = "stt";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colSTT.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colSTT.HeaderText = "STT";
-            this.colSTT.Name = "colSTT";
-            this.colSTT.ReadOnly = true;
-            this.colSTT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSTT.Width = 66;
-            // 
-            // colManhaxuatban
-            // 
-            this.colManhaxuatban.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colManhaxuatban.DataPropertyName = "manhaxuatban";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colManhaxuatban.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colManhaxuatban.HeaderText = "Mã nhà xuất bản";
-            this.colManhaxuatban.MinimumWidth = 80;
-            this.colManhaxuatban.Name = "colManhaxuatban";
-            this.colManhaxuatban.ReadOnly = true;
-            this.colManhaxuatban.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colManhaxuatban.Width = 155;
-            // 
-            // colTennhaxuatban
-            // 
-            this.colTennhaxuatban.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTennhaxuatban.DataPropertyName = "tennhaxuatban";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colTennhaxuatban.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colTennhaxuatban.HeaderText = "Tên nhà xuất bản";
-            this.colTennhaxuatban.Name = "colTennhaxuatban";
-            this.colTennhaxuatban.ReadOnly = true;
-            this.colTennhaxuatban.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btnXuatexcel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnXuatexcel.Animated = true;
+            this.btnXuatexcel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnXuatexcel.BorderRadius = 5;
+            this.btnXuatexcel.BorderThickness = 1;
+            this.btnXuatexcel.CheckedState.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXuatexcel.CustomImages.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.FillColor = System.Drawing.Color.Transparent;
+            this.btnXuatexcel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatexcel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnXuatexcel.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnXuatexcel.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnXuatexcel.HoverState.ForeColor = System.Drawing.Color.White;
+            this.btnXuatexcel.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.HoverState.Image")));
+            this.btnXuatexcel.HoverState.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.Image")));
+            this.btnXuatexcel.ImageSize = new System.Drawing.Size(25, 25);
+            this.btnXuatexcel.Location = new System.Drawing.Point(29, 119);
+            this.btnXuatexcel.Name = "btnXuatexcel";
+            this.btnXuatexcel.ShadowDecoration.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Size = new System.Drawing.Size(80, 30);
+            this.btnXuatexcel.TabIndex = 25;
+            this.btnXuatexcel.Click += new System.EventHandler(this.btnXuatexcel_Click);
             // 
             // frmQuanlynhaxuatban
             // 
@@ -683,5 +712,6 @@ namespace QuanLyThuVien.Taikhoan
         private System.Windows.Forms.DataGridViewTextBoxColumn colSTT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManhaxuatban;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTennhaxuatban;
+        private Guna.UI2.WinForms.Guna2Button btnXuatexcel;
     }
 }

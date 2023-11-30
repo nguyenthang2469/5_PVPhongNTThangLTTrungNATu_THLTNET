@@ -40,6 +40,10 @@ namespace QuanLyThuVien.Taikhoan
             this.tbTimkiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnLast = new Guna.UI2.WinForms.Guna2Button();
             this.dgvNguoidung = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.stt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTendangnhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMatkhau = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLoainguoidung = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAfter = new Guna.UI2.WinForms.Guna2Button();
             this.cbSohang = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lbChimuc = new System.Windows.Forms.Label();
@@ -47,6 +51,7 @@ namespace QuanLyThuVien.Taikhoan
             this.btnBefore = new Guna.UI2.WinForms.Guna2Button();
             this.btnFirst = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnXuatexcel = new Guna.UI2.WinForms.Guna2Button();
             this.cbTimkiemloainguoidung = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cbLoainguoidung = new Guna.UI2.WinForms.Guna2ComboBox();
             this.btnSua = new Guna.UI2.WinForms.Guna2Button();
@@ -59,10 +64,7 @@ namespace QuanLyThuVien.Taikhoan
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
-            this.stt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTendangnhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMatkhau = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLoainguoidung = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.guna2HtmlToolTip1 = new Guna.UI2.WinForms.Guna2HtmlToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNguoidung)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -245,6 +247,38 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvNguoidung.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvNguoidung.SelectionChanged += new System.EventHandler(this.dgvNguoidung_SelectionChanged);
             // 
+            // stt
+            // 
+            this.stt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.stt.DataPropertyName = "stt";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.stt.DefaultCellStyle = dataGridViewCellStyle3;
+            this.stt.HeaderText = "STT";
+            this.stt.Name = "stt";
+            this.stt.ReadOnly = true;
+            this.stt.Width = 66;
+            // 
+            // colTendangnhap
+            // 
+            this.colTendangnhap.DataPropertyName = "tendangnhap";
+            this.colTendangnhap.HeaderText = "Tên đăng nhập";
+            this.colTendangnhap.Name = "colTendangnhap";
+            this.colTendangnhap.ReadOnly = true;
+            // 
+            // colMatkhau
+            // 
+            this.colMatkhau.DataPropertyName = "matkhau";
+            this.colMatkhau.HeaderText = "Mật khẩu";
+            this.colMatkhau.Name = "colMatkhau";
+            this.colMatkhau.ReadOnly = true;
+            // 
+            // colLoainguoidung
+            // 
+            this.colLoainguoidung.DataPropertyName = "loainguoidung";
+            this.colLoainguoidung.HeaderText = "Loại người dùng";
+            this.colLoainguoidung.Name = "colLoainguoidung";
+            this.colLoainguoidung.ReadOnly = true;
+            // 
             // btnAfter
             // 
             this.btnAfter.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -379,6 +413,7 @@ namespace QuanLyThuVien.Taikhoan
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.White;
+            this.guna2Panel1.Controls.Add(this.btnXuatexcel);
             this.guna2Panel1.Controls.Add(this.cbTimkiemloainguoidung);
             this.guna2Panel1.Controls.Add(this.btnTimkiem);
             this.guna2Panel1.Controls.Add(this.cbLoainguoidung);
@@ -400,6 +435,34 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
             this.guna2Panel1.Size = new System.Drawing.Size(866, 171);
             this.guna2Panel1.TabIndex = 2;
+            // 
+            // btnXuatexcel
+            // 
+            this.btnXuatexcel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnXuatexcel.Animated = true;
+            this.btnXuatexcel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnXuatexcel.BorderRadius = 5;
+            this.btnXuatexcel.BorderThickness = 1;
+            this.btnXuatexcel.CheckedState.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXuatexcel.CustomImages.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.FillColor = System.Drawing.Color.Transparent;
+            this.btnXuatexcel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatexcel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnXuatexcel.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnXuatexcel.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnXuatexcel.HoverState.ForeColor = System.Drawing.Color.White;
+            this.btnXuatexcel.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.HoverState.Image")));
+            this.btnXuatexcel.HoverState.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.Image")));
+            this.btnXuatexcel.ImageSize = new System.Drawing.Size(25, 25);
+            this.btnXuatexcel.Location = new System.Drawing.Point(30, 128);
+            this.btnXuatexcel.Name = "btnXuatexcel";
+            this.btnXuatexcel.ShadowDecoration.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Size = new System.Drawing.Size(80, 30);
+            this.btnXuatexcel.TabIndex = 14;
+            this.guna2HtmlToolTip1.SetToolTip(this.btnXuatexcel, "Xuất Excel");
+            this.btnXuatexcel.Click += new System.EventHandler(this.btnXuatexcel_Click);
             // 
             // cbTimkiemloainguoidung
             // 
@@ -655,37 +718,11 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2Panel3.Size = new System.Drawing.Size(866, 342);
             this.guna2Panel3.TabIndex = 14;
             // 
-            // stt
+            // guna2HtmlToolTip1
             // 
-            this.stt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.stt.DataPropertyName = "stt";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.stt.DefaultCellStyle = dataGridViewCellStyle3;
-            this.stt.HeaderText = "STT";
-            this.stt.Name = "stt";
-            this.stt.ReadOnly = true;
-            this.stt.Width = 66;
-            // 
-            // colTendangnhap
-            // 
-            this.colTendangnhap.DataPropertyName = "tendangnhap";
-            this.colTendangnhap.HeaderText = "Tên đăng nhập";
-            this.colTendangnhap.Name = "colTendangnhap";
-            this.colTendangnhap.ReadOnly = true;
-            // 
-            // colMatkhau
-            // 
-            this.colMatkhau.DataPropertyName = "matkhau";
-            this.colMatkhau.HeaderText = "Mật khẩu";
-            this.colMatkhau.Name = "colMatkhau";
-            this.colMatkhau.ReadOnly = true;
-            // 
-            // colLoainguoidung
-            // 
-            this.colLoainguoidung.DataPropertyName = "loainguoidung";
-            this.colLoainguoidung.HeaderText = "Loại người dùng";
-            this.colLoainguoidung.Name = "colLoainguoidung";
-            this.colLoainguoidung.ReadOnly = true;
+            this.guna2HtmlToolTip1.AllowLinksHandling = true;
+            this.guna2HtmlToolTip1.AutomaticDelay = 200;
+            this.guna2HtmlToolTip1.MaximumSize = new System.Drawing.Size(0, 0);
             // 
             // frmQuanlytaikhoan
             // 
@@ -741,5 +778,7 @@ namespace QuanLyThuVien.Taikhoan
         private System.Windows.Forms.DataGridViewTextBoxColumn colTendangnhap;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMatkhau;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLoainguoidung;
+        private Guna.UI2.WinForms.Guna2Button btnXuatexcel;
+        private Guna.UI2.WinForms.Guna2HtmlToolTip guna2HtmlToolTip1;
     }
 }
