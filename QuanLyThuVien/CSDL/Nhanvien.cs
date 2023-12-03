@@ -42,8 +42,8 @@ namespace QuanLyThuVien.CSDL
 
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    sqlCount += " WHERE manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword";
-                    sqlSelect += " WHERE manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword";
+                    sqlCount += " WHERE (manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword)";
+                    sqlSelect += " WHERE (manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword)";
                 }
 
                 using (SqlCommand countCmd = new SqlCommand(sqlCount, conn))
@@ -108,7 +108,7 @@ namespace QuanLyThuVien.CSDL
 
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    sqlSelect += " WHERE manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword";
+                    sqlSelect += " WHERE (manhanvien LIKE @keyword OR tennhanvien LIKE @keyword OR tendangnhap LIKE @keyword)";
                 }
 
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
@@ -186,7 +186,7 @@ namespace QuanLyThuVien.CSDL
                     "tennhanvien = @tennhanvien, " +
                     "ngaysinh = @ngaysinh, " +
                     "gioitinh = @gioitinh, " +
-                    "sodienthoai = @sodienthoai, " +
+                    "sodienthoai = @sodienthoai " +
                     "WHERE manhanvien = @manhanvien";
                 using (SqlCommand cm = new SqlCommand(sql, conn))
                 {

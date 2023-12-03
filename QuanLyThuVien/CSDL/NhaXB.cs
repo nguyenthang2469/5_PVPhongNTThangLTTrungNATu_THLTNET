@@ -41,8 +41,8 @@ namespace QuanLyThuVien.CSDL
 
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    sqlCount += " WHERE manhaxuatban LIKE @keyword OR tennhaxuatban LIKE @keyword";
-                    sqlSelect += " WHERE manhaxuatban LIKE @keyword OR tennhaxuatban LIKE @keyword";
+                    sqlCount += " WHERE (manhaxuatban LIKE @keyword OR tennhaxuatban LIKE @keyword)";
+                    sqlSelect += " WHERE (manhaxuatban LIKE @keyword OR tennhaxuatban LIKE @keyword)";
                 }
 
                 using (SqlCommand countCmd = new SqlCommand(sqlCount, conn))
@@ -103,7 +103,7 @@ namespace QuanLyThuVien.CSDL
 
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    sqlSelect += " WHERE manhaxuatban LIKE @keyword OR tennhaxuatban LIKE @keyword";
+                    sqlSelect += " WHERE (manhaxuatban LIKE @keyword OR tennhaxuatban LIKE @keyword)";
                 }
 
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))

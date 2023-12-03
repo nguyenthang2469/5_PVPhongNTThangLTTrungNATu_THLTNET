@@ -67,6 +67,9 @@ namespace QuanLyThuVien.Taikhoan
             this.cbSohang = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lbChimuc = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.cbTimkiemnhaxb = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cbTimkiemtacgia = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.btnXuatexcel = new Guna.UI2.WinForms.Guna2Button();
             this.nudSoluong = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.tbLoaisach = new Guna.UI2.WinForms.Guna2TextBox();
             this.cbTacgia = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -86,7 +89,6 @@ namespace QuanLyThuVien.Taikhoan
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnXuatexcel = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSach)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoluong)).BeginInit();
@@ -151,7 +153,7 @@ namespace QuanLyThuVien.Taikhoan
             this.tbTimkiem.HoverState.Parent = this.tbTimkiem;
             this.tbTimkiem.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbTimkiem.IconLeft")));
             this.tbTimkiem.IconLeftOffset = new System.Drawing.Point(5, 0);
-            this.tbTimkiem.Location = new System.Drawing.Point(750, 176);
+            this.tbTimkiem.Location = new System.Drawing.Point(749, 176);
             this.tbTimkiem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbTimkiem.Name = "tbTimkiem";
             this.tbTimkiem.PasswordChar = '\0';
@@ -199,7 +201,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvSach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.dgvSach.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSach.BackgroundColor = System.Drawing.Color.White;
-            this.dgvSach.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvSach.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvSach.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvSach.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -212,6 +214,7 @@ namespace QuanLyThuVien.Taikhoan
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvSach.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSach.ColumnHeadersHeight = 40;
+            this.dgvSach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSach.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSTT,
             this.colMasach,
@@ -273,7 +276,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvSach.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvSach.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvSach.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dgvSach.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.dgvSach.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSach.ThemeStyle.HeaderStyle.Height = 40;
             this.dgvSach.ThemeStyle.ReadOnly = true;
             this.dgvSach.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
@@ -539,6 +542,8 @@ namespace QuanLyThuVien.Taikhoan
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.White;
+            this.guna2Panel1.Controls.Add(this.cbTimkiemnhaxb);
+            this.guna2Panel1.Controls.Add(this.cbTimkiemtacgia);
             this.guna2Panel1.Controls.Add(this.btnXuatexcel);
             this.guna2Panel1.Controls.Add(this.tbTimkiem);
             this.guna2Panel1.Controls.Add(this.nudSoluong);
@@ -569,6 +574,93 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2Panel1.Size = new System.Drawing.Size(1145, 225);
             this.guna2Panel1.TabIndex = 2;
             // 
+            // cbTimkiemnhaxb
+            // 
+            this.cbTimkiemnhaxb.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbTimkiemnhaxb.Animated = true;
+            this.cbTimkiemnhaxb.AutoRoundedCorners = true;
+            this.cbTimkiemnhaxb.BackColor = System.Drawing.Color.White;
+            this.cbTimkiemnhaxb.BorderRadius = 17;
+            this.cbTimkiemnhaxb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbTimkiemnhaxb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTimkiemnhaxb.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.cbTimkiemnhaxb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.cbTimkiemnhaxb.FocusedState.FillColor = System.Drawing.Color.White;
+            this.cbTimkiemnhaxb.FocusedState.Parent = this.cbTimkiemnhaxb;
+            this.cbTimkiemnhaxb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbTimkiemnhaxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cbTimkiemnhaxb.FormattingEnabled = true;
+            this.cbTimkiemnhaxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.cbTimkiemnhaxb.HoverState.Parent = this.cbTimkiemnhaxb;
+            this.cbTimkiemnhaxb.IntegralHeight = false;
+            this.cbTimkiemnhaxb.ItemHeight = 30;
+            this.cbTimkiemnhaxb.ItemsAppearance.Parent = this.cbTimkiemnhaxb;
+            this.cbTimkiemnhaxb.Location = new System.Drawing.Point(407, 176);
+            this.cbTimkiemnhaxb.Name = "cbTimkiemnhaxb";
+            this.cbTimkiemnhaxb.ShadowDecoration.Color = System.Drawing.Color.Transparent;
+            this.cbTimkiemnhaxb.ShadowDecoration.Parent = this.cbTimkiemnhaxb;
+            this.cbTimkiemnhaxb.Size = new System.Drawing.Size(324, 36);
+            this.cbTimkiemnhaxb.TabIndex = 28;
+            this.cbTimkiemnhaxb.TextOffset = new System.Drawing.Point(8, 0);
+            this.cbTimkiemnhaxb.SelectedIndexChanged += new System.EventHandler(this.cbTimkiemnhaxb_SelectedIndexChanged);
+            // 
+            // cbTimkiemtacgia
+            // 
+            this.cbTimkiemtacgia.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbTimkiemtacgia.Animated = true;
+            this.cbTimkiemtacgia.AutoRoundedCorners = true;
+            this.cbTimkiemtacgia.BackColor = System.Drawing.Color.White;
+            this.cbTimkiemtacgia.BorderRadius = 17;
+            this.cbTimkiemtacgia.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbTimkiemtacgia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTimkiemtacgia.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.cbTimkiemtacgia.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.cbTimkiemtacgia.FocusedState.FillColor = System.Drawing.Color.White;
+            this.cbTimkiemtacgia.FocusedState.Parent = this.cbTimkiemtacgia;
+            this.cbTimkiemtacgia.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbTimkiemtacgia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cbTimkiemtacgia.FormattingEnabled = true;
+            this.cbTimkiemtacgia.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.cbTimkiemtacgia.HoverState.Parent = this.cbTimkiemtacgia;
+            this.cbTimkiemtacgia.IntegralHeight = false;
+            this.cbTimkiemtacgia.ItemHeight = 30;
+            this.cbTimkiemtacgia.ItemsAppearance.Parent = this.cbTimkiemtacgia;
+            this.cbTimkiemtacgia.Location = new System.Drawing.Point(134, 176);
+            this.cbTimkiemtacgia.Name = "cbTimkiemtacgia";
+            this.cbTimkiemtacgia.ShadowDecoration.Color = System.Drawing.Color.Transparent;
+            this.cbTimkiemtacgia.ShadowDecoration.Parent = this.cbTimkiemtacgia;
+            this.cbTimkiemtacgia.Size = new System.Drawing.Size(267, 36);
+            this.cbTimkiemtacgia.TabIndex = 22;
+            this.cbTimkiemtacgia.TextOffset = new System.Drawing.Point(8, 0);
+            this.cbTimkiemtacgia.SelectedIndexChanged += new System.EventHandler(this.cbTimkiemtacgia_SelectedIndexChanged);
+            // 
+            // btnXuatexcel
+            // 
+            this.btnXuatexcel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnXuatexcel.Animated = true;
+            this.btnXuatexcel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnXuatexcel.BorderRadius = 5;
+            this.btnXuatexcel.BorderThickness = 1;
+            this.btnXuatexcel.CheckedState.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXuatexcel.CustomImages.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.FillColor = System.Drawing.Color.Transparent;
+            this.btnXuatexcel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatexcel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnXuatexcel.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnXuatexcel.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnXuatexcel.HoverState.ForeColor = System.Drawing.Color.White;
+            this.btnXuatexcel.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.HoverState.Image")));
+            this.btnXuatexcel.HoverState.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.Image")));
+            this.btnXuatexcel.ImageSize = new System.Drawing.Size(25, 25);
+            this.btnXuatexcel.Location = new System.Drawing.Point(23, 179);
+            this.btnXuatexcel.Name = "btnXuatexcel";
+            this.btnXuatexcel.ShadowDecoration.Parent = this.btnXuatexcel;
+            this.btnXuatexcel.Size = new System.Drawing.Size(80, 30);
+            this.btnXuatexcel.TabIndex = 27;
+            this.btnXuatexcel.Click += new System.EventHandler(this.btnXuatexcel_Click);
+            // 
             // nudSoluong
             // 
             this.nudSoluong.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -588,6 +680,11 @@ namespace QuanLyThuVien.Taikhoan
             this.nudSoluong.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSoluong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.nudSoluong.Location = new System.Drawing.Point(921, 77);
+            this.nudSoluong.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.nudSoluong.Name = "nudSoluong";
             this.nudSoluong.ShadowDecoration.Parent = this.nudSoluong;
             this.nudSoluong.Size = new System.Drawing.Size(201, 36);
@@ -630,7 +727,9 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // cbTacgia
             // 
+            this.cbTacgia.AllowDrop = true;
             this.cbTacgia.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbTacgia.Animated = true;
             this.cbTacgia.AutoRoundedCorners = true;
             this.cbTacgia.BackColor = System.Drawing.Color.White;
             this.cbTacgia.BorderRadius = 18;
@@ -646,6 +745,7 @@ namespace QuanLyThuVien.Taikhoan
             this.cbTacgia.FormattingEnabled = true;
             this.cbTacgia.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.cbTacgia.HoverState.Parent = this.cbTacgia;
+            this.cbTacgia.IntegralHeight = false;
             this.cbTacgia.ItemHeight = 32;
             this.cbTacgia.ItemsAppearance.Parent = this.cbTacgia;
             this.cbTacgia.Location = new System.Drawing.Point(495, 75);
@@ -681,7 +781,9 @@ namespace QuanLyThuVien.Taikhoan
             // 
             // cbNhaxuatban
             // 
+            this.cbNhaxuatban.AllowDrop = true;
             this.cbNhaxuatban.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbNhaxuatban.Animated = true;
             this.cbNhaxuatban.AutoRoundedCorners = true;
             this.cbNhaxuatban.BackColor = System.Drawing.Color.White;
             this.cbNhaxuatban.BorderRadius = 18;
@@ -697,6 +799,7 @@ namespace QuanLyThuVien.Taikhoan
             this.cbNhaxuatban.FormattingEnabled = true;
             this.cbNhaxuatban.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
             this.cbNhaxuatban.HoverState.Parent = this.cbNhaxuatban;
+            this.cbNhaxuatban.IntegralHeight = false;
             this.cbNhaxuatban.ItemHeight = 32;
             this.cbNhaxuatban.ItemsAppearance.Parent = this.cbNhaxuatban;
             this.cbNhaxuatban.Location = new System.Drawing.Point(134, 126);
@@ -953,33 +1056,6 @@ namespace QuanLyThuVien.Taikhoan
             this.guna2Panel3.Size = new System.Drawing.Size(1145, 325);
             this.guna2Panel3.TabIndex = 20;
             // 
-            // btnXuatexcel
-            // 
-            this.btnXuatexcel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnXuatexcel.Animated = true;
-            this.btnXuatexcel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
-            this.btnXuatexcel.BorderRadius = 5;
-            this.btnXuatexcel.BorderThickness = 1;
-            this.btnXuatexcel.CheckedState.Parent = this.btnXuatexcel;
-            this.btnXuatexcel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnXuatexcel.CustomImages.Parent = this.btnXuatexcel;
-            this.btnXuatexcel.FillColor = System.Drawing.Color.Transparent;
-            this.btnXuatexcel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXuatexcel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
-            this.btnXuatexcel.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
-            this.btnXuatexcel.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
-            this.btnXuatexcel.HoverState.ForeColor = System.Drawing.Color.White;
-            this.btnXuatexcel.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.HoverState.Image")));
-            this.btnXuatexcel.HoverState.Parent = this.btnXuatexcel;
-            this.btnXuatexcel.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatexcel.Image")));
-            this.btnXuatexcel.ImageSize = new System.Drawing.Size(25, 25);
-            this.btnXuatexcel.Location = new System.Drawing.Point(23, 179);
-            this.btnXuatexcel.Name = "btnXuatexcel";
-            this.btnXuatexcel.ShadowDecoration.Parent = this.btnXuatexcel;
-            this.btnXuatexcel.Size = new System.Drawing.Size(80, 30);
-            this.btnXuatexcel.TabIndex = 27;
-            this.btnXuatexcel.Click += new System.EventHandler(this.btnXuatexcel_Click);
-            // 
             // frmQuanlysach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -995,7 +1071,7 @@ namespace QuanLyThuVien.Taikhoan
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmQuanlysach";
-            this.Text = "frmQuanlysach";
+            this.Text = "Sách";
             this.Load += new System.EventHandler(this.frmQuanlysach_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSach)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
@@ -1051,5 +1127,7 @@ namespace QuanLyThuVien.Taikhoan
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgayxuatban;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoluong;
         private Guna.UI2.WinForms.Guna2Button btnXuatexcel;
+        private Guna.UI2.WinForms.Guna2ComboBox cbTimkiemnhaxb;
+        private Guna.UI2.WinForms.Guna2ComboBox cbTimkiemtacgia;
     }
 }

@@ -26,7 +26,7 @@ namespace QuanLyThuVien.CSDL
             return dt;
         }
 
-        public static Tuple<int, DataTable> searchDocgia(int pageSize, int pageIndex, string keyword = "")
+        public static Tuple<int, DataTable> searchDocgia(int pageSize, int pageIndex, string keyword = "", string nhanvienTimkiem = "")
         {
             DataTable dt = new DataTable();
             int totalAccount = 0;
@@ -39,17 +39,35 @@ namespace QuanLyThuVien.CSDL
                 string sqlCount = "SELECT COUNT(*) FROM DocGia";
                 string sqlSelect = "SELECT * FROM DocGia";
 
+                string condition = "";
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    sqlCount += " WHERE madocgia LIKE @keyword OR tendocgia LIKE @keyword OR lophoc LIKE @keyword OR manhanvientaothe LIKE @keyword OR tendangnhap LIKE @keyword";
-                    sqlSelect += " WHERE madocgia LIKE @keyword OR tendocgia LIKE @keyword OR lophoc LIKE @keyword OR manhanvientaothe LIKE @keyword OR tendangnhap LIKE @keyword";
+                    condition = " WHERE (madocgia LIKE @keyword OR tendocgia LIKE @keyword OR lophoc LIKE @keyword OR tendangnhap LIKE @keyword)";
                 }
-
+                if (nhanvienTimkiem != "")
+                {
+                    if (condition.Length == 0)
+                    {
+                        condition += " WHERE ";
+                    }
+                    else
+                    {
+                        condition += " AND ";
+                    }
+                    condition += "manhanvientaothe = @manhanvientaothe";
+                }
+                sqlCount += condition;
+                sqlSelect += condition;
+                
                 using (SqlCommand countCmd = new SqlCommand(sqlCount, conn))
                 {
                     if (!string.IsNullOrEmpty(keyword))
                     {
                         countCmd.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+                    if (!string.IsNullOrEmpty(nhanvienTimkiem))
+                    {
+                        countCmd.Parameters.AddWithValue("@manhanvientaothe", $"{nhanvienTimkiem}");
                     }
                     totalAccount = (int)countCmd.ExecuteScalar();
                 }
@@ -62,7 +80,10 @@ namespace QuanLyThuVien.CSDL
                     {
                         cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
                     }
-
+                    if (!string.IsNullOrEmpty(nhanvienTimkiem))
+                    {
+                        cm.Parameters.AddWithValue("@manhanvientaothe", $"{nhanvienTimkiem}");
+                    }
                     cm.Parameters.AddWithValue("@offset", offset);
                     cm.Parameters.AddWithValue("@pageSize", pageSize);
 
@@ -91,7 +112,7 @@ namespace QuanLyThuVien.CSDL
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
-        public static DataTable exportToExcel(string keyword = "")
+        public static DataTable exportToExcel(string keyword = "", string nhanvienTimkiem = "")
         {
             DataTable dt = new DataTable();
 
@@ -109,17 +130,34 @@ namespace QuanLyThuVien.CSDL
                                 "manhanvientaothe as 'Mã nhân viên tạo thẻ', " +
                                 "nv.tennhanvien as 'Tên nhân viên tạo thẻ' FROM DocGia dg " +
                                 "INNER JOIN NhanVien nv ON nv.manhanvien = dg.manhanvientaothe";
-
+                string condition = "";
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    sqlSelect += " WHERE madocgia LIKE @keyword OR tendocgia LIKE @keyword OR lophoc LIKE @keyword OR manhanvientaothe LIKE @keyword OR tendangnhap LIKE @keyword";
+                    condition = " WHERE (madocgia LIKE @keyword OR tendocgia LIKE @keyword OR lophoc LIKE @keyword OR tendangnhap LIKE @keyword)";
                 }
+                if (nhanvienTimkiem != "")
+                {
+                    if (condition.Length == 0)
+                    {
+                        condition += " WHERE ";
+                    }
+                    else
+                    {
+                        condition += " AND ";
+                    }
+                    condition += "manhanvientaothe = @manhanvientaothe";
+                }
+                sqlSelect += condition;
 
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
                 {
                     if (!string.IsNullOrEmpty(keyword))
                     {
                         cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    }
+                    if (!string.IsNullOrEmpty(nhanvienTimkiem))
+                    {
+                        cm.Parameters.AddWithValue("@manhanvientaothe", $"{nhanvienTimkiem}");
                     }
 
                     SqlDataAdapter ad = new SqlDataAdapter(cm);

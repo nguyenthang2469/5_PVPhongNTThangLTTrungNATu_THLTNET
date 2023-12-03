@@ -20,6 +20,7 @@ namespace QuanLyThuVien.Taikhoan
         private int pageSize = 10; 
         private int totalPages = 0;
         private string keySearch = "";
+        private string nhanvienTimkiem = "";
         private DataGridViewRow selectedRow = null;
         private List<string> usernames = new List<string>();
 
@@ -63,20 +64,24 @@ namespace QuanLyThuVien.Taikhoan
         {
             try
             {
-                Dictionary<string, string> nhanvienDictionary = new Dictionary<string, string>();
+                SortedDictionary<string, string> nhanvienDictionary = new SortedDictionary<string, string>();
                 System.Data.DataTable dt = Nhanvien.getAllNhanvien();
                 cbManhanvien.Items.Clear();
                 foreach (DataRow row in dt.Rows)
                 {
                     string displayText = $"{row["manhanvien"].ToString()}-{row["tennhanvien"].ToString()}";
 
-                    nhanvienDictionary.Add(row["manhanvien"].ToString(), displayText);
+                    nhanvienDictionary.Add(row["manhanvien"].ToString().ToUpper(), displayText);
                 }
                 if(nhanvienDictionary.Count > 0)
                 {
                     cbManhanvien.DataSource = new BindingSource(nhanvienDictionary, null);
                     cbManhanvien.DisplayMember = "Value";
                     cbManhanvien.ValueMember = "Key";
+                    nhanvienDictionary.Add("-1", "Nhân viên tạo thẻ");
+                    cbTimkiemnhanvien.DataSource = new BindingSource(nhanvienDictionary, null);
+                    cbTimkiemnhanvien.DisplayMember = "Value";
+                    cbTimkiemnhanvien.ValueMember = "Key";
                 }
             }
             catch (Exception)
@@ -87,7 +92,7 @@ namespace QuanLyThuVien.Taikhoan
 
         private void loadData()
         {
-            Tuple<int, System.Data.DataTable> result = Docgia.searchDocgia(pageSize, pageIndex, keySearch);
+            Tuple<int, System.Data.DataTable> result = Docgia.searchDocgia(pageSize, pageIndex, keySearch, nhanvienTimkiem);
             System.Data.DataTable dt = result.Item2;
             lbSonguoidung.Text = "Tổng số độc giả: " + result.Item1;
             totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
@@ -230,7 +235,7 @@ namespace QuanLyThuVien.Taikhoan
                     }
                     else
                     {
-                        MessageBox.Show("Thêm thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Thêm thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else if (chucnanghientai == CHUCNANG.UPDATE)
@@ -248,7 +253,7 @@ namespace QuanLyThuVien.Taikhoan
                     }
                     else
                     {
-                        MessageBox.Show("Cập nhật thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Cập nhật thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -266,6 +271,11 @@ namespace QuanLyThuVien.Taikhoan
                 }
                 string madocgia = dgvDocgia.CurrentRow.Cells[1].Value.ToString();
                 string tendangnhap = dgvDocgia.CurrentRow.Cells[9].Value.ToString();
+                if (Phieumuon.searchPhieumuon(1, 1, "", "", madocgia).Item2.Rows.Count > 0)
+                {
+                    MessageBox.Show("Độc giả này đã có phiếu mượn sách trong thư viện, không thể xóa", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 if (Docgia.deleteDocgia(madocgia, tendangnhap))
                 {
                     MessageBox.Show("Xóa độc giả " + madocgia + " thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -273,7 +283,7 @@ namespace QuanLyThuVien.Taikhoan
                 }
                 else
                 {
-                    MessageBox.Show("Xảy ra lỗi khi xóa, vui lòng thử lại sau", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xảy ra lỗi khi xóa, vui lòng thử lại sau", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } else
             {
@@ -441,6 +451,7 @@ namespace QuanLyThuVien.Taikhoan
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnTimkiem.Enabled = state;
+            btnXuatexcel.Enabled = state;
             btnThem.Visible = state;
             showButtonPage(state);
         }
@@ -508,7 +519,7 @@ namespace QuanLyThuVien.Taikhoan
         {
             try
             {
-                System.Data.DataTable dataTable = Docgia.exportToExcel(keySearch);
+                System.Data.DataTable dataTable = Docgia.exportToExcel(keySearch, nhanvienTimkiem);
                 // Tạo một ứng dụng Excel mới
                 Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
                 if (excelApp == null)
@@ -557,6 +568,16 @@ namespace QuanLyThuVien.Taikhoan
             {
                 MessageBox.Show("Xảy ra lỗi khi export: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cbTimkiemnhanvien_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbTimkiemnhanvien.SelectedIndex != 0)
+            {
+                this.nhanvienTimkiem = (string)cbTimkiemnhanvien.SelectedValue;
+            }
+            else this.nhanvienTimkiem = "";
+            loadData();
         }
     }
 }

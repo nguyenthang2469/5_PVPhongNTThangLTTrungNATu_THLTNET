@@ -176,7 +176,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvNguoidung.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.dgvNguoidung.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvNguoidung.BackgroundColor = System.Drawing.Color.White;
-            this.dgvNguoidung.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvNguoidung.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvNguoidung.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvNguoidung.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -189,6 +189,7 @@ namespace QuanLyThuVien.Taikhoan
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvNguoidung.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvNguoidung.ColumnHeadersHeight = 40;
+            this.dgvNguoidung.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvNguoidung.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.stt,
             this.colTendangnhap,
@@ -235,7 +236,7 @@ namespace QuanLyThuVien.Taikhoan
             this.dgvNguoidung.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvNguoidung.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvNguoidung.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dgvNguoidung.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.dgvNguoidung.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvNguoidung.ThemeStyle.HeaderStyle.Height = 40;
             this.dgvNguoidung.ThemeStyle.ReadOnly = true;
             this.dgvNguoidung.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
@@ -737,7 +738,7 @@ namespace QuanLyThuVien.Taikhoan
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmQuanlytaikhoan";
-            this.Text = "frmQuanlytaikhoan";
+            this.Text = "Tài khoản";
             this.Load += new System.EventHandler(this.frmQuanlytaikhoan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNguoidung)).EndInit();
             this.guna2Panel1.ResumeLayout(false);

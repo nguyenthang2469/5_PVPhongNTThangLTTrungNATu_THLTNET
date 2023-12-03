@@ -219,7 +219,7 @@ namespace QuanLyThuVien.Taikhoan
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Đổi mật khẩu";
             this.TransparencyKey = System.Drawing.Color.Lime;
-            this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.Load += new System.EventHandler(this.frmDoimatkhau_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

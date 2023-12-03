@@ -12,36 +12,28 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien
 {
-    public partial class frmTrangchuAdmin : Form
+    public partial class frmTrangchuDocgia : Form
     {
         public static Form formtrangchu;
-        public static Guna.UI2.WinForms.Guna2HtmlLabel lbTitle;
         private bool shouldExit = false;
-        private string tendangnhap = "";
-        private string loainguoidung = "";
+        private string tendangnhap = string.Empty;
         private bool isSidebarVisible = true;
-        private DataRow nhanvien = null;
+        private DataRow docgia = null;
 
-        public frmTrangchuAdmin(string tendangnhap, string loainguoidung = "quanly")
+        public frmTrangchuDocgia(string tendangnhap)
         {
             InitializeComponent();
             this.tendangnhap = tendangnhap;
-            this.loainguoidung = loainguoidung;
+            docgia = Docgia.getDocgiaByTendangnhap(tendangnhap);
         }
 
-        private void frmTrangchuAdmin_Load(object sender, EventArgs e)
+        private void frmTrangchuDocgia_Load(object sender, EventArgs e)
         {
             pnContent.Width = 2000;
             guna2ShadowForm1.SetShadowForm(this);
             btnTrangchu_Click(btnTrangchu, EventArgs.Empty);
             lbTendangnhap.Text = tendangnhap;
             formtrangchu = this;
-            lbTitle = lbCurrentPage;
-            if(loainguoidung == "thuthu")
-            {
-                btnThongtincanhan.Visible = true;
-                nhanvien = Nhanvien.getNhanvienByTendangnhap(tendangnhap);
-            }
         }
 
         private void btnTrangchu_Click(object sender, EventArgs e)
@@ -71,10 +63,10 @@ namespace QuanLyThuVien
             frm.Show();
         }
 
-        private void btnQuanly_Click(object sender, EventArgs e)
+        private void btnSach_Click(object sender, EventArgs e)
         {
-            ptbCurrentPage.Image = Properties.Resources.list;
-            addFormContent(new frmQuanly(loainguoidung));
+            ptbCurrentPage.Image = Properties.Resources.list_book;
+            addFormContent(new frmQuanlysach("docgia"));
         }
 
         private void btnDoimatkhau_Click(object sender, EventArgs e)
@@ -90,7 +82,7 @@ namespace QuanLyThuVien
             this.Close();
         }
 
-        private void frmTrangchuAdmin_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmTrangchuDocgia_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!shouldExit && MessageBox.Show("Bạn có thật sự muốn thoát chương trình?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
@@ -146,20 +138,10 @@ namespace QuanLyThuVien
             isSidebarVisible = !isSidebarVisible;
         }
 
-        private void btnMuontra_Click(object sender, EventArgs e)
-        {
-            ptbCurrentPage.Image = Properties.Resources.borrow_return;
-            addFormContent(new frmQuanlyphieumuon());
-        }
-
         private void btnThongtincanhan_Click(object sender, EventArgs e)
         {
-            if(nhanvien != null)
-            {
-                frmThongtinnhanvien frm = new frmThongtinnhanvien(nhanvien);
-                frm.ShowDialog();
-                nhanvien = Nhanvien.getNhanvienByTendangnhap(tendangnhap);
-            }
+            frmThongtindocgia frm = new frmThongtindocgia(docgia);
+            frm.ShowDialog();
         }
     }
 }

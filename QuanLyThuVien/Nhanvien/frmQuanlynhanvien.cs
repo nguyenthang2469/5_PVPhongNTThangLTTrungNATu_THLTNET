@@ -222,6 +222,16 @@ namespace QuanLyThuVien.Taikhoan
                 }
                 string manhanvien = dgvNhanvien.CurrentRow.Cells[1].Value.ToString();
                 string tendangnhap = dgvNhanvien.CurrentRow.Cells[6].Value.ToString();
+                if (Phieumuon.searchPhieumuon(1, 1, "", manhanvien).Item2.Rows.Count > 0)
+                {
+                    MessageBox.Show("Nhân viên này đã từng lập phiếu mượn sách trong thư viện, không thể xóa", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (Docgia.searchDocgia(1, 1, "", manhanvien).Item2.Rows.Count > 0)
+                {
+                    MessageBox.Show("Nhân viên này đã từng lập thẻ thư viện cho 1 số độc giả trong thư viện, không thể xóa", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 if (Nhanvien.deleteNhanvien(manhanvien, tendangnhap))
                 {
                     MessageBox.Show("Xóa nhân viên " + manhanvien + " thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -326,6 +336,7 @@ namespace QuanLyThuVien.Taikhoan
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnTimkiem.Enabled = state;
+            btnXuatexcel.Enabled = state;
             btnThem.Visible = state;
             showButtonPage(state);
         }

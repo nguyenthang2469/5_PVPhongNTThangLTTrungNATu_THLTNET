@@ -1,7 +1,7 @@
 ﻿
 namespace QuanLyThuVien
 {
-    partial class frmTrangchuAdmin
+    partial class frmTrangchuDocgia
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace QuanLyThuVien
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTrangchuAdmin));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTrangchuDocgia));
             this.guna2Panel_left = new Guna.UI2.WinForms.Guna2Panel();
             this.btnThongtincanhan = new Guna.UI2.WinForms.Guna2Button();
             this.lbTendangnhap = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -39,7 +39,7 @@ namespace QuanLyThuVien
             this.btnDangxuat = new Guna.UI2.WinForms.Guna2Button();
             this.btnSidebar = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnMuontra = new Guna.UI2.WinForms.Guna2Button();
-            this.btnQuanly = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSach = new Guna.UI2.WinForms.Guna2Button();
             this.ptbBook = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnTrangchu = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel_top = new Guna.UI2.WinForms.Guna2Panel();
@@ -67,7 +67,7 @@ namespace QuanLyThuVien
             this.guna2Panel_left.Controls.Add(this.btnDangxuat);
             this.guna2Panel_left.Controls.Add(this.btnSidebar);
             this.guna2Panel_left.Controls.Add(this.btnMuontra);
-            this.guna2Panel_left.Controls.Add(this.btnQuanly);
+            this.guna2Panel_left.Controls.Add(this.btnSach);
             this.guna2Panel_left.Controls.Add(this.ptbBook);
             this.guna2Panel_left.Controls.Add(this.btnTrangchu);
             this.guna2Panel_left.CustomBorderColor = System.Drawing.Color.Silver;
@@ -105,11 +105,10 @@ namespace QuanLyThuVien
             this.btnThongtincanhan.Name = "btnThongtincanhan";
             this.btnThongtincanhan.ShadowDecoration.Parent = this.btnThongtincanhan;
             this.btnThongtincanhan.Size = new System.Drawing.Size(201, 45);
-            this.btnThongtincanhan.TabIndex = 10;
+            this.btnThongtincanhan.TabIndex = 4;
             this.btnThongtincanhan.Text = "Thông tin cá nhân";
             this.btnThongtincanhan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnThongtincanhan.TextOffset = new System.Drawing.Point(12, 0);
-            this.btnThongtincanhan.Visible = false;
             this.btnThongtincanhan.Click += new System.EventHandler(this.btnThongtincanhan_Click);
             // 
             // lbTendangnhap
@@ -162,7 +161,7 @@ namespace QuanLyThuVien
             this.btnDoimatkhau.Name = "btnDoimatkhau";
             this.btnDoimatkhau.ShadowDecoration.Parent = this.btnDoimatkhau;
             this.btnDoimatkhau.Size = new System.Drawing.Size(201, 45);
-            this.btnDoimatkhau.TabIndex = 7;
+            this.btnDoimatkhau.TabIndex = 5;
             this.btnDoimatkhau.Text = "Đổi mật khẩu";
             this.btnDoimatkhau.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnDoimatkhau.TextOffset = new System.Drawing.Point(12, 0);
@@ -242,37 +241,36 @@ namespace QuanLyThuVien
             this.btnMuontra.Text = "Mượn - Trả";
             this.btnMuontra.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnMuontra.TextOffset = new System.Drawing.Point(12, 0);
-            this.btnMuontra.Click += new System.EventHandler(this.btnMuontra_Click);
             // 
-            // btnQuanly
+            // btnSach
             // 
-            this.btnQuanly.Animated = true;
-            this.btnQuanly.BackColor = System.Drawing.Color.White;
-            this.btnQuanly.BorderRadius = 4;
-            this.btnQuanly.CheckedState.Parent = this.btnQuanly;
-            this.btnQuanly.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnQuanly.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.btnQuanly.CustomImages.Parent = this.btnQuanly;
-            this.btnQuanly.FillColor = System.Drawing.Color.Transparent;
-            this.btnQuanly.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuanly.ForeColor = System.Drawing.Color.Black;
-            this.btnQuanly.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
-            this.btnQuanly.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
-            this.btnQuanly.HoverState.ForeColor = System.Drawing.Color.White;
-            this.btnQuanly.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("btnQuanly.HoverState.Image")));
-            this.btnQuanly.HoverState.Parent = this.btnQuanly;
-            this.btnQuanly.Image = ((System.Drawing.Image)(resources.GetObject("btnQuanly.Image")));
-            this.btnQuanly.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnQuanly.ImageOffset = new System.Drawing.Point(8, 0);
-            this.btnQuanly.Location = new System.Drawing.Point(1, 182);
-            this.btnQuanly.Name = "btnQuanly";
-            this.btnQuanly.ShadowDecoration.Parent = this.btnQuanly;
-            this.btnQuanly.Size = new System.Drawing.Size(201, 45);
-            this.btnQuanly.TabIndex = 2;
-            this.btnQuanly.Text = "Quản lý";
-            this.btnQuanly.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnQuanly.TextOffset = new System.Drawing.Point(12, 0);
-            this.btnQuanly.Click += new System.EventHandler(this.btnQuanly_Click);
+            this.btnSach.Animated = true;
+            this.btnSach.BackColor = System.Drawing.Color.White;
+            this.btnSach.BorderRadius = 4;
+            this.btnSach.CheckedState.Parent = this.btnSach;
+            this.btnSach.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSach.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.btnSach.CustomImages.Parent = this.btnSach;
+            this.btnSach.FillColor = System.Drawing.Color.Transparent;
+            this.btnSach.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSach.ForeColor = System.Drawing.Color.Black;
+            this.btnSach.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(72)))), ((int)(((byte)(167)))));
+            this.btnSach.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(103)))), ((int)(((byte)(239)))));
+            this.btnSach.HoverState.ForeColor = System.Drawing.Color.White;
+            this.btnSach.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("btnSach.HoverState.Image")));
+            this.btnSach.HoverState.Parent = this.btnSach;
+            this.btnSach.Image = ((System.Drawing.Image)(resources.GetObject("btnSach.Image")));
+            this.btnSach.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSach.ImageOffset = new System.Drawing.Point(8, 0);
+            this.btnSach.Location = new System.Drawing.Point(1, 182);
+            this.btnSach.Name = "btnSach";
+            this.btnSach.ShadowDecoration.Parent = this.btnSach;
+            this.btnSach.Size = new System.Drawing.Size(201, 45);
+            this.btnSach.TabIndex = 2;
+            this.btnSach.Text = "Sách";
+            this.btnSach.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSach.TextOffset = new System.Drawing.Point(12, 0);
+            this.btnSach.Click += new System.EventHandler(this.btnSach_Click);
             // 
             // ptbBook
             // 
@@ -332,7 +330,7 @@ namespace QuanLyThuVien
             this.guna2Panel_top.Location = new System.Drawing.Point(205, 0);
             this.guna2Panel_top.Name = "guna2Panel_top";
             this.guna2Panel_top.ShadowDecoration.Parent = this.guna2Panel_top;
-            this.guna2Panel_top.Size = new System.Drawing.Size(962, 53);
+            this.guna2Panel_top.Size = new System.Drawing.Size(995, 53);
             this.guna2Panel_top.TabIndex = 1;
             // 
             // lbCurrentPage
@@ -362,7 +360,7 @@ namespace QuanLyThuVien
             this.guna2ControlBox3.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox3.HoverState.Parent = this.guna2ControlBox3;
             this.guna2ControlBox3.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox3.Location = new System.Drawing.Point(812, 3);
+            this.guna2ControlBox3.Location = new System.Drawing.Point(845, 3);
             this.guna2ControlBox3.Name = "guna2ControlBox3";
             this.guna2ControlBox3.ShadowDecoration.Parent = this.guna2ControlBox3;
             this.guna2ControlBox3.Size = new System.Drawing.Size(45, 29);
@@ -375,7 +373,7 @@ namespace QuanLyThuVien
             this.guna2ControlBox2.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox2.HoverState.Parent = this.guna2ControlBox2;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(863, 3);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(896, 3);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.ShadowDecoration.Parent = this.guna2ControlBox2;
             this.guna2ControlBox2.Size = new System.Drawing.Size(45, 29);
@@ -387,7 +385,7 @@ namespace QuanLyThuVien
             this.guna2ControlBox1.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox1.HoverState.Parent = this.guna2ControlBox1;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(914, 3);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(947, 3);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.ShadowDecoration.Parent = this.guna2ControlBox1;
             this.guna2ControlBox1.Size = new System.Drawing.Size(45, 29);
@@ -404,24 +402,24 @@ namespace QuanLyThuVien
             this.pnContent.Location = new System.Drawing.Point(205, 53);
             this.pnContent.Name = "pnContent";
             this.pnContent.ShadowDecoration.Parent = this.pnContent;
-            this.pnContent.Size = new System.Drawing.Size(962, 647);
+            this.pnContent.Size = new System.Drawing.Size(995, 647);
             this.pnContent.TabIndex = 2;
             // 
-            // frmTrangchuAdmin
+            // frmTrangchuDocgia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1167, 700);
+            this.ClientSize = new System.Drawing.Size(1200, 700);
             this.Controls.Add(this.pnContent);
             this.Controls.Add(this.guna2Panel_top);
             this.Controls.Add(this.guna2Panel_left);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmTrangchuAdmin";
+            this.Name = "frmTrangchuDocgia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trang chủ";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTrangchuAdmin_FormClosing);
-            this.Load += new System.EventHandler(this.frmTrangchuAdmin_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTrangchuDocgia_FormClosing);
+            this.Load += new System.EventHandler(this.frmTrangchuDocgia_Load);
             this.guna2Panel_left.ResumeLayout(false);
             this.guna2Panel_left.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSidebar)).EndInit();
@@ -444,7 +442,7 @@ namespace QuanLyThuVien
         private Guna.UI2.WinForms.Guna2Button btnTrangchu;
         private Guna.UI2.WinForms.Guna2PictureBox ptbBook;
         private Guna.UI2.WinForms.Guna2Button btnMuontra;
-        private Guna.UI2.WinForms.Guna2Button btnQuanly;
+        private Guna.UI2.WinForms.Guna2Button btnSach;
         private Guna.UI2.WinForms.Guna2Panel pnContent;
         private Guna.UI2.WinForms.Guna2PictureBox btnSidebar;
         private Guna.UI2.WinForms.Guna2Button btnDangxuat;
