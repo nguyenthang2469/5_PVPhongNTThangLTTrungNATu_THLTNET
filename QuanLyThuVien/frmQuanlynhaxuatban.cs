@@ -203,6 +203,11 @@ namespace QuanLyThuVien.Taikhoan
                     return;
                 }
                 string matacgia = dgvNhaxuatban.CurrentRow.Cells[1].Value.ToString();
+                if (Sach.searchSach(1, 1, "", matacgia).Item2.Rows.Count > 0)
+                {
+                    MessageBox.Show("Hiện đang có sách của nhà xuất bản này trong thư viện, không thể xóa", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 if (NhaXB.deleteNhaXB(matacgia))
                 {
                     MessageBox.Show("Xóa nhà xuất bản thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -295,6 +300,7 @@ namespace QuanLyThuVien.Taikhoan
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnTimkiem.Enabled = state;
+            btnXuatexcel.Enabled = state;
             btnThem.Visible = state;
             showButtonPage(state);
         }

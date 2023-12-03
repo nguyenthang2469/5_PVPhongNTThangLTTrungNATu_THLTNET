@@ -70,12 +70,12 @@ namespace QuanLyThuVien.Taikhoan
                 {
                     if (dr["matkhau"].ToString().Equals(matkhau))
                     {
-                        if (dr["loainguoidung"].ToString().Equals("docgia") && Docgia.getDocgia(dr["tendangnhap"].ToString()) == null)
+                        if (dr["loainguoidung"].ToString().Equals("docgia") && Docgia.getDocgiaByTendangnhap(dr["tendangnhap"].ToString()) == null)
                         {
                             MessageBox.Show("Tài khoản của bạn chưa thể sử dụng do chưa lập thẻ độc giả, vui lòng liên hệ với thủ thư để cấp thẻ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
-                        if (dr["loainguoidung"].ToString().Equals("thuthu") && Nhanvien.getNhanvien(dr["tendangnhap"].ToString()) == null)
+                        if (dr["loainguoidung"].ToString().Equals("thuthu") && Nhanvien.getNhanvienByTendangnhap(dr["tendangnhap"].ToString()) == null)
                         {
                             MessageBox.Show("Tài khoản của bạn chưa được kích hoạt, vui lòng liên hệ quản lý để đăng ký thông tin nhân viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
@@ -87,10 +87,10 @@ namespace QuanLyThuVien.Taikhoan
                             frm = new frmTrangchuAdmin(dr["tendangnhap"].ToString());
                         } else if(dr["loainguoidung"].ToString().Equals("thuthu"))
                         {
-                            frm = new frmTrangchuAdmin();
+                            frm = new frmTrangchuAdmin(dr["tendangnhap"].ToString(), "thuthu");
                         } else
                         {
-                            frm = new frmTrangchuAdmin();
+                            frm = new frmTrangchuDocgia(dr["tendangnhap"].ToString());
                         }
                         this.Hide();
                         logout = false;

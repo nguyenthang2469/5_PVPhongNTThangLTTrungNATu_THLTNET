@@ -51,6 +51,11 @@ namespace QuanLyThuVien.Taikhoan
             cbTimkiemloainguoidung.DataSource = new BindingSource(roles, null);
             cbTimkiemloainguoidung.DisplayMember = "Value";
             cbTimkiemloainguoidung.ValueMember = "Key";
+
+            if(loainguoidung == "thuthu")
+            {
+                cbTimkiemloainguoidung.Visible = false;
+            }
         }
 
         private void loadData()
@@ -253,9 +258,9 @@ namespace QuanLyThuVien.Taikhoan
                 if (dgvNguoidung.SelectedRows.Count > 0)
                 {
                     this.selectedRow = dgvNguoidung.CurrentRow;
-                    tbTendangnhap.Text = selectedRow.Cells[0].Value.ToString();
-                    tbMatkhau.Text = selectedRow.Cells[1].Value.ToString();
-                    cbLoainguoidung.SelectedValue = selectedRow.Cells[2].Value.ToString();
+                    tbTendangnhap.Text = selectedRow.Cells[1].Value.ToString();
+                    tbMatkhau.Text = selectedRow.Cells[2].Value.ToString();
+                    cbLoainguoidung.SelectedValue = selectedRow.Cells[3].Value.ToString();
                     btnSua.Enabled = true;
                     btnXoa.Enabled = true;
                 } else if(chucnanghientai == CHUCNANG.NONE)
@@ -302,6 +307,7 @@ namespace QuanLyThuVien.Taikhoan
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnTimkiem.Enabled = state;
+            btnXuatexcel.Enabled = state;
             btnThem.Visible = state;
             showButtonPage(state);
         }

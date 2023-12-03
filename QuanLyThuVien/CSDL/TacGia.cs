@@ -41,8 +41,8 @@ namespace QuanLyThuVien.CSDL
 
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    sqlCount += " WHERE matacgia LIKE @keyword OR tentacgia LIKE @keyword";
-                    sqlSelect += " WHERE matacgia LIKE @keyword OR tentacgia LIKE @keyword";
+                    sqlCount += " WHERE (matacgia LIKE @keyword OR tentacgia LIKE @keyword)";
+                    sqlSelect += " WHERE (matacgia LIKE @keyword OR tentacgia LIKE @keyword)";
                 }
 
                 using (SqlCommand countCmd = new SqlCommand(sqlCount, conn))
@@ -103,7 +103,7 @@ namespace QuanLyThuVien.CSDL
 
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    sqlSelect += " WHERE matacgia LIKE @keyword OR tentacgia LIKE @keyword";
+                    sqlSelect += " WHERE (matacgia LIKE @keyword OR tentacgia LIKE @keyword)";
                 }
 
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))

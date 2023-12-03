@@ -59,11 +59,19 @@
     <Compile Include="CHUCNANG.cs" />
     <Compile Include="CSDL\Account.cs" />
     <Compile Include="CSDL\DB.cs" />
+    <Compile Include="CSDL\Chitietphieumuon.cs" />
+    <Compile Include="CSDL\Phieumuon.cs" />
     <Compile Include="CSDL\Sach.cs" />
     <Compile Include="CSDL\NhaXB.cs" />
     <Compile Include="CSDL\TacGia.cs" />
     <Compile Include="CSDL\Nhanvien.cs" />
     <Compile Include="CSDL\Docgia.cs" />
+    <Compile Include="Docgia\frmThongtindocgia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docgia\frmThongtindocgia.Designer.cs">
+      <DependentUpon>frmThongtindocgia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Docgia\frmQuanlydocgia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,10 +96,28 @@
     <Compile Include="frmQuanlytacgia.Designer.cs">
       <DependentUpon>frmQuanlytacgia.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmQuanlysach.cs">
+    <Compile Include="Nhanvien\frmThongtinnhanvien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmQuanlysach.Designer.cs">
+    <Compile Include="Nhanvien\frmThongtinnhanvien.Designer.cs">
+      <DependentUpon>frmThongtinnhanvien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sach\frmChitietphieumuon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sach\frmChitietphieumuon.Designer.cs">
+      <DependentUpon>frmChitietphieumuon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sach\frmQuanlyphieumuon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sach\frmQuanlyphieumuon.Designer.cs">
+      <DependentUpon>frmQuanlyphieumuon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sach\frmQuanlysach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sach\frmQuanlysach.Designer.cs">
       <DependentUpon>frmQuanlysach.cs</DependentUpon>
     </Compile>
     <Compile Include="frmThongtinnhom.cs">
@@ -99,6 +125,12 @@
     </Compile>
     <Compile Include="frmThongtinnhom.Designer.cs">
       <DependentUpon>frmThongtinnhom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTrangchuDocgia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTrangchuDocgia.Designer.cs">
+      <DependentUpon>frmTrangchuDocgia.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTrangchuAdmin.cs">
       <SubType>Form</SubType>
@@ -123,12 +155,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Docgia\fThongtindocgia.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Docgia\fThongtindocgia.Designer.cs">
-      <DependentUpon>fThongtindocgia.cs</DependentUpon>
-    </Compile>
     <Compile Include="Taikhoan\frmDoimatkhau.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +173,9 @@
     <Compile Include="Taikhoan\frmQuanlytaikhoan.Designer.cs">
       <DependentUpon>frmQuanlytaikhoan.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Docgia\frmThongtindocgia.resx">
+      <DependentUpon>frmThongtindocgia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Docgia\frmQuanlydocgia.resx">
       <DependentUpon>frmQuanlydocgia.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,11 +188,23 @@
     <EmbeddedResource Include="frmQuanlytacgia.resx">
       <DependentUpon>frmQuanlytacgia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmQuanlysach.resx">
+    <EmbeddedResource Include="Nhanvien\frmThongtinnhanvien.resx">
+      <DependentUpon>frmThongtinnhanvien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sach\frmChitietphieumuon.resx">
+      <DependentUpon>frmChitietphieumuon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sach\frmQuanlyphieumuon.resx">
+      <DependentUpon>frmQuanlyphieumuon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sach\frmQuanlysach.resx">
       <DependentUpon>frmQuanlysach.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmThongtinnhom.resx">
       <DependentUpon>frmThongtinnhom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTrangchuDocgia.resx">
+      <DependentUpon>frmTrangchuDocgia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTrangchuAdmin.resx">
       <DependentUpon>frmTrangchuAdmin.cs</DependentUpon>
@@ -178,9 +219,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Docgia\fThongtindocgia.resx">
-      <DependentUpon>fThongtindocgia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Taikhoan\frmDoimatkhau.resx">
       <DependentUpon>frmDoimatkhau.cs</DependentUpon>
@@ -256,6 +294,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\list_book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images\borrow-return.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

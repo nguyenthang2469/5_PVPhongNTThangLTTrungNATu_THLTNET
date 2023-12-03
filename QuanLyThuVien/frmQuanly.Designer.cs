@@ -42,17 +42,17 @@ namespace QuanLyThuVien
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabNguoidung);
-            this.tabControl1.Controls.Add(this.tabThuthu);
-            this.tabControl1.Controls.Add(this.tabDocgia);
             this.tabControl1.Controls.Add(this.tabSach);
             this.tabControl1.Controls.Add(this.tabTacgia);
             this.tabControl1.Controls.Add(this.tabNhaxuatban);
+            this.tabControl1.Controls.Add(this.tabDocgia);
+            this.tabControl1.Controls.Add(this.tabThuthu);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(900, 700);
+            this.tabControl1.Size = new System.Drawing.Size(900, 600);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -76,7 +76,7 @@ namespace QuanLyThuVien
             this.tabThuthu.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabThuthu.Location = new System.Drawing.Point(4, 29);
             this.tabThuthu.Name = "tabThuthu";
-            this.tabThuthu.Size = new System.Drawing.Size(892, 570);
+            this.tabThuthu.Size = new System.Drawing.Size(892, 567);
             this.tabThuthu.TabIndex = 5;
             this.tabThuthu.Text = "Thủ thư";
             this.tabThuthu.UseVisualStyleBackColor = true;
@@ -87,7 +87,7 @@ namespace QuanLyThuVien
             this.tabDocgia.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabDocgia.Location = new System.Drawing.Point(4, 29);
             this.tabDocgia.Name = "tabDocgia";
-            this.tabDocgia.Size = new System.Drawing.Size(892, 570);
+            this.tabDocgia.Size = new System.Drawing.Size(892, 567);
             this.tabDocgia.TabIndex = 4;
             this.tabDocgia.Text = "Độc giả";
             this.tabDocgia.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@ namespace QuanLyThuVien
             this.tabSach.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabSach.Location = new System.Drawing.Point(4, 29);
             this.tabSach.Name = "tabSach";
-            this.tabSach.Size = new System.Drawing.Size(892, 570);
+            this.tabSach.Size = new System.Drawing.Size(892, 567);
             this.tabSach.TabIndex = 3;
             this.tabSach.Text = "Sách";
             this.tabSach.UseVisualStyleBackColor = true;
@@ -108,7 +108,7 @@ namespace QuanLyThuVien
             this.tabTacgia.Location = new System.Drawing.Point(4, 29);
             this.tabTacgia.Name = "tabTacgia";
             this.tabTacgia.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTacgia.Size = new System.Drawing.Size(892, 570);
+            this.tabTacgia.Size = new System.Drawing.Size(892, 567);
             this.tabTacgia.TabIndex = 1;
             this.tabTacgia.Text = "Tác giả";
             this.tabTacgia.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@ namespace QuanLyThuVien
             this.tabNhaxuatban.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabNhaxuatban.Location = new System.Drawing.Point(4, 29);
             this.tabNhaxuatban.Name = "tabNhaxuatban";
-            this.tabNhaxuatban.Size = new System.Drawing.Size(892, 570);
+            this.tabNhaxuatban.Size = new System.Drawing.Size(892, 567);
             this.tabNhaxuatban.TabIndex = 2;
             this.tabNhaxuatban.Text = "Nhà xuất bản";
             this.tabNhaxuatban.UseVisualStyleBackColor = true;

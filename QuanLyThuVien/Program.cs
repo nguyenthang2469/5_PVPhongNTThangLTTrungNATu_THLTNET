@@ -17,7 +17,7 @@ namespace QuanLyThuVien
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmTrangchuAdmin());
+            Application.Run(new frmLogin());
         }
     }
 }

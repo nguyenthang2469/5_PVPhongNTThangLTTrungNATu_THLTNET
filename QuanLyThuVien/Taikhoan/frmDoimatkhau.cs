@@ -23,7 +23,7 @@ namespace QuanLyThuVien.Taikhoan
             this.tendangnhap = tendangnhap;
         }
 
-        private void frmLogin_Load(object sender, EventArgs e)
+        private void frmDoimatkhau_Load(object sender, EventArgs e)
         {
             guna2ShadowForm1.SetShadowForm(this);
             user = Account.getAccount(tendangnhap);

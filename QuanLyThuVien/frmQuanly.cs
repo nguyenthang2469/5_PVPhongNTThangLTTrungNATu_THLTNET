@@ -14,9 +14,11 @@ namespace QuanLyThuVien
 {
     public partial class frmQuanly : Form
     {
-        public frmQuanly()
+        private string loainguoidung = "";
+        public frmQuanly(string loainguoidung)
         {
             InitializeComponent();
+            this.loainguoidung = loainguoidung;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -26,22 +28,22 @@ namespace QuanLyThuVien
             switch (selectedIndex)
             {
                 case 0:
-                    addFormContent(new frmQuanlytaikhoan(), tabNguoidung);
+                    addFormContent(new frmQuanlytaikhoan(loainguoidung), tabNguoidung);
                     break;
                 case 1:
-                    addFormContent(new frmQuanlynhanvien(), tabThuthu);
-                    break;
-                case 2:
-                    addFormContent(new frmQuanlydocgia(), tabDocgia);
-                    break;
-                case 3:
                     addFormContent(new frmQuanlysach(), tabSach);
                     break;
-                case 4:
+                case 2:
                     addFormContent(new frmQuanlytacgia(), tabTacgia);
                     break;
-                case 5:
+                case 3:
                     addFormContent(new frmQuanlynhaxuatban(), tabNhaxuatban);
+                    break;
+                case 4:
+                    addFormContent(new frmQuanlydocgia(), tabDocgia);
+                    break;
+                case 5:
+                    addFormContent(new frmQuanlynhanvien(), tabThuthu);
                     break;
             }
         }
@@ -63,12 +65,17 @@ namespace QuanLyThuVien
             frm.Dock = DockStyle.Fill;
             tabPage.Controls.Add(frm);
             tabPage.Tag = frm;
+            frmTrangchuAdmin.lbTitle.Text = this.Text + "  >  " + frm.Text;
             frm.Show();
         }
 
         private void frmQuanly_Load(object sender, EventArgs e)
         {
             tabControl1_SelectedIndexChanged(tabControl1, EventArgs.Empty);
+            if(loainguoidung == "thuthu")
+            {
+                tabControl1.TabPages.Remove(tabThuthu);
+            }
         }
     }
 }

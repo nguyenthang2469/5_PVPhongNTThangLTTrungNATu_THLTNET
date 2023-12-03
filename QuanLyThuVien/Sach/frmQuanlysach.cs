@@ -15,18 +15,22 @@ namespace QuanLyThuVien.Taikhoan
 {
     public partial class frmQuanlysach : Form
     {
+        private string loainguoidung = "";
         private int chucnanghientai = CHUCNANG.NONE;
         private int pageIndex = 1;
         private int pageSize = 10; 
         private int totalPages = 0;
         private string keySearch = "";
+        private string tacgiaTimkiem = "";
+        private string nhaxuatbanTimkiem = "";
         private DataGridViewRow selectedRow = null;
-        Dictionary<string, string> tacgiaDictionary = new Dictionary<string, string>();
-        Dictionary<string, string> nhaxbDictionary = new Dictionary<string, string>();
+        SortedDictionary<string, string> tacgiaDictionary = new SortedDictionary<string, string>();
+        SortedDictionary<string, string> nhaxbDictionary = new SortedDictionary<string, string>();
 
-        public frmQuanlysach()
+        public frmQuanlysach(string loainguoidung = "quanly")
         {
             InitializeComponent();
+            this.loainguoidung = loainguoidung;
         }
 
         private void frmQuanlysach_Load(object sender, EventArgs e)
@@ -35,6 +39,13 @@ namespace QuanLyThuVien.Taikhoan
             dtpNgayxuatban.CustomFormat = "dd/MM/yyyy";
             loadComboboxTacgia();
             loadComboboxNhaxb();
+            if (loainguoidung != "quanly")
+            {
+                btnThem.Visible = false;
+                btnSua.Visible = false;
+                btnXoa.Visible = false;
+                btnXuatexcel.Visible = false;
+            }
         }
 
         private void loadComboboxTacgia()
@@ -48,13 +59,18 @@ namespace QuanLyThuVien.Taikhoan
                 {
                     string displayText = $"{row[0].ToString()}-{row[1].ToString()}";
 
-                    tacgiaDictionary.Add(row[0].ToString(), displayText);
+                    tacgiaDictionary.Add(row[0].ToString().ToUpper(), displayText);
                 }
                 if(tacgiaDictionary.Count > 0)
                 {
                     cbTacgia.DataSource = new BindingSource(tacgiaDictionary, null);
                     cbTacgia.DisplayMember = "Value";
                     cbTacgia.ValueMember = "Key";
+
+                    tacgiaDictionary.Add("-1", "Tác giả");
+                    cbTimkiemtacgia.DataSource = new BindingSource(tacgiaDictionary, null);
+                    cbTimkiemtacgia.DisplayMember = "Value";
+                    cbTimkiemtacgia.ValueMember = "Key";
                 }
             }
             catch (Exception)
@@ -74,24 +90,29 @@ namespace QuanLyThuVien.Taikhoan
                 {
                     string displayText = $"{row[0].ToString()}-{row[1].ToString()}";
 
-                    nhaxbDictionary.Add(row[0].ToString(), displayText);
+                    nhaxbDictionary.Add(row[0].ToString().ToUpper(), displayText);
                 }
                 if(nhaxbDictionary.Count > 0)
                 {
                     cbNhaxuatban.DataSource = new BindingSource(nhaxbDictionary, null);
                     cbNhaxuatban.DisplayMember = "Value";
                     cbNhaxuatban.ValueMember = "Key";
+
+                    nhaxbDictionary.Add("-1", "Nhà xuất bản");
+                    cbTimkiemnhaxb.DataSource = new BindingSource(nhaxbDictionary, null);
+                    cbTimkiemnhaxb.DisplayMember = "Value";
+                    cbTimkiemnhaxb.ValueMember = "Key";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Lấy dữ liệu thất bại", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lấy dữ liệu thất bại" + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void loadData()
         {
-            Tuple<int, System.Data.DataTable> result = Sach.searchSach(pageSize, pageIndex, keySearch);
+            Tuple<int, System.Data.DataTable> result = Sach.searchSach(pageSize, pageIndex, keySearch, tacgiaTimkiem, nhaxuatbanTimkiem);
             System.Data.DataTable dt = result.Item2;
             lbSonguoidung.Text = "Tổng số sách: " + result.Item1;
             totalPages = (int)Math.Ceiling((double)result.Item1 / pageSize);
@@ -231,7 +252,7 @@ namespace QuanLyThuVien.Taikhoan
                     }
                     else
                     {
-                        MessageBox.Show("Thêm thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Thêm thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else if (chucnanghientai == CHUCNANG.UPDATE)
@@ -248,7 +269,7 @@ namespace QuanLyThuVien.Taikhoan
                     }
                     else
                     {
-                        MessageBox.Show("Cập nhật thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Cập nhật thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -272,7 +293,7 @@ namespace QuanLyThuVien.Taikhoan
                 }
                 else
                 {
-                    MessageBox.Show("Xảy ra lỗi khi xóa, vui lòng thử lại sau", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xảy ra lỗi khi xóa, vui lòng thử lại sau", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } else
             {
@@ -401,6 +422,8 @@ namespace QuanLyThuVien.Taikhoan
             dtpNgayxuatban.Enabled = enabled;
             nudSoluong.Enabled = enabled;
             tbTimkiem.Enabled = !enabled;
+            cbTimkiemtacgia.Enabled = !enabled;
+            cbTimkiemnhaxb.Enabled = !enabled;
             cbSohang.Enabled = !enabled;
         }
 
@@ -421,6 +444,7 @@ namespace QuanLyThuVien.Taikhoan
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnTimkiem.Enabled = state;
+            btnXuatexcel.Enabled = state;
             btnThem.Visible = state;
             showButtonPage(state);
         }
@@ -536,6 +560,26 @@ namespace QuanLyThuVien.Taikhoan
             {
                 MessageBox.Show("Xảy ra lỗi khi export: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cbTimkiemtacgia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbTimkiemtacgia.SelectedIndex != 0)
+            {
+                this.tacgiaTimkiem = (string)cbTimkiemtacgia.SelectedValue;
+            }
+            else this.tacgiaTimkiem = "";
+            loadData();
+        }
+
+        private void cbTimkiemnhaxb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbTimkiemnhaxb.SelectedIndex != 0)
+            {
+                this.nhaxuatbanTimkiem = (string)cbTimkiemnhaxb.SelectedValue;
+            }
+            else this.nhaxuatbanTimkiem = "";
+            loadData();
         }
     }
 }

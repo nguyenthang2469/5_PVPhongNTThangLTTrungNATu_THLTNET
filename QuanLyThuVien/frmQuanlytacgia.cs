@@ -202,6 +202,11 @@ namespace QuanLyThuVien.Taikhoan
                     return;
                 }
                 string matacgia = dgvTacgia.CurrentRow.Cells[1].Value.ToString();
+                if(Sach.searchSach(1, 1, "", matacgia).Item2.Rows.Count > 0)
+                {
+                    MessageBox.Show("Hiện đang có sách của tác giả này trong thư viện, không thể xóa", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 if (TacGia.deleteTacgia(matacgia))
                 {
                     MessageBox.Show("Xóa tác giả thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -209,7 +214,7 @@ namespace QuanLyThuVien.Taikhoan
                 }
                 else
                 {
-                    MessageBox.Show("Xảy ra lỗi khi xóa, vui lòng thử lại sau", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xảy ra lỗi khi xóa, vui lòng thử lại sau", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } else
             {
@@ -294,6 +299,7 @@ namespace QuanLyThuVien.Taikhoan
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnTimkiem.Enabled = state;
+            btnXuatexcel.Enabled = state;
             btnThem.Visible = state;
             showButtonPage(state);
         }
