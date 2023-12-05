@@ -297,7 +297,7 @@ namespace QuanLyThuVien.Taikhoan
                         SwitchMode(CHUCNANG.NONE);
                         loadData();
                         btnThem.Focus();
-                        MessageBox.Show("Thêm thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Mượn sách thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -487,6 +487,7 @@ namespace QuanLyThuVien.Taikhoan
             cbManhanviennhantra.SelectedIndex = 0;
             cbMasach.SelectedIndex= 0;
             cbTinhtrang.SelectedIndex = 0;
+            nudTienphat.Value = 0;
         }
 
         private bool checkInput()

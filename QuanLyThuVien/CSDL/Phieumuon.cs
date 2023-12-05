@@ -100,7 +100,6 @@ namespace QuanLyThuVien.CSDL
                 }
 
                 sqlSelect += " ORDER BY maphieumuon OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY";
-                Console.WriteLine(sqlSelect);
 
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
                 {
@@ -169,12 +168,12 @@ namespace QuanLyThuVien.CSDL
                                     "tensach as 'Tên sách'," +
                                     "CASE WHEN tinhtrang = 0 THEN N'Đã trả' " +
                                     "WHEN tinhtrang = 1 THEN N'Đang mượn' " +
-                                    "ELSE 'Không xác định' " +
+                                    "ELSE N'Không xác định' " +
                                     "END AS 'Trình trạng', " +
                                     "FORMAT(ngaytrasach, 'dd/MM/yyyy') as 'Ngày trả sách', " +
                                     "tienphat as 'Tiền phạt', " +
                                     "manhanviennhansachtra as 'Mã nhân viên nhận trả sách'," +
-                                    "nv_nhan.tennhanvien as 'Tên nhân viên nhận sách trả' " +
+                                    "ISNULL(nv_nhan.tennhanvien, '') as 'Tên nhân viên nhận sách trả' " +
                                     "FROM PhieuMuon p " +
                                     "INNER JOIN NhanVien nv_lap ON p.manhanvienlapphieu = nv_lap.manhanvien " +
                                     "INNER JOIN DocGia dg ON p.madocgia = dg.madocgia " +
@@ -184,7 +183,7 @@ namespace QuanLyThuVien.CSDL
                 string condition = "";
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    condition = " WHERE (p.maphieumuon LIKE @keyword OR tennhanvien LIKE @keyword OR tendocgia LIKE @keyword OR ngaylapphieu LIKE @keyword)";
+                    condition = " WHERE (p.maphieumuon LIKE @keyword OR tendocgia LIKE @keyword OR ngaylapphieu LIKE @keyword)";
                 }
                 if (nhanvienTimkiem != "")
                 {
@@ -235,7 +234,7 @@ namespace QuanLyThuVien.CSDL
                     condition += "tienphat <> 0";
                 }
                 sqlSelect += condition;
-
+                
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
                 {
                     if (!string.IsNullOrEmpty(keyword))

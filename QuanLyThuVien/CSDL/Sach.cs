@@ -179,7 +179,7 @@ namespace QuanLyThuVien.CSDL
                     }
                 }
                 sqlSelect += condition;
-
+                Console.WriteLine(sqlSelect);
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
                 {
                     if (!string.IsNullOrEmpty(keyword))

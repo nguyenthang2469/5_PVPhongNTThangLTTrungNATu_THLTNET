@@ -511,7 +511,7 @@ namespace QuanLyThuVien.Taikhoan
         {
             try
             {
-                System.Data.DataTable dataTable = Sach.exportToExcel(keySearch);
+                System.Data.DataTable dataTable = Sach.exportToExcel(keySearch, tacgiaTimkiem, nhaxuatbanTimkiem);
                 // Tạo một ứng dụng Excel mới
                 Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
                 if (excelApp == null)
