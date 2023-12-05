@@ -11,5 +11,6 @@ namespace QuanLyThuVien
         public const int NONE = -1;
         public const int ADD = 0;
         public const int UPDATE = 1;
+        public const int RETURNBOOK = 2;
     }
 }

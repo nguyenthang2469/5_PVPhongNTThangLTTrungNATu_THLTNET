@@ -149,7 +149,14 @@ namespace QuanLyThuVien
         private void btnMuontra_Click(object sender, EventArgs e)
         {
             ptbCurrentPage.Image = Properties.Resources.borrow_return;
-            addFormContent(new frmQuanlyphieumuon());
+            if(loainguoidung == "quanly")
+            {
+                addFormContent(new frmQuanlyphieumuon());
+            }
+            else if (loainguoidung == "thuthu")
+            {
+                addFormContent(new frmQuanlyphieumuon(nhanvien["manhanvien"].ToString(), "thuthu"));
+            }
         }
 
         private void btnThongtincanhan_Click(object sender, EventArgs e)

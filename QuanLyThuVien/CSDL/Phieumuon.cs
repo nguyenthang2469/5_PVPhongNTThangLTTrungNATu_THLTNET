@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -78,7 +79,14 @@ namespace QuanLyThuVien.CSDL
                 {
                     if (!string.IsNullOrEmpty(keyword))
                     {
-                        countCmd.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                        if (DateTime.TryParseExact(keyword, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
+                        {    
+                            countCmd.Parameters.AddWithValue("@keyword", "%" + result.ToString("yyyy-MM-dd") + "%");
+                        }
+                        else
+                        {
+                            countCmd.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                        }
                     }
                     if (!string.IsNullOrEmpty(nhanvienTimkiem))
                     {
@@ -92,12 +100,20 @@ namespace QuanLyThuVien.CSDL
                 }
 
                 sqlSelect += " ORDER BY maphieumuon OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY";
+                Console.WriteLine(sqlSelect);
 
                 using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
                 {
                     if (!string.IsNullOrEmpty(keyword))
                     {
-                        cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                        if (DateTime.TryParseExact(keyword, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
+                        {
+                            cm.Parameters.AddWithValue("@keyword", "%" + result.ToString("yyyy-MM-dd") + "%");
+                        }
+                        else
+                        {
+                            cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                        }
                     }
                     if (!string.IsNullOrEmpty(nhanvienTimkiem))
                     {
@@ -136,70 +152,119 @@ namespace QuanLyThuVien.CSDL
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
 
-        //public static DataTable exportToExcel(string keyword = "", string nhanvienTimkiem = "", string docgiaTimkiem = "", DateTime ngaylapphieu = DateTime.Now)
-        //{
-        //    DataTable dt = new DataTable();
+        public static DataTable exportToExcel(string keyword = "", string nhanvienTimkiem = "", string docgiaTimkiem = "", bool sachdangmuonTimkiem = false, bool quahanTimkiem = false)
+        {
+            DataTable dt = new DataTable();
 
-        //    using (SqlConnection conn = connect())
-        //    {
-        //        conn.Open();
-        //        string sqlSelect = "SELECT p.*, tennhanvien, tendocgia, ctpm.*,  FROM PhieuMuon p " +
-        //                            "INNER JOIN NhanVien nv tg ON p.manhanvienlapphieu = nv.manhanvien " +
-        //                            "INNER JOIN DocGia dg ON p.madocgia = dg.madocgia " +
-        //                            "INNER JOIN ChiTietPhieuMuon ctpm ON p.maphieumuon = ctpm.maphieumuon";
-        //        string condition = "";
-        //        if (!string.IsNullOrEmpty(keyword))
-        //        {
-        //            condition = " WHERE maphieumuon LIKE @keyword OR tennhanvien LIKE @keyword OR tendocgia LIKE @keyword";
-        //        }
-        //        if (nhanvienTimkiem != "")
-        //        {
-        //            if (condition.Length == 0)
-        //            {
-        //                condition += " WHERE ";
-        //            }
-        //            else
-        //            {
-        //                condition += " AND ";
-        //            }
-        //            condition += "p.manhanvien = @manhanvien";
-        //        }
-        //        if (docgiaTimkiem != "")
-        //        {
-        //            if (condition.Length == 0)
-        //            {
-        //                condition += " WHERE ";
-        //            }
-        //            else
-        //            {
-        //                condition += " AND ";
-        //            }
-        //            condition += "p.madocgia = @madocgia";
-        //        }
-        //        sqlSelect += condition;
+            using (SqlConnection conn = connect())
+            {
+                conn.Open();
+                string sqlSelect = "SELECT p.maphieumuon as 'Mã phiếu mượn', " +
+                                    "manhanvienlapphieu as 'Mã nhân viên lập phiếu', " +
+                                    "nv_lap.tennhanvien as 'Tên nhân viên lập phiếu', " +
+                                    "FORMAT(ngaylapphieu, 'dd/MM/yyyy') as 'Ngày lập phiếu', " +
+                                    "p.madocgia as 'Mã độc giả', " +
+                                    "tendocgia as 'Tên độc giả', " +
+                                    "ctpm.masach as 'Mã sách', " +
+                                    "tensach as 'Tên sách'," +
+                                    "CASE WHEN tinhtrang = 0 THEN N'Đã trả' " +
+                                    "WHEN tinhtrang = 1 THEN N'Đang mượn' " +
+                                    "ELSE 'Không xác định' " +
+                                    "END AS 'Trình trạng', " +
+                                    "FORMAT(ngaytrasach, 'dd/MM/yyyy') as 'Ngày trả sách', " +
+                                    "tienphat as 'Tiền phạt', " +
+                                    "manhanviennhansachtra as 'Mã nhân viên nhận trả sách'," +
+                                    "nv_nhan.tennhanvien as 'Tên nhân viên nhận sách trả' " +
+                                    "FROM PhieuMuon p " +
+                                    "INNER JOIN NhanVien nv_lap ON p.manhanvienlapphieu = nv_lap.manhanvien " +
+                                    "INNER JOIN DocGia dg ON p.madocgia = dg.madocgia " +
+                                    "INNER JOIN ChiTietPhieuMuon ctpm ON p.maphieumuon = ctpm.maphieumuon " +
+                                    "LEFT JOIN NhanVien nv_nhan ON ctpm.manhanviennhansachtra = nv_nhan.manhanvien " +
+                                    "INNER JOIN Sach s ON ctpm.masach = s.masach";
+                string condition = "";
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    condition = " WHERE (p.maphieumuon LIKE @keyword OR tennhanvien LIKE @keyword OR tendocgia LIKE @keyword OR ngaylapphieu LIKE @keyword)";
+                }
+                if (nhanvienTimkiem != "")
+                {
+                    if (condition.Length == 0)
+                    {
+                        condition += " WHERE ";
+                    }
+                    else
+                    {
+                        condition += " AND ";
+                    }
+                    condition += "p.manhanvienlapphieu = @manhanvienlapphieu";
+                }
+                if (docgiaTimkiem != "")
+                {
+                    if (condition.Length == 0)
+                    {
+                        condition += " WHERE ";
+                    }
+                    else
+                    {
+                        condition += " AND ";
+                    }
+                    condition += "p.madocgia = @madocgia";
+                }
+                if (sachdangmuonTimkiem)
+                {
+                    if (condition.Length == 0)
+                    {
+                        condition += " WHERE ";
+                    }
+                    else
+                    {
+                        condition += " AND ";
+                    }
+                    condition += "tinhtrang = 1";
+                }
+                if (quahanTimkiem)
+                {
+                    if (condition.Length == 0)
+                    {
+                        condition += " WHERE ";
+                    }
+                    else
+                    {
+                        condition += " AND ";
+                    }
+                    condition += "tienphat <> 0";
+                }
+                sqlSelect += condition;
 
-        //        using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
-        //        {
-        //            if (!string.IsNullOrEmpty(keyword))
-        //            {
-        //                cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
-        //            }
-        //            if (!string.IsNullOrEmpty(nhanvienTimkiem))
-        //            {
-        //                cm.Parameters.AddWithValue("@manhanvien", $"{nhanvienTimkiem}");
-        //            }
-        //            if (!string.IsNullOrEmpty(docgiaTimkiem))
-        //            {
-        //                cm.Parameters.AddWithValue("@madocgia", $"{docgiaTimkiem}");
-        //            }
+                using (SqlCommand cm = new SqlCommand(sqlSelect, conn))
+                {
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        if (DateTime.TryParseExact(keyword, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
+                        {
+                            cm.Parameters.AddWithValue("@keyword", "%" + result.ToString("yyyy-MM-dd") + "%");
+                        }
+                        else
+                        {
+                            cm.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(nhanvienTimkiem))
+                    {
+                        cm.Parameters.AddWithValue("@manhanvienlapphieu", $"{nhanvienTimkiem}");
+                    }
+                    if (!string.IsNullOrEmpty(docgiaTimkiem))
+                    {
+                        cm.Parameters.AddWithValue("@madocgia", $"{docgiaTimkiem}");
+                    }
 
-        //            SqlDataAdapter ad = new SqlDataAdapter(cm);
-        //            ad.Fill(dt);
-        //        }
-        //    }
+                    SqlDataAdapter ad = new SqlDataAdapter(cm);
+                    ad.Fill(dt);
+                }
+            }
 
-        //    return dt;
-        //}
+            return dt;
+        }
 
         public static bool createPhieumuon(
             string maphieumuon,
