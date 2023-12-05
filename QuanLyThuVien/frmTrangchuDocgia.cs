@@ -143,5 +143,10 @@ namespace QuanLyThuVien
             frmThongtindocgia frm = new frmThongtindocgia(docgia);
             frm.ShowDialog();
         }
+
+        private void btnMuontra_Click(object sender, EventArgs e)
+        {
+            addFormContent(new frmQuanlyphieumuon(docgia["madocgia"].ToString(), "docgia"));
+        }
     }
 }

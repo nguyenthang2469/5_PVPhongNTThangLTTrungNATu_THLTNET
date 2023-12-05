@@ -16,6 +16,7 @@ namespace QuanLyThuVien.Taikhoan
     public partial class frmQuanlyphieumuon : Form
     {
         private string loainguoidung = "";
+        private string manhanvien = "";
         private int chucnanghientai = CHUCNANG.NONE;
         private int pageIndex = 1;
         private int pageSize = 10; 
@@ -23,6 +24,8 @@ namespace QuanLyThuVien.Taikhoan
         private string keySearch = "";
         private string docgiaTimkiem = "";
         private string nhanvienTimkiem = "";
+        private bool sachdangmuonTimkiem = false;
+        private bool quahanTimkiem = false;
         private DataGridViewRow selectedRow = null;
         SortedDictionary<string, string> docgiaDictionary = new SortedDictionary<string, string>();
         SortedDictionary<string, string> nhanvienDictionary = new SortedDictionary<string, string>();
@@ -39,25 +42,32 @@ namespace QuanLyThuVien.Taikhoan
             this.loainguoidung = loainguoidung;
             if(loainguoidung == "thuthu")
             {
-                nhanvienTimkiem = ma;
+                this.manhanvien = ma;
             } else if(loainguoidung == "docgia")
             {
-                docgiaTimkiem = ma;
+                this.docgiaTimkiem = ma;
             }
         }
 
         private void frmQuanlyphieumuon_Load(object sender, EventArgs e)
         {
             cbSohang.SelectedIndex = 2;
+            cbXuatexcel.SelectedIndex = 0;
             dtpNgaylapphieu.CustomFormat = "dd/MM/yyyy";
             loadComboboxDocgia();
             loadComboboxNhanvien();
-            if(loainguoidung != "quanly")
+            if(loainguoidung == "docgia")
             {
                 btnThem.Visible = false;
                 btnSua.Visible = false;
                 btnXoa.Visible = false;
                 btnXuatexcel.Visible = false;
+                cbXuatexcel.Visible = false;
+                cbTimkiemdocgia.Visible = false;
+                cbTimkiemnhanvien.Visible = false;
+            } else
+            {
+                cbTimkiemdocgia.SelectedIndexChanged += cbTimkiemdocgia_SelectedIndexChanged;
             }
         }
 
@@ -66,6 +76,7 @@ namespace QuanLyThuVien.Taikhoan
             try
             {
                 docgiaDictionary.Clear();
+                docgiaDictionary.Add("Default", "Chọn độc giả");
                 System.Data.DataTable dt = Docgia.getAllDocgia();
                 cbMadocgia.Items.Clear();
                 foreach (DataRow row in dt.Rows)
@@ -80,7 +91,6 @@ namespace QuanLyThuVien.Taikhoan
                     cbMadocgia.DisplayMember = "Value";
                     cbMadocgia.ValueMember = "Key";
 
-                    docgiaDictionary.Add("-1", "Chọn Độc giả");
                     cbTimkiemdocgia.DataSource = new BindingSource(docgiaDictionary, null);
                     cbTimkiemdocgia.DisplayMember = "Value";
                     cbTimkiemdocgia.ValueMember = "Key";
@@ -97,6 +107,7 @@ namespace QuanLyThuVien.Taikhoan
             try
             {
                 nhanvienDictionary.Clear();
+                nhanvienDictionary.Add("Default", "Chọn nhân viên");
                 System.Data.DataTable dt = Nhanvien.getAllNhanvien();
                 cbManhanvienlapphieu.Items.Clear();
                 foreach (DataRow row in dt.Rows)
@@ -111,7 +122,6 @@ namespace QuanLyThuVien.Taikhoan
                     cbManhanvienlapphieu.DisplayMember = "Value";
                     cbManhanvienlapphieu.ValueMember = "Key";
 
-                    nhanvienDictionary.Add("-1", "Chọn Nhân viên lập phiếu");
                     cbTimkiemnhanvien.DataSource = new BindingSource(nhanvienDictionary, null);
                     cbTimkiemnhanvien.DisplayMember = "Value";
                     cbTimkiemnhanvien.ValueMember = "Key";
@@ -122,6 +132,7 @@ namespace QuanLyThuVien.Taikhoan
                 MessageBox.Show("Lấy dữ liệu thất bại" + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
         private void loadData()
         {
             Tuple<int, System.Data.DataTable> result = Phieumuon.searchPhieumuon(pageSize, pageIndex, keySearch, nhanvienTimkiem, docgiaTimkiem);
@@ -224,7 +235,8 @@ namespace QuanLyThuVien.Taikhoan
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            
+            SwitchMode(CHUCNANG.ADD);
+            dgvPhieumuon.Enabled = false;
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -238,19 +250,46 @@ namespace QuanLyThuVien.Taikhoan
                 string maphieumuon = tbMaphieumuon.Text.Trim();
                 string manhanvienlapphieu = (string)cbManhanvienlapphieu.SelectedValue;
                 string madocgia = (string)cbMadocgia.SelectedValue;
-                if (checkInput() == false)
+                DateTime ngaylapphieu = dtpNgaylapphieu.Value;
+                if (chucnanghientai == CHUCNANG.ADD)
                 {
-                    return;
-                }
-                if (Phieumuon.updatePhieumuon(maphieumuon, manhanvienlapphieu, madocgia))
+                    if (checkInput() == false)
+                    {
+                        return;
+                    }
+                    if (Phieumuon.getPhieumuon(maphieumuon) != null)
+                    {
+                        MessageBox.Show("Mã phiếu mượn đã tồn tại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    if (Phieumuon.createPhieumuon(maphieumuon, manhanvienlapphieu, ngaylapphieu, madocgia))
+                    {
+                        dgvPhieumuon.Enabled = true;
+                        SwitchMode(CHUCNANG.NONE);
+                        loadData();
+                        btnThem.Focus();
+                        MessageBox.Show("Thêm thành công", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thêm thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                } else if(chucnanghientai == CHUCNANG.UPDATE)
                 {
-                    SwitchMode(CHUCNANG.NONE);
-                    loadData();
-                    MessageBox.Show("Cập nhật thành công", "Thông báo chỉnh sửa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (checkInput() == false)
+                    {
+                        return;
+                    }
+                    if (Phieumuon.updatePhieumuon(maphieumuon, manhanvienlapphieu, madocgia))
+                    {
+                        SwitchMode(CHUCNANG.NONE);
+                        loadData();
+                        MessageBox.Show("Cập nhật thành công", "Thông báo chỉnh sửa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại", "Thông bảo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -329,24 +368,31 @@ namespace QuanLyThuVien.Taikhoan
         private void clearInput()
         {
             tbMaphieumuon.Text = "";
-            cbManhanvienlapphieu.SelectedIndex = -1;
-            cbMadocgia.SelectedIndex= -1;
+            cbManhanvienlapphieu.SelectedIndex = 0;
+            cbMadocgia.SelectedIndex= 0;
         }
 
         private bool checkInput()
         {
+            string maphieumuon = cbMadocgia.Text;
             string manhanvienlapphieu = (string)cbManhanvienlapphieu.SelectedValue;
             string madocgia = (string)cbMadocgia.SelectedValue;
-            if (manhanvienlapphieu == null || manhanvienlapphieu.Length == 0)
+            if(maphieumuon == "")
             {
-                MessageBox.Show("Vui lòng chọn nhân viên lập phiếu", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cbManhanvienlapphieu.Focus();
+                MessageBox.Show("Vui lòng nhập mã phiếu mượn", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tbMaphieumuon.Focus();
                 return false;
             }
-            if (madocgia == null || madocgia.Length == 0)
+            if (madocgia == null || cbMadocgia.SelectedIndex == 0 || madocgia.Length == 0)
             {
                 MessageBox.Show("Vui lòng chọn độc giả mượn sách", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cbMadocgia.Focus();
+                return false;
+            }
+            if (manhanvienlapphieu == null || cbManhanvienlapphieu.SelectedIndex == 0 || manhanvienlapphieu.Length == 0)
+            {
+                MessageBox.Show("Vui lòng chọn nhân viên lập phiếu", "Cảnh bảo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cbManhanvienlapphieu.Focus();
                 return false;
             }
             return true;
@@ -354,11 +400,16 @@ namespace QuanLyThuVien.Taikhoan
 
         private void setStateInput(bool enabled)
         {
-            cbManhanvienlapphieu.Enabled = enabled;
+            tbMaphieumuon.Enabled = enabled;
+            if(loainguoidung == "quanly")
+            {
+                cbManhanvienlapphieu.Enabled = enabled;
+            }
             cbMadocgia.Enabled = enabled;
             tbTimkiem.Enabled = !enabled;
             cbTimkiemdocgia.Enabled = !enabled;
             cbTimkiemnhanvien.Enabled = !enabled;
+            cbXuatexcel.Enabled = !enabled;
             cbSohang.Enabled = !enabled;
         }
 
@@ -390,9 +441,29 @@ namespace QuanLyThuVien.Taikhoan
             chucnanghientai = chucNang;
             switch (chucnanghientai)
             {
+                case CHUCNANG.ADD:
+                    {
+                        setStateInput(true);
+                        tbMaphieumuon.Focus();
+                        setStateButton(false);
+                        clearInput();
+                        dtpNgaylapphieu.Value = DateTime.Today;
+                        cbMadocgia.SelectedIndex = 0;
+                        if(loainguoidung == "quanly")
+                        {
+                            cbManhanvienlapphieu.SelectedIndex = 0;
+                        } else if(loainguoidung == "thuthu")
+                        {
+                            cbManhanvienlapphieu.SelectedValue = manhanvien;
+                        }
+                        dgvPhieumuon.ClearSelection();
+                        break;
+                    }
                 case CHUCNANG.UPDATE:
                     {
                         setStateInput(true);
+                        tbMaphieumuon.Enabled = false;
+                        cbMadocgia.Focus();
                         setStateButton(false);
                         break;
                     }
@@ -434,60 +505,60 @@ namespace QuanLyThuVien.Taikhoan
 
         private void btnXuatexcel_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    System.Data.DataTable dataTable = Phieumuon.exportToExcel(keySearch);
-            //    // Tạo một ứng dụng Excel mới
-            //    Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
-            //    if (excelApp == null)
-            //    {
-            //        MessageBox.Show("Excel chưa được cài trên máy của bạn", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        return;
-            //    }
+            try
+            {
+                System.Data.DataTable dataTable = Phieumuon.exportToExcel(keySearch, nhanvienTimkiem, docgiaTimkiem, sachdangmuonTimkiem, quahanTimkiem);
+                // Tạo một ứng dụng Excel mới
+                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+                if (excelApp == null)
+                {
+                    MessageBox.Show("Excel chưa được cài trên máy của bạn", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-            //    // Tạo một workbook mới và một worksheet mới
-            //    Workbook workbook = excelApp.Workbooks.Add();
-            //    Worksheet worksheet = (Worksheet)workbook.Worksheets[1];
-            //    worksheet.Name = "Danh sách sách";
+                // Tạo một workbook mới và một worksheet mới
+                Workbook workbook = excelApp.Workbooks.Add();
+                Worksheet worksheet = (Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Danh sách sách";
 
-            //    // Ghi dữ liệu từ DataTable vào ExcelWorksheet
-            //    for (int i = 0; i < dataTable.Columns.Count; i++)
-            //    {
-            //        worksheet.Cells[1, i + 1] = dataTable.Columns[i].ColumnName;
-            //    }
+                // Ghi dữ liệu từ DataTable vào ExcelWorksheet
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1] = dataTable.Columns[i].ColumnName;
+                }
 
-            //    for (int i = 0; i < dataTable.Rows.Count; i++)
-            //    {
-            //        for (int j = 0; j < dataTable.Columns.Count; j++)
-            //        {
-            //            worksheet.Cells[i + 2, j + 1] = dataTable.Rows[i][j];
-            //        }
-            //    }
-            //    worksheet.Columns.AutoFit();
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataTable.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dataTable.Rows[i][j];
+                    }
+                }
+                worksheet.Columns.AutoFit();
 
-            //    // Lưu workbook vào một file Excel
-            //    SaveFileDialog saveFileDialog = new SaveFileDialog();
-            //    saveFileDialog.Filter = "Excel Files|*.xlsx";
-            //    saveFileDialog.Title = "Export to Excel";
-            //    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            //    {
-            //        workbook.SaveAs(saveFileDialog.FileName);
-            //        MessageBox.Show("Xuất Excel thành công!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    }
+                // Lưu workbook vào một file Excel
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Export to Excel";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    workbook.SaveAs(saveFileDialog.FileName);
+                    MessageBox.Show("Xuất Excel thành công!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-            //    // Đóng workbook và ứng dụng Excel
-            //    workbook.Close(false);
-            //    Marshal.ReleaseComObject(workbook); // Giải phóng tài nguyên COM
-            //    excelApp.Quit();
-            //    Marshal.ReleaseComObject(excelApp);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Xảy ra lỗi khi export: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                // Đóng workbook và ứng dụng Excel
+                workbook.Close(false);
+                Marshal.ReleaseComObject(workbook); // Giải phóng tài nguyên COM
+                excelApp.Quit();
+                Marshal.ReleaseComObject(excelApp);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Xảy ra lỗi khi export: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void cbTimkiemtacgia_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbTimkiemdocgia_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbTimkiemdocgia.SelectedIndex != 0)
             {
@@ -497,7 +568,7 @@ namespace QuanLyThuVien.Taikhoan
             loadData();
         }
 
-        private void cbTimkiemnhaxb_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbTimkiemnhanvien_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbTimkiemnhanvien.SelectedIndex != 0)
             {
@@ -509,8 +580,32 @@ namespace QuanLyThuVien.Taikhoan
 
         private void btnChitietphieu_Click(object sender, EventArgs e)
         {
-            frmChitietphieumuon frm = new frmChitietphieumuon(selectedRow.Cells["colMaphieumuon"].Value.ToString());
-            frm.ShowDialog();
+            if(loainguoidung == "quanly")
+            {
+                frmChitietphieumuon frm = new frmChitietphieumuon(selectedRow);
+                frm.ShowDialog();
+            } else if(loainguoidung == "thuthu")
+            {
+                frmChitietphieumuon frm = new frmChitietphieumuon(selectedRow, manhanvien, "thuthu");
+                frm.ShowDialog();
+            } else if (loainguoidung == "docgia")
+            {
+                frmChitietphieumuon frm = new frmChitietphieumuon(selectedRow, docgiaTimkiem, "docgia");
+                frm.ShowDialog();
+            }
+        }
+
+        private void cbXuatexcel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbXuatexcel.SelectedIndex == 1)
+            {
+                this.sachdangmuonTimkiem = true;
+                this.quahanTimkiem = false;
+            } else if(cbXuatexcel.SelectedIndex == 2)
+            {
+                this.sachdangmuonTimkiem = false;
+                this.quahanTimkiem = true;
+            }
         }
     }
 }

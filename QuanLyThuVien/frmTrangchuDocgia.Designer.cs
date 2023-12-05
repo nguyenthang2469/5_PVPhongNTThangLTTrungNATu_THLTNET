@@ -241,6 +241,7 @@ namespace QuanLyThuVien
             this.btnMuontra.Text = "Mượn - Trả";
             this.btnMuontra.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnMuontra.TextOffset = new System.Drawing.Point(12, 0);
+            this.btnMuontra.Click += new System.EventHandler(this.btnMuontra_Click);
             // 
             // btnSach
             // 
